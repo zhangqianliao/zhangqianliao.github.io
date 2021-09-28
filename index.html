@@ -111,7 +111,7 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://zhangqianliao.github.io/2021/09/28/hexo%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/" data-id="cku3ecaug0000ssv70v31e79r" class="article-share-link">
-        分享
+        Share
       </a>
       
     </footer>
@@ -159,13 +159,19 @@
         
       
       
-      <p>typeAliases的使用(用于给实体类起别名)<br><br>视图：<img src="/2021/09/27/Mybatis%E4%BA%8C/202109271.png"><br><br>实体类名与数据库名称不相同时使用resultMap标签进行关联<br><br>视图：<img src="/2021/09/27/Mybatis%E4%BA%8C/202109272.png"><br><br>使用resultMap进行数据库一对一的查询<br><br>思路：分成两个方法进行查询<br><br>分别给两张表都创建接口和myBatis映射方法，然后使用resultMap进行关联<br><br>视图：<img src="/2021/09/27/Mybatis%E4%BA%8C/202109273.png"><br><br><img src="/2021/09/27/Mybatis%E4%BA%8C/202109274.png"><br></p>
-
+        <p>typeAliases的使用(用于给实体类起别名)<br><br>视图：<img src="/2021/09/27/Mybatis%E4%BA%8C/202109271.png"><br></p>
+        
+          <p>
+            <a class="article-more-link" href="/2021/09/27/Mybatis%E4%BA%8C/">
+              Read More...
+            </a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
       <a data-url="http://zhangqianliao.github.io/2021/09/27/Mybatis%E4%BA%8C/" data-id="cku20vezc0000ekv78u85938h" class="article-share-link">
-        分享
+        Share
       </a>
       
     </footer>
@@ -219,7 +225,7 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://zhangqianliao.github.io/2021/09/24/%E4%BD%BF%E7%94%A8U%E7%9B%98%E5%AE%89%E8%A3%85pc%E7%B3%BB%E7%BB%9F/" data-id="cktxsf6x90000rwv75io6hkgo" class="article-share-link">
-        分享
+        Share
       </a>
       
     </footer>
@@ -267,13 +273,19 @@
         
       
       
-      <p>MyBasit基础配置和main主方法的调用<br><br>一、下载MyBasit需要用到的jar文件(在我的GitHub上有)<br><br>二、配置myBasit<br><br>|1|在下文件中找到帮助文档，在帮助文档中找到myBasit的头部<br><br>配图：<img src="/2021/09/23/MyBasit%E4%B8%80/202109233.png"><br><br><img src="/2021/09/23/MyBasit%E4%B8%80/202109232.png"><br><br>|2|使用properties标签调用db.properties文档(db.properties文档放的是mysql连接要用的账号密码地址什么的)<br><br>配图：<img src="/2021/09/23/MyBasit%E4%B8%80/202109232.png"><br><br>|3|使用environments标签和它的子标签进行mysql的配置<br>配图：<img src="/2021/09/23/MyBasit%E4%B8%80/202109234.png"><br><br>————————————————————————————————————<br>使用myBasit映射来完成数据库查询<br><br>一、在dao层写一个接口<br><br>配图：<img src="/2021/09/23/MyBasit%E4%B8%80/202109235.png"><br><br>二、写一个和接口类名相同的映射(映射配置的头部也是在帮助文档中)<br>配图：<img src="/2021/09/23/MyBasit%E4%B8%80/202109236.png"><br><br><img src="/2021/09/23/MyBasit%E4%B8%80/202109237.png"><br><br>三、创建main方法进行试验<br><br>配图：<img src="/2021/09/23/MyBasit%E4%B8%80/202109238.png"><br></p>
-
+        <p>MyBasit基础配置和main主方法的调用<br><br>一、下载MyBasit需要用到的jar文件(在我的GitHub上有)<br><br>二、配置myBasit<br></p>
+        
+          <p>
+            <a class="article-more-link" href="/2021/09/23/MyBasit%E4%B8%80/">
+              Read More...
+            </a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
       <a data-url="http://zhangqianliao.github.io/2021/09/23/MyBasit%E4%B8%80/" data-id="cktwuus7l0000tcv76pbmcnk3" class="article-share-link">
-        分享
+        Share
       </a>
       
     </footer>
@@ -321,18 +333,19 @@
         
       
       
-      <p>myeclipse项目搭建(什么设计模式不记得了)<br><br>一、在src文件中搭建基础包action、entity、dao、service和.xml文件的配置<br><br>视图<br><br><img src="/2021/09/21/UseMyeclipse/202109212.png"><br><br><br>|1|applicationContext.xml&nbsp;&nbsp;设置基础方法包<br><br>|2|spring-mvc.xml&nbsp;&nbsp;设置action控制器包<br><br>二、在webRoot目录下应用需要使用jar文件<br><br>视图<br><br><img src="/2021/09/21/UseMyeclipse/202109211.png"><br><br></p>
-<h6>提示:</h6>如果前端需要使用jq代码的话也需要应用js文件<br>
-写这篇博客遇到的问题:图片显示问题<br>
-|1|使用&nbsp;&nbsp;npm&nbsp;install&nbsp;hexo-asset-image&nbsp;--save&nbsp;命令下载大佬写好的js文件<br>
-|2|打开hexo的配置文件_config.yml找到&nbsp;post_asset_folder，把这个选项从false改成true<br>
-使用问题：在标题标签h之后使用图片的相对路径无法显示图片
-
+        <p>myeclipse项目搭建(什么设计模式不记得了)<br><br>一、在src文件中搭建基础包action、entity、dao、service和.xml文件的配置<br><br>视图<br><br><img src="/2021/09/21/UseMyeclipse/202109212.png"><br><br></p>
+        
+          <p>
+            <a class="article-more-link" href="/2021/09/21/UseMyeclipse/">
+              Read More...
+            </a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
       <a data-url="http://zhangqianliao.github.io/2021/09/21/UseMyeclipse/" data-id="ckttydlmw0000awv75pfcd8ui" class="article-share-link">
-        分享
+        Share
       </a>
       
     </footer>
@@ -380,26 +393,21 @@
         
       
       
-      <h5>配置git</h5></br>
-一、下载并安装<a target="_blank" rel="noopener" href="https://git-for-windows.github.io">git</a>（网速慢的同学请移步国内镜像）</br>
-二、配置git，使用两条命令</br>
-$&nbsp;g&nbsp;--global&nbsp;user.name "输入GitHub用户名"</br>
-$&nbsp;git&nbsp;config&nbsp;--global&nbsp;user.email "输入GitHub邮箱"</br>
-三、配置GitHub连接远程库</br>
-使用命令&nbsp;$&nbsp;ssh-keygen&nbsp;-t&nbsp;rea&nbsp;-C "输入GitHub邮箱"</br>四、登录GitHub使用生成的密钥进行创建库</br>
-<h5>使用git上传到GitHub</h5></br>
-基本上传命令</br>
-|1|$&nbsp;git&nbsp;status(查看状态)</br>
-|2|$&nbsp;git&nbsp;add&nbsp;.(将新增的文件添加到代码仓库)</br>
-|3|$&nbsp;git&nbsp;commit&nbsp;-m&nbsp;"提交说明"(提交到本地库)</br>
-|4|$&nbsp;git&nbsp;push&nbsp;origin&nbsp;master(origin本地库master远程库push提交)</br>clear——张千燎(参考潘老师尚未配图)
-
-
+        <h5>配置git</h5><br>
+一、下载并安装<a target="_blank" rel="noopener" href="https://git-for-windows.github.io">git</a>（网速慢的同学请移步国内镜像）<br>
+二、配置git，使用两条命令<br>
+        
+          <p>
+            <a class="article-more-link" href="/2021/09/20/git%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%B8%8A%E4%BC%A0/">
+              Read More...
+            </a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
       <a data-url="http://zhangqianliao.github.io/2021/09/20/git%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%B8%8A%E4%BC%A0/" data-id="cktscxhay0000bgv75b55byl9" class="article-share-link">
-        分享
+        Share
       </a>
       
     </footer>
@@ -447,21 +455,21 @@ $&nbsp;git&nbsp;config&nbsp;--global&nbsp;user.email "输入GitHub邮箱"</br>
         
       
       
-      <h6>hexo 更换主题步骤<h6>
-在网上寻找自己喜欢的主题 例如hexo<a target="_blank" rel="noopener" href="https://hexo.io/themes/">官网</a>上的主题</br>
-1、将github上的主题资源下载到自己的项目中
-
-<p>例子 ：</br><br>$ git clone <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean.git">https://github.com/zhwangart/hexo-theme-ocean.git</a> themes/ocean</br><br>&nbsp;&nbsp;&nbsp;&nbsp;|1|git clone &nbsp;&nbsp;&nbsp;拷贝git仓库到本地项目(简称下载)</br><br>&nbsp;&nbsp;&nbsp;&nbsp;|2|<a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean.git">https://github.com/zhwangart/hexo-theme-ocean.git</a> &nbsp;&nbsp;指的是 git仓库的地址</br><br>&nbsp;&nbsp;&nbsp;&nbsp;|3|themes/ocean &nbsp;&nbsp; 主题名称</br></p>
-<p>2、更改_config.yml中的主题 &nbsp;&nbsp;  theme:主题hi名称 &nbsp;&nbsp;   url:博客访问地址</br></p>
-<p>3、使用hexo clean命令清除清除缓存文件 (db.json) 和已生成的静态文件 (public)。<br>在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令</br></p>
-<p>4、使用hexo generate命令生成静态页面</br></p>
-<p>5、使用hexo deploy命令上传到github</br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ——张千燎</p>
-
+        <h6>hexo 更换主题步骤<h6>
+在网上寻找自己喜欢的主题 例如hexo<a target="_blank" rel="noopener" href="https://hexo.io/themes/">官网</a>上的主题<br>
+1、将github上的主题资源下载到自己的项目中</h6></h6>
+        
+          <p>
+            <a class="article-more-link" href="/2021/09/18/%E4%B8%BB%E9%A2%98%E6%9B%B4%E6%8D%A2/">
+              Read More...
+            </a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
       <a data-url="http://zhangqianliao.github.io/2021/09/18/%E4%B8%BB%E9%A2%98%E6%9B%B4%E6%8D%A2/" data-id="cktp6ta350000d8v71cfuahxk" class="article-share-link">
-        分享
+        Share
       </a>
       
     </footer>
@@ -530,9 +538,9 @@ $&nbsp;git&nbsp;config&nbsp;--global&nbsp;user.email "输入GitHub邮箱"</br>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
+      <a class="nav-item-link nav-item-search" title="Search">
         <i class="fe fe-search"></i>
-        搜索
+        Search
       </a>
     </li>
   </ul>
