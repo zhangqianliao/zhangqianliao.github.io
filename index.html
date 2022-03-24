@@ -65,6 +65,93 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-第一天" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/24/%E7%AC%AC%E4%B8%80%E5%A4%A9/">第一天</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/03/24/%E7%AC%AC%E4%B8%80%E5%A4%A9/" class="article-date">
+  <time datetime="2022-03-24T09:40:48.000Z" itemprop="datePublished">2022-03-24</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <p>计算机都是按照 冯诺依曼体系 来设计的。  </p>
+<p>JDK中包含了JRE和JVM（JDK&gt;JRE&gt;JVM）</p>
+<p>JVM是java虚拟机，java通过JVM虚拟机真正做到了编译一次可以在所有平台上运行</p>
+<p>从头来过</p>
+<figure class="highlight plaintext"><figcaption><span>class Hello&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Hello&#123;</span><br><span class="line">  public static void main(String[] args)</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;Hello World!&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>java程序运行机制分为<strong>编译型</strong>，<strong>解释型</strong>，java是先编译再解释</p>
+<p><strong>java八大基本数据类型</strong></p>
+<blockquote>
+<p>整数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">byte num1 = 20;//最小的最大只有127</span><br><span class="line">int num2  = 20;</span><br><span class="line">short num3= 20;</span><br><span class="line">long num4 = 20L;//使用Long类型需要在数字后面加个L</span><br></pre></td></tr></table></figure>
+
+<p>小数：浮点数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">float num1 = 20.1F;//Float类型要在数字后面加个F</span><br><span class="line">double num2= 20.44444;</span><br></pre></td></tr></table></figure>
+
+<p>字符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">char name = &quot;a&quot;;//char只能表示单个字符(一个字母或者一个汉字)</span><br><span class="line">//字符串，String不是关键字，而是一个类</span><br><span class="line">//String name = &quot;zhangshan&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>布尔值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boolean flag =true;//或者等于false</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>面试题：银行的业务怎么表示？钱</strong></p>
+<p><em><strong>使用 BitDecimal类  这是一个数学工具类</strong></em></p>
+</blockquote>
+<blockquote>
+<p><strong>java进制        二进制0b    十进制    八进制0    十六进制0x</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;int i  = 10;	//十进制</span><br><span class="line">&gt;int i2 = 010;	//八进制0</span><br><span class="line">&gt;int i3 = 0x10;	//十六进制0x</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出结果</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;10</span><br><span class="line">&gt;8</span><br><span class="line">&gt;16</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/03/24/%E7%AC%AC%E4%B8%80%E5%A4%A9/" data-id="cl1518mvb0000dwv76ie89sxq" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
     <article id="post-开始了" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -595,71 +682,13 @@
 
 </article>
     
-    <article id="post-主题更换" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/18/%E4%B8%BB%E9%A2%98%E6%9B%B4%E6%8D%A2/">主题更换</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/18/%E4%B8%BB%E9%A2%98%E6%9B%B4%E6%8D%A2/" class="article-date">
-  <time datetime="2021-09-18T02:37:55.000Z" itemprop="datePublished">2021-09-18</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <h6>hexo 更换主题步骤<h6>
-在网上寻找自己喜欢的主题 例如hexo<a target="_blank" rel="noopener" href="https://hexo.io/themes/">官网</a>上的主题<br>
-1、将github上的主题资源下载到自己的项目中</h6></h6>
-        
-          <p>
-            <a class="article-more-link" href="/2021/09/18/%E4%B8%BB%E9%A2%98%E6%9B%B4%E6%8D%A2/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2021/09/18/%E4%B8%BB%E9%A2%98%E6%9B%B4%E6%8D%A2/" data-id="cktp6ta350000d8v71cfuahxk" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
   </article>
   
 
+  
+  <nav class="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+  </nav>
   
 </section>
 </div>
