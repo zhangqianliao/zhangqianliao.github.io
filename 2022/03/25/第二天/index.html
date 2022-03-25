@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第二天 |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第二天" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第二天
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/03/25/%E7%AC%AC%E4%BA%8C%E5%A4%A9/" class="article-date">
+  <time datetime="2022-03-25T07:31:43.000Z" itemprop="datePublished">2022-03-25</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><em><strong>给自己一句话：“今天如果不学明天就没时间了。”</strong></em></p>
+<p><strong>数据类型转换</strong></p>
+<blockquote>
+<p>低—————-高</p>
+<p><strong>byte,short,char,int,long,float,double    字节小的可以自动转换成字节高的</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;int i =	10;</span><br><span class="line">&gt;double j = i;</span><br><span class="line">&gt;//-------------------</span><br><span class="line">&gt;//输出结果</span><br><span class="line">&gt;j=10;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>如果是<strong>从高转低那就需要进行强制转换</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;int i =	128;</span><br><span class="line">&gt;byte j = (int)i;</span><br><span class="line">&gt;//--------------------</span><br><span class="line">&gt;//输出结果</span><br><span class="line">&gt;j = -128</span><br></pre></td></tr></table></figure>
+
+<p>j =    -128的原因是内存溢出，byte只有一个字节最大为127最小为-127</p>
+<p><strong>位运算符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;&lt;  //向左移位，向左每移一位乘以一个二</span><br><span class="line">&gt;&gt;&gt;	//向右移位，向右每移一位除以一个二</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>三元运算符</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;//x ? y : z</span><br><span class="line">&gt;System.out.printnl(10 &gt; 1 ? &quot;对&quot;:&quot;错&quot;);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>通过javaDoc来来生成java文档</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;1、打开cmd</span><br><span class="line">&gt;2、进入需要生成文档文件的目录</span><br><span class="line">&gt;3、使用javadoc命令 ：javadoc -encoding UTF-8 -charset UTF-8 xxx.java</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>使用Scanner接受用户输入</strong>(其他用法同理)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Scanner scanner = new Scanner(System.in);  //声明Scanner类对象</span><br><span class="line"></span><br><span class="line">    System.out.println(&quot;使用nextLin方式接受：&quot;);</span><br><span class="line"></span><br><span class="line">    if(scanner.hasNext())                    //判断Scanner有没有接受到数据</span><br><span class="line">    &#123;</span><br><span class="line">        String s = scanner.nextLine();     //使用String类型来接受用户输入的数据</span><br><span class="line">        //String s = scanner.next();       //next以空格结尾 nextLine以回车键结尾</span><br><span class="line"></span><br><span class="line">        System.out.println(s);                  //输出用户输入的结果</span><br><span class="line"></span><br><span class="line">        scanner.close();                //凡是使用了IO都需要手动关闭节省资源</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>if和switch</strong>(if我就不记录了)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    String s = &quot;1&quot;;     //假设用户输入</span><br><span class="line"></span><br><span class="line">    switch (s)&#123;         //匹配型判断</span><br><span class="line">        case &quot;1&quot;:       //如果s=“1”那么执行</span><br><span class="line">            System.out.println(&quot;优秀&quot;);</span><br><span class="line">            break;      //执行完之后一定要break退出循环要不然就会出现</span><br><span class="line">                        // case穿透:接着执行下面的语句直到结束或者遇到break跳出循环</span><br><span class="line">        case &quot;2&quot;:</span><br><span class="line">            System.out.println(&quot;良好&quot;);</span><br><span class="line">            break;</span><br><span class="line">        default:        //当s没有匹配到的时候执行</span><br><span class="line">            System.out.println(&quot;没有评分&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/03/25/%E7%AC%AC%E4%BA%8C%E5%A4%A9/" data-id="cl16htu6500003ov7h8bu8rvx" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2022/03/24/%E7%AC%AC%E4%B8%80%E5%A4%A9/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第一天</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
