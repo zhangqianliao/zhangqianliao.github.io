@@ -65,6 +65,109 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-第四天" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/27/%E7%AC%AC%E5%9B%9B%E5%A4%A9/">第四天</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/03/27/%E7%AC%AC%E5%9B%9B%E5%A4%A9/" class="article-date">
+  <time datetime="2022-03-27T10:05:02.000Z" itemprop="datePublished">2022-03-27</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <blockquote>
+<p><em><strong>给自己一句话：“如果今天不学习明天就没机会了。”</strong></em></p>
+<p>类与对象的小结</p>
+<p>——1、类与对象</p>
+<p>————类是一个模板：抽象，对象是一个具体的实例</p>
+<p>——2、方法</p>
+<p>————方法的定义与调用</p>
+<p>——3、对应的引用</p>
+<p>————引用类型、基本类型（八大基本类型）</p>
+<p>————：对象是通过引用来操作的：栈–&gt;堆</p>
+<p>——4、属性：字段Field 成员变量</p>
+<p>————默认初始值：</p>
+<p>——————：数字：0    0.0</p>
+<p>——————：char：u0000</p>
+<p>——————：boolean：false</p>
+<p>——————：引用：null</p>
+<p>——5、类</p>
+<p>————静态的属性–属性</p>
+<p>————动态的行为–方法（类中只有这两个）</p>
+</blockquote>
+<blockquote>
+<p><strong>封装</strong>(高内聚，低耦合。)</p>
+</blockquote>
+<blockquote>
+<p>在java中，所有类都默认直接或间接<strong>继承</strong>Object类</p>
+</blockquote>
+<blockquote>
+<p><strong>super</strong>注意点：</p>
+<p>​    1、super调用父类的构造方法，必须在构造方法的第一个</p>
+<p>​    2、super必须只能出现在子类的方法或者构造方法中</p>
+<p>​    3、super和this不能同时调用构造方法</p>
+</blockquote>
+<blockquote>
+<p><strong>instanceof</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;System.out.println(x instanceof y);//如果x和y有父子关系或者类型相同就会输出true</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>静态</strong>导入包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;import static java.lang.Math.random; //静态导入包</span><br><span class="line"></span><br><span class="line">&gt;public class Test&#123;</span><br><span class="line"> </span><br><span class="line"> public static void main(String[] args)&#123;</span><br><span class="line">   System.out.prontln(random());//输出随即苏</span><br><span class="line"> &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>abstract</strong>抽象类</p>
+</blockquote>
+<blockquote>
+<p>异常处理<strong>try(尝试处理)、catch(捕获异常)、finally(有没有异常都会执行)、throw、throws</strong></p>
+<p><strong>catch</strong>捕获的异常:Throwable(包含Exception和Error)</p>
+<p>​                Exception：程序异常。Error：java异常。</p>
+<p>继承异常可以进行<strong>自定义异常</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;extends Exception</span><br></pre></td></tr></table></figure>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/03/27/%E7%AC%AC%E5%9B%9B%E5%A4%A9/" data-id="cl1988n8i00009cv73ne5gt5l" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
     <article id="post-第三天" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -590,66 +693,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://zhangqianliao.github.io/2021/09/24/%E4%BD%BF%E7%94%A8U%E7%9B%98%E5%AE%89%E8%A3%85pc%E7%B3%BB%E7%BB%9F/" data-id="cktxsf6x90000rwv75io6hkgo" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-MyBasit一" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/23/MyBasit%E4%B8%80/">MyBasit一</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/23/MyBasit%E4%B8%80/" class="article-date">
-  <time datetime="2021-09-23T08:52:59.000Z" itemprop="datePublished">2021-09-23</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <p>MyBasit基础配置和main主方法的调用<br><br>一、下载MyBasit需要用到的jar文件(在我的GitHub上有)<br><br>二、配置myBasit<br></p>
-        
-          <p>
-            <a class="article-more-link" href="/2021/09/23/MyBasit%E4%B8%80/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2021/09/23/MyBasit%E4%B8%80/" data-id="cktwuus7l0000tcv76pbmcnk3" class="article-share-link">
         分享
       </a>
       
