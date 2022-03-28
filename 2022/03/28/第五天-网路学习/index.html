@@ -10,7 +10,7 @@
   <meta name="description" content="解答">
   
   <title>
-    第四天（javaSE） |
+    第五天(网路学习) |
     
     一些记忆
   </title>
@@ -33,7 +33,7 @@
 <body>
   <main class="content">
     <section class="outer">
-<article id="post-第四天" class="article article-type-post" itemscope
+<article id="post-第五天-网路学习" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -42,7 +42,7 @@
       
 
 <h1 class="article-title" itemprop="name">
-  第四天（javaSE）
+  第五天(网路学习)
 </h1>
 
 
@@ -52,8 +52,8 @@
 
     
     <div class="article-meta">
-      <a href="/2022/03/27/%E7%AC%AC%E5%9B%9B%E5%A4%A9/" class="article-date">
-  <time datetime="2022-03-27T10:05:02.000Z" itemprop="datePublished">2022-03-27</time>
+      <a href="/2022/03/28/%E7%AC%AC%E4%BA%94%E5%A4%A9-%E7%BD%91%E8%B7%AF%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2022-03-28T11:48:58.000Z" itemprop="datePublished">2022-03-28</time>
 </a>
       
     </div>
@@ -67,63 +67,46 @@
       
       
       
-      <blockquote>
-<p><em><strong>给自己一句话：“如果今天不学习明天就没机会了。”</strong></em></p>
-<p>类与对象的小结</p>
-<p>——1、类与对象</p>
-<p>————类是一个模板：抽象，对象是一个具体的实例</p>
-<p>——2、方法</p>
-<p>————方法的定义与调用</p>
+      <p><strong>IP</strong>(网络电脑的地址)</p>
 <span id="more"></span>
 
-<p>——3、对应的引用</p>
-<p>————引用类型、基本类型（八大基本类型）</p>
-<p>————：对象是通过引用来操作的：栈–&gt;堆</p>
-<p>——4、属性：字段Field 成员变量</p>
-<p>————默认初始值：</p>
-<p>——————：数字：0    0.0</p>
-<p>——————：char：u0000</p>
-<p>——————：boolean：false</p>
-<p>——————：引用：null</p>
-<p>——5、类</p>
-<p>————静态的属性–属性</p>
-<p>————动态的行为–方法（类中只有这两个）</p>
-</blockquote>
 <blockquote>
-<p><strong>封装</strong>(高内聚，低耦合。)</p>
+<p>ip地址：InetAddress</p>
+<p>——唯一定位一台网络计算机</p>
+<p>——127.0.0.1：本机localhost</p>
+<p>——ip地址的分类</p>
+<p>——    -ipv4/ipv6</p>
+<p>——        -IPV4 127.0.0.1，4个字节组成</p>
+<p>——        -IPV6 128位字节组成，8个无符号整数</p>
+<p>——        -公网(互联网)，私网(局域网)</p>
+<p>​                -192.168.xx.xx,专门给组织内部使用的</p>
 </blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        InetAddress inetAddress1 = InetAddress.getByName(&quot;127.0.0.1&quot;);  //获取本机ip地址</span><br><span class="line">        InetAddress inetAddress2 = InetAddress.getByName(&quot;localhost&quot;);</span><br><span class="line">        InetAddress inetAddress3 = InetAddress.getLocalHost();</span><br><span class="line"></span><br><span class="line">        InetAddress inetAddress4 = InetAddress.getByName(&quot;www.baidu.com&quot;); //获取百度ip地址</span><br><span class="line"></span><br><span class="line">        System.out.println(inetAddress1);</span><br><span class="line">        System.out.println(inetAddress2);</span><br><span class="line">        System.out.println(inetAddress3);</span><br><span class="line">        System.out.println(inetAddress4);</span><br><span class="line">    &#125; catch (UnknownHostException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>端口</strong></p>
 <blockquote>
-<p>在java中，所有类都默认直接或间接<strong>继承</strong>Object类</p>
-</blockquote>
-<blockquote>
-<p><strong>super</strong>注意点：</p>
-<p>​    1、super调用父类的构造方法，必须在构造方法的第一个</p>
-<p>​    2、super必须只能出现在子类的方法或者构造方法中</p>
-<p>​    3、super和this不能同时调用构造方法</p>
-</blockquote>
-<blockquote>
-<p><strong>instanceof</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;System.out.println(x instanceof y);//如果x和y有父子关系或者类型相同就会输出true</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>静态</strong>导入包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;import static java.lang.Math.random; //静态导入包</span><br><span class="line"></span><br><span class="line">&gt;public class Test&#123;</span><br><span class="line"> </span><br><span class="line"> public static void main(String[] args)&#123;</span><br><span class="line">   System.out.prontln(random());//输出随即苏</span><br><span class="line"> &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>abstract</strong>抽象类</p>
-</blockquote>
-<blockquote>
-<p>异常处理<strong>try(尝试处理)、catch(捕获异常)、finally(有没有异常都会执行)、throw、throws</strong></p>
-<p><strong>catch</strong>捕获的异常:Throwable(包含Exception和Error)</p>
-<p>​                Exception：程序异常。Error：java异常。</p>
-<p>继承异常可以进行<strong>自定义异常</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;extends Exception</span><br></pre></td></tr></table></figure>
+<p>端口表示计算机上的一个程序的进程</p>
+<p>​    -不用的进程有不同的端口号，用来区分软件</p>
+<p>​    -被规定 0~65535</p>
+<p>​    -TCP,UDP:65535*2  tcp:80,udp80,单个协议下，端口号不能冲突</p>
+<p>​    -端口分类</p>
+<p>​    –公有端口0~1023</p>
+<p>​    –HTTP:80</p>
+<p>​    –HTTPS:443</p>
+<p>​    –FTP:21</p>
+<p>​    –Telent:23</p>
+<p>​    -程序注册端口：1024~49151，分配给用户或者程序</p>
+<p>​    –Tomcat:8080</p>
+<p>​    –MySQL:3306</p>
+<p>​    –Oracle:1521</p>
+<p>​    -动态，私有端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    InetSocketAddress inetSocketAddress = new InetSocketAddress(&quot;127.0.0.1&quot;,8080); </span><br><span class="line">    System.out.println(inetSocketAddress.getAddress());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/03/27/%E7%AC%AC%E5%9B%9B%E5%A4%A9/" data-id="cl1988n8i00009cv73ne5gt5l" class="article-share-link">
+      <a data-url="http://zhangqianliao.github.io/2022/03/28/%E7%AC%AC%E4%BA%94%E5%A4%A9-%E7%BD%91%E8%B7%AF%E5%AD%A6%E4%B9%A0/" data-id="cl1aofgwo0000bcv76ry323w0" class="article-share-link">
         分享
       </a>
       
@@ -135,19 +118,10 @@
   
 <nav class="article-nav">
   
+  
   <a href="/2022/03/28/%E7%AC%AC%E4%BA%94%E5%A4%A9/" class="article-nav-link">
-    <strong class="article-nav-caption">前一篇</strong>
-    <div class="article-nav-title">
-      
-      第五天（javaScript）
-      
-    </div>
-  </a>
-  
-  
-  <a href="/2022/03/26/%E7%AC%AC%E4%B8%89%E5%A4%A9/" class="article-nav-link">
     <strong class="article-nav-caption">后一篇</strong>
-    <div class="article-nav-title">第三天（javaSE）</div>
+    <div class="article-nav-title">第五天（javaScript）</div>
   </a>
   
 </nav>

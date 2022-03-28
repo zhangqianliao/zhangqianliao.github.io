@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第五天（javaScript） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第五天" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第五天（javaScript）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/03/28/%E7%AC%AC%E4%BA%94%E5%A4%A9/" class="article-date">
+  <time datetime="2022-03-28T09:25:20.000Z" itemprop="datePublished">2022-03-28</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><em><strong>给自己的一句话：“今天如果不学就没机会了。”</strong></em></p>
+<!--more--->
+
+<blockquote>
+<p><strong>javaScript的两种使用方式</strong></p>
+<p>方式一：内部使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;javaScript type=&quot;text/javascript&quot;&gt; //不写type他会默认</span><br><span class="line">//javaScript代码</span><br><span class="line">alert(&quot;Hello World&quot;);</span><br><span class="line">&gt;&lt;/javaScript&gt;</span><br></pre></td></tr></table></figure>
+
+<p>方式二：外部引用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;javaScript scr=&quot;.js文件地址&quot;&gt;&lt;/javaScript&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>比较运算符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;=</span><br><span class="line">&gt;== 等于(类型不一样，值一样，也会判断为true)</span><br><span class="line">&gt;===（类型和值一样才会判断为true）</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>对象和数组的定义</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;var a = &#123;1,2,3,&#x27;hello&#x27;&#125;; //数组</span><br><span class="line">&gt;var b&#123;					//对象</span><br><span class="line"> name:&#x27;zhangshan&#x27;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>javaScript严格检查模式 ’use strict‘</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&lt;javaScript&gt;</span><br><span class="line">&#x27;use strict&#x27;;  //必须写在第一行 ES6语法才支持</span><br><span class="line">let name = &#x27;zhangsan&#x27;; //javascript中局部变量建议使用let</span><br><span class="line">&gt;&lt;/javaScript&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>console.log浏览器后台输出</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;console.log(&#x27;123&#x27;);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>slice()截取Array的一部分，返回一个新的数组</strong></p>
+<p>push(),pop() 尾部</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;push：Array尾部添加</span><br><span class="line">&gt;pop：Array返回尾部一个元素</span><br></pre></td></tr></table></figure>
+
+<p>unshift(),shift()头部</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;unshift：Array头部添加</span><br><span class="line">&gt;shift：Array返回头部一个元素</span><br></pre></td></tr></table></figure>
+
+<p>sort()排序、reverse()元素反转、concat()、join()</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&#x27;use strict&#x27;</span><br><span class="line">&gt;let arr= [&#x27;1&#x27;,&#x27;2&#x27;,&#x27;3&#x27;];</span><br><span class="line"></span><br><span class="line">&gt;arr.concat([&#x27;zhang&#x27;]);  //concat只会返回一个新的数组不会改变原有数组</span><br><span class="line">&gt;[&#x27;1&#x27;,&#x27;2&#x27;,&#x27;3&#x27;,&#x27;zhang&#x27;]</span><br><span class="line"></span><br><span class="line">&gt;arr</span><br><span class="line">&gt;[&#x27;1&#x27;,&#x27;2&#x27;,&#x27;3&#x27;]</span><br><span class="line"></span><br><span class="line">&gt;\\\\\\\\\\\\\\\\\\\\\</span><br><span class="line">&gt;arr.join(&#x27;-&#x27;);  //打印拼接数组，使用特定的字符串连接</span><br><span class="line"></span><br><span class="line">&gt;arr</span><br><span class="line">&gt;&quot;1-2-3&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/03/28/%E7%AC%AC%E4%BA%94%E5%A4%A9/" data-id="cl1aofgwr0001bcv7hb2gg8p9" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2022/03/28/%E7%AC%AC%E4%BA%94%E5%A4%A9-%E7%BD%91%E8%B7%AF%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      第五天(网路学习)
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2022/03/27/%E7%AC%AC%E5%9B%9B%E5%A4%A9/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第四天（javaSE）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
