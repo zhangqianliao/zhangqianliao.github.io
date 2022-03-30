@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第七天（网路编程） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第七天（网路编程）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第七天（网路编程）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/03/30/%E7%AC%AC%E4%B8%83%E5%A4%A9%EF%BC%88%E7%BD%91%E8%B7%AF%E7%BC%96%E7%A8%8B%EF%BC%89/" class="article-date">
+  <time datetime="2022-03-30T10:52:12.000Z" itemprop="datePublished">2022-03-30</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><strong>UDP单方面咨询</strong></p>
+<p>咨询方</p>
+<span id="more"></span>
+
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&gt;public class Udp01 &#123;</span><br><span class="line">   public static void main(String[] args) throws Exception &#123;</span><br><span class="line">       Sender sender = new Sender();</span><br><span class="line">       sender.UserSender();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt;class Sender &#123;</span><br><span class="line"></span><br><span class="line">   public void   UserSender() throws Exception &#123;</span><br><span class="line">       DatagramSocket socket = new DatagramSocket(8888);</span><br><span class="line">           while (true)</span><br><span class="line">           &#123;</span><br><span class="line"></span><br><span class="line">               //接受用户输入信息</span><br><span class="line">               BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">               //将用户输入的信息储存起来并转化成字节数组，然后打包</span><br><span class="line">               String data = reader.readLine();</span><br><span class="line">               byte[] datas = data.getBytes();</span><br><span class="line">               DatagramPacket packet = new DatagramPacket(datas,0,datas.length,(new InetSocketAddress(&quot;127.0.0.1&quot;,9999)));</span><br><span class="line">               //发送</span><br><span class="line">               socket.send(packet);</span><br><span class="line"></span><br><span class="line">               if (data.equals(&quot;byt&quot;))</span><br><span class="line">               &#123;</span><br><span class="line">                   break;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       socket.close();</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>客服</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&gt;public class Upd02 &#123;</span><br><span class="line">   public static void main(String[] args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">       Accept accept = new Accept();</span><br><span class="line">       accept.AcceptUser();</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;class Accept&#123;</span><br><span class="line"></span><br><span class="line">   public  void  AcceptUser() throws Exception &#123;</span><br><span class="line">       DatagramSocket datagramSocket = new DatagramSocket(9999); //开启一个端口号</span><br><span class="line"></span><br><span class="line">       while (true)</span><br><span class="line">       &#123;</span><br><span class="line"></span><br><span class="line">           byte[] buffer = new byte[1024];//缓存区</span><br><span class="line">           DatagramPacket datagramPacket = new DatagramPacket(buffer,0,buffer.length);//接受包</span><br><span class="line">           datagramSocket.receive(datagramPacket);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">           //断开连接</span><br><span class="line">           byte[] data = datagramPacket.getData();</span><br><span class="line">           String datas = new String(data,0,data.length);</span><br><span class="line">           //输出接受的信息</span><br><span class="line">           System.out.println(datas);</span><br><span class="line"></span><br><span class="line">           if(datas.equals(&quot;byt&quot;) )</span><br><span class="line">           &#123;</span><br><span class="line">               break;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">       datagramSocket.close();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>互相聊天（多线程）</strong></p>
+<p><em><strong>发送消息线程</strong></em></p>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&gt;public class TestUpd01 implements  Runnable&#123;</span><br><span class="line"></span><br><span class="line">   DatagramSocket socket =null;</span><br><span class="line">   BufferedReader reader = null;</span><br><span class="line"></span><br><span class="line">   int prot = 0; //创建的端口</span><br><span class="line">   String id = null;   //连接的ip地址</span><br><span class="line">   int pProt =0;   //发送端口</span><br><span class="line">   public  TestUpd01(int prot,String id,int pProt)</span><br><span class="line">   &#123;</span><br><span class="line">       this.prot = prot;</span><br><span class="line">       this.id=id;</span><br><span class="line">       this.pProt = pProt;</span><br><span class="line"></span><br><span class="line">           try &#123;</span><br><span class="line">               socket = new DatagramSocket(prot); //开启一个端口</span><br><span class="line">               //接受用户输入信息</span><br><span class="line">               reader = new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">           &#125; catch (SocketException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   @Override</span><br><span class="line">   public void run() &#123;</span><br><span class="line">       while (true)</span><br><span class="line">       &#123;</span><br><span class="line">           try &#123;</span><br><span class="line">               //将用户输入的信息储存起来并转化成字节数组，然后打包</span><br><span class="line">               String data = reader.readLine();</span><br><span class="line">               byte[] datas = data.getBytes();</span><br><span class="line">               DatagramPacket packet = new DatagramPacket(datas,0,datas.length,(new InetSocketAddress(this.id,this.pProt)));</span><br><span class="line">               //发送</span><br><span class="line">               socket.send(packet);</span><br><span class="line"></span><br><span class="line">               //关闭</span><br><span class="line">               if (data.equals(&quot;byt&quot;))</span><br><span class="line">               &#123;</span><br><span class="line">                   break;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; catch (IOException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">       socket.close();</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>接受消息线程</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&gt;public class TestUpd02 implements Runnable&#123;</span><br><span class="line">   DatagramSocket datagramSocket = null;</span><br><span class="line">   private String msgFrom; //名字</span><br><span class="line">   private int prot=0; //创建的端口号</span><br><span class="line"></span><br><span class="line">   public TestUpd02(int prot,String msgFrom)</span><br><span class="line">   &#123;</span><br><span class="line">       this.prot=prot;</span><br><span class="line">       this.msgFrom=msgFrom;</span><br><span class="line"></span><br><span class="line">       try &#123;</span><br><span class="line">           datagramSocket = new DatagramSocket(prot); //开启一个端口号</span><br><span class="line">       &#125; catch (SocketException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @Override</span><br><span class="line">   public void run() &#123;</span><br><span class="line">       while (true)</span><br><span class="line">       &#123;</span><br><span class="line"></span><br><span class="line">           try &#123;</span><br><span class="line">               byte[] buffer = new byte[1024];//缓存区</span><br><span class="line">               DatagramPacket datagramPacket = new DatagramPacket(buffer,0,buffer.length);</span><br><span class="line">               datagramSocket.receive(datagramPacket); //堵塞性质接受包</span><br><span class="line"></span><br><span class="line">               //将读取到的信息接受并转化成String类型输出</span><br><span class="line">               byte[] data = datagramPacket.getData();</span><br><span class="line">               String datas = new String(data,0,data.length);</span><br><span class="line">               //输出接受的信息</span><br><span class="line">               System.out.println(msgFrom+&quot;:&quot;+datas);</span><br><span class="line">               //断开连接</span><br><span class="line">               if(datas.equals(&quot;byt&quot;) )</span><br><span class="line">               &#123;</span><br><span class="line">                   break;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; catch (IOException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       datagramSocket.close();</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>使用URL下载东西</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&gt;public class UrlDownload &#123;</span><br><span class="line">   public static void main(String[] args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">       Url url = new Url();</span><br><span class="line">       url.download();</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;class Url&#123;</span><br><span class="line"></span><br><span class="line">   public int download() throws Exception &#123;</span><br><span class="line"></span><br><span class="line">       int i = 0;</span><br><span class="line">       //需要下载东西的地址(歌名“予你”)</span><br><span class="line">       URL url = new URL(&quot;https://m701.music.126.net/20220330204516/7685f84247eb324ebf49e1d1ffedb2de/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/11679155749/cd4e/66cc/7d55/c0ee5d6f563fb362f81f41f30451cd31.m4a&quot;);</span><br><span class="line"></span><br><span class="line">       //连接到地址</span><br><span class="line">       HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();</span><br><span class="line"></span><br><span class="line">       //输入流</span><br><span class="line">       InputStream inputStream = urlConnection.getInputStream();</span><br><span class="line"></span><br><span class="line">       //输出流</span><br><span class="line">       OutputStream outputStream = new FileOutputStream(&quot;予你.m4a&quot;);</span><br><span class="line"></span><br><span class="line">       //管道流</span><br><span class="line">       byte[] buffer = new byte[1024];</span><br><span class="line">       int len;</span><br><span class="line">       while ((len=inputStream.read(buffer))!=-1)</span><br><span class="line">       &#123;</span><br><span class="line">           outputStream.write(buffer,0,buffer.length);</span><br><span class="line">       &#125;</span><br><span class="line">       //关闭资源</span><br><span class="line">       outputStream.close();</span><br><span class="line">       inputStream.close();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       return i;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/03/30/%E7%AC%AC%E4%B8%83%E5%A4%A9%EF%BC%88%E7%BD%91%E8%B7%AF%E7%BC%96%E7%A8%8B%EF%BC%89/" data-id="cl1dm2x200000xcv7eb55fvml" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2022/03/30/%E7%AC%AC%E4%B8%83%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      第七天（GUI编程）
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2022/03/29/%E7%AC%AC%E5%85%AD%E5%A4%A9%EF%BC%88IO%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第六天（IO）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
