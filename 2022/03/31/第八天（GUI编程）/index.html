@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第八天（GUI编程） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第八天（GUI编程）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第八天（GUI编程）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/03/31/%E7%AC%AC%E5%85%AB%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/" class="article-date">
+  <time datetime="2022-03-31T09:58:24.000Z" itemprop="datePublished">2022-03-31</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><em><strong>给自己的一句话：“今天都不学难道还有时间？”</strong></em></p>
+<p><strong>事件监听（按钮事件test）</strong></p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">public class Demo04 &#123;</span><br><span class="line"></span><br><span class="line">    //启动</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        MyFrame();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //创建也给窗口和按钮</span><br><span class="line">    private static void  MyFrame()&#123;</span><br><span class="line">        Frame frame = new Frame(); //创建一个窗口</span><br><span class="line"></span><br><span class="line">        Button button = new Button(&quot;开始&quot;); //创建一个按钮</span><br><span class="line"></span><br><span class="line">        //添加按钮事件</span><br><span class="line">        button.addActionListener(new ButtonListener());</span><br><span class="line"></span><br><span class="line">        frame.pack();</span><br><span class="line">        frame.setVisible(true);</span><br><span class="line">        frame.add(button);</span><br><span class="line"></span><br><span class="line">        //关闭窗口</span><br><span class="line">        WindowClose(frame);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //窗口监听（关闭窗口）</span><br><span class="line">    private static void WindowClose(Frame frame)</span><br><span class="line">    &#123;</span><br><span class="line">        frame.addWindowListener(new WindowAdapter() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void windowClosing(WindowEvent e) &#123;</span><br><span class="line">                System.exit(0);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//点击按钮事件</span><br><span class="line">class  ButtonListener implements ActionListener&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void actionPerformed(ActionEvent e) &#123;</span><br><span class="line">        System.out.println(&quot;aaaa&quot;+e.getActionCommand());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>文本框（TextField）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public class Demo05 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">         new MyFrame().getTextField(); //启动</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//继承窗口类创建一个文本框</span><br><span class="line">class MyFrame extends Frame&#123;</span><br><span class="line">    public void getTextField() &#123;</span><br><span class="line">        TextField textField = new TextField(); //创建一个文本</span><br><span class="line">        add(textField); //窗口添加文本框</span><br><span class="line"></span><br><span class="line">        //文本框事件</span><br><span class="line">        textField.addActionListener(new TextFieldListener());</span><br><span class="line"></span><br><span class="line">        //设置文本框的输入</span><br><span class="line">        textField.setEchoChar(&#x27;*&#x27;);</span><br><span class="line"></span><br><span class="line">        setVisible(true);//显示</span><br><span class="line">        pack();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//设置文本框事件</span><br><span class="line">class TextFieldListener implements ActionListener&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void actionPerformed(ActionEvent e) &#123;</span><br><span class="line">        TextField textField = (TextField)e.getSource(); //获取文本框中的内容  getSource（）返回的是Object类</span><br><span class="line">        System.out.println(textField.getText());    //控制台输出内容</span><br><span class="line">        textField.setText(&quot;&quot;);  //清空文本框内容</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>画笔（paint）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class Demo06 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new MyPaint().NewFram(); //开启</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyPaint extends Frame&#123;</span><br><span class="line"></span><br><span class="line">    //设置窗口可视化和位置大小</span><br><span class="line">    public void NewFram()&#123;</span><br><span class="line">        setVisible(true);</span><br><span class="line">        setBounds(200,200,400,400);</span><br><span class="line"></span><br><span class="line">        //关闭窗口</span><br><span class="line">        new Windos().WindosClose(this);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    //重写paint</span><br><span class="line">    @Override</span><br><span class="line">    public void paint(Graphics g) &#123;</span><br><span class="line">        g.setColor(Color.GREEN);    //颜色</span><br><span class="line">        g.drawOval(100,100,50,50); //位置大小</span><br><span class="line">        g.fillOval(150,150,50,50);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//关闭窗口类</span><br><span class="line">class Windos &#123;</span><br><span class="line">//关闭方法</span><br><span class="line">    public void WindosClose(Frame frame)&#123;</span><br><span class="line">   //添加窗口监听方法(关闭)</span><br><span class="line">        frame.addWindowListener(new WindowAdapter() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void windowClosing(WindowEvent e) &#123;</span><br><span class="line">                System.exit(0);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>窗口监听器最长用的两个事件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">public class Demo07 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">    new MyFram().ShowFram(); //启动</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//窗口类</span><br><span class="line">class MyFram extends Frame&#123;</span><br><span class="line">    public void ShowFram()&#123;</span><br><span class="line">        setBounds(100,100,300,200);</span><br><span class="line">        setVisible(true);</span><br><span class="line">        addWindowListener(new MyWinListener(this));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//窗口监听类</span><br><span class="line">class MyWinListener extends WindowAdapter &#123;</span><br><span class="line"></span><br><span class="line">    private Frame frame;</span><br><span class="line">    </span><br><span class="line">    //构造方法</span><br><span class="line">    MyWinListener (Frame frame)&#123;</span><br><span class="line">        this.frame = frame;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //关闭事件</span><br><span class="line">    @Override</span><br><span class="line">    public void windowClosing(WindowEvent e) &#123;</span><br><span class="line">        System.exit(0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //激活事件</span><br><span class="line">    @Override</span><br><span class="line">    public void windowActivated(WindowEvent e) &#123;</span><br><span class="line">        this.frame = (Frame)e.getSource();//强转</span><br><span class="line">        this.frame.setTitle(&quot;被显示了&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>按钮监听事件（addKeyListener）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">//主方法</span><br><span class="line">public class Demo08 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        new keyFrame();//开启</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//窗口类</span><br><span class="line">class keyFrame extends Frame&#123;</span><br><span class="line">    public keyFrame()&#123;</span><br><span class="line">        setVisible(true);</span><br><span class="line">        setBounds(100,100,300,300);</span><br><span class="line"></span><br><span class="line">        //窗口开启按钮监听事件</span><br><span class="line">        this.addKeyListener(new KeyAdapter() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void keyPressed(KeyEvent e) &#123;</span><br><span class="line">                int keyCode =e.getKeyCode();</span><br><span class="line">                System.out.println(keyCode);</span><br><span class="line"></span><br><span class="line">                //判断按下的是否为上键</span><br><span class="line">                if(keyCode == KeyEvent.VK_UP)</span><br><span class="line">                &#123;</span><br><span class="line">                    System.out.println(&quot;你按下了上键&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>label（像标签一样显示内容）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Frame frame = new Frame();</span><br><span class="line">Label ablel = new Label(&quot;哈哈哈哈&quot;);</span><br><span class="line">frame.add(ablel);</span><br></pre></td></tr></table></figure>
+
+<p><strong>Swing之Frame窗口（JFrame继承了Frame类 实现了WindowConstants接口所以比Frame高级）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class Demo09 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new JFrame().SJFrame(); //开启</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//JFrame窗口创建</span><br><span class="line">class JFrame extends javax.swing.JFrame&#123;</span><br><span class="line">    public void SJFrame()&#123;</span><br><span class="line">        //设置窗口初始位置和大小</span><br><span class="line">        setBounds(100,100,400,440);</span><br><span class="line">        setVisible(true);  //设置可见性</span><br><span class="line"></span><br><span class="line">        //设置jlabel标签内容</span><br><span class="line">        JLabel jLabel = new JLabel(&quot;学习Study&quot;);</span><br><span class="line">        //添加到窗口中</span><br><span class="line">        add(jLabel);</span><br><span class="line"></span><br><span class="line">        //设置文本居总</span><br><span class="line">        jLabel.setHorizontalAlignment(SwingConstants.CENTER);</span><br><span class="line"></span><br><span class="line">        //获得一个容器</span><br><span class="line">        Container container = this.getContentPane();</span><br><span class="line">        container.setBackground(Color.cyan);</span><br><span class="line"></span><br><span class="line">        //关闭窗口（JFrame自带关闭方法和其他方法）</span><br><span class="line">        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/03/31/%E7%AC%AC%E5%85%AB%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/" data-id="cl1f1jqcz0000ukv70eqgh88j" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2022/03/30/%E7%AC%AC%E4%B8%83%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第七天（GUI编程）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
