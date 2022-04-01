@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第九天（GUI编程） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第九天（GUI编程）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第九天（GUI编程）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/01/%E7%AC%AC%E4%B9%9D%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-01T10:11:21.000Z" itemprop="datePublished">2022-04-01</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><em><strong>给自己一句话：”今天不学哪来明天“</strong></em></p>
+<p><strong>Swing弹窗JDialog</strong></p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">//JFrame窗口</span><br><span class="line">class DialogDemo extends JFrame&#123;</span><br><span class="line"></span><br><span class="line">    //构造方法</span><br><span class="line">    public DialogDemo()&#123;</span><br><span class="line">        //窗口的一些基本设置</span><br><span class="line">        this.setVisible(true);</span><br><span class="line">        this.setBounds(100,100,400,444);</span><br><span class="line">        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span><br><span class="line"></span><br><span class="line">        //创建一JFrame类</span><br><span class="line">        Container container =  this.getContentPane();</span><br><span class="line">        container.setLayout(null);</span><br><span class="line"></span><br><span class="line">        //按钮</span><br><span class="line">        JButton jButton = new JButton(&quot;弹出&quot;);</span><br><span class="line">        //按钮大小</span><br><span class="line">        jButton.setBounds(20,20,50,50);</span><br><span class="line">        //添加一个按钮</span><br><span class="line">        container.add(jButton);</span><br><span class="line"></span><br><span class="line">        //添加一个按钮事件</span><br><span class="line">        jButton.addActionListener(new AbstractAction() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void actionPerformed(ActionEvent e) &#123;</span><br><span class="line">                new JDialogDemo();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//弹窗类</span><br><span class="line">class JDialogDemo extends JDialog&#123;</span><br><span class="line"></span><br><span class="line">        //构造方法</span><br><span class="line">        public JDialogDemo()&#123;</span><br><span class="line">            //设置弹窗的基本设置</span><br><span class="line">            this.setVisible(true);</span><br><span class="line">            this.setBounds(100,100,300,300);</span><br><span class="line"></span><br><span class="line">            //创建也给类</span><br><span class="line">            Container container = this.getContentPane();</span><br><span class="line">            container.add(new JLabel(&quot;看一下&quot;));</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Icon和ImageIcon标签</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">//icon</span><br><span class="line">public class Demo11 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new IcomDemo().init(30,30); //开启</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class IcomDemo extends JFrame implements Icon&#123;</span><br><span class="line">    int width;</span><br><span class="line">    int height;</span><br><span class="line"></span><br><span class="line">    public IcomDemo()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    public IcomDemo(int width,int height)&#123;</span><br><span class="line">        this.width = width;</span><br><span class="line">        this.height = height;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //ICom方法</span><br><span class="line">    public void init(int width,int height)&#123;</span><br><span class="line">        //创建一个标志</span><br><span class="line">        IcomDemo icomDemo = new IcomDemo(width,height);</span><br><span class="line"></span><br><span class="line">        //设置标志的位置</span><br><span class="line">        JLabel jLabel = new JLabel(&quot;hhhh&quot;,icomDemo,SwingConstants.CENTER);</span><br><span class="line">        this.setVisible(true);</span><br><span class="line"></span><br><span class="line">        //获取frame中的方法</span><br><span class="line">        Container container = this.getContentPane();</span><br><span class="line">        container.setBounds(100,100,400,400);</span><br><span class="line">        container.add(jLabel);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void paintIcon(Component c, Graphics g, int x, int y) &#123;  //画</span><br><span class="line">        g.fillOval(x,y,width,height);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getIconWidth() &#123;</span><br><span class="line">        return this.width;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getIconHeight() &#123;</span><br><span class="line">        return this.height;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//ImageIcon的使用</span><br><span class="line">public class Demo12 &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        new Demos12(); //开启</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Demos12 extends JFrame &#123;</span><br><span class="line">    public  Demos12() throws Exception &#123;</span><br><span class="line">        </span><br><span class="line">        JLabel jLabel =new JLabel(&quot;hhhh&quot;);</span><br><span class="line">        </span><br><span class="line">        URL url = Demos12.class.getResource(&quot;jj.jpg&quot;); //获取当前对象的一个值</span><br><span class="line">        ImageIcon imageIcon = new ImageIcon(url); //创建一个图标</span><br><span class="line">        jLabel.setIcon(imageIcon);  //JLabel添加一个图片</span><br><span class="line">        jLabel.setHorizontalAlignment(SwingConstants.CENTER); //设置位置</span><br><span class="line"></span><br><span class="line">        this.setVisible(true);</span><br><span class="line">        this.setBounds(100,100,400,400);</span><br><span class="line"></span><br><span class="line">        Container container = getContentPane();</span><br><span class="line">        container.add(jLabel);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>textArea文本域和JScrollPane面板</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class Demo13 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new JScroll(); //开启</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class JScroll extends JFrame&#123;</span><br><span class="line">    public JScroll()&#123;</span><br><span class="line"></span><br><span class="line">        this.setVisible(true);</span><br><span class="line">        this.setBounds(100,100,500,500);</span><br><span class="line"></span><br><span class="line">        Container container = this.getContentPane();</span><br><span class="line"></span><br><span class="line">        //创建文本域</span><br><span class="line">        JTextArea jTextArea =new JTextArea(20,10);</span><br><span class="line">        jTextArea.setText(&quot;我太蠢了&quot;);</span><br><span class="line"></span><br><span class="line">        //创建Scroll面板</span><br><span class="line">        JScrollPane pane = new JScrollPane(jTextArea);</span><br><span class="line"></span><br><span class="line">        container.add(pane);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>图片按钮、单选框、多选框、下拉框、列表框（课程在狂神GUI编程）</strong></em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/01/%E7%AC%AC%E4%B9%9D%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/" data-id="cl1ggd5qx0000n8v7b2yd05ob" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2022/04/01/%E7%AC%AC%E5%8D%81%E5%A4%A9%EF%BC%88%E6%B3%A8%E8%A7%A3%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      第十天（注解）
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2022/03/31/%E7%AC%AC%E5%85%AB%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第八天（GUI编程）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
