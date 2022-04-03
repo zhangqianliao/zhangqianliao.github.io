@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第十一天（JUC并发） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第十一天（JUC并发）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第十一天（JUC并发）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/03/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-03T10:06:24.000Z" itemprop="datePublished">2022-04-03</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><em><strong>给自的一句话：“自己给自己一个坚定的信念不会是一件坏事”</strong></em></p>
+<p><strong>线程和进程</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//进程：一个程序：qq.exe、lol.exe 程序的集合，一个进程包含多个线程，至少有一个线程。</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p><strong>Java默认有几条线程？</strong></p>
+<blockquote>
+<p>Java默认有两个线程  main（主线程）和GC（回收线程）</p>
+</blockquote>
+<p>开启线程的方式（对Java而言）：Thread、Runnable、Callable</p>
+<p><strong>Java真的可以开启线程吗？</strong></p>
+<blockquote>
+<p>不可以</p>
+</blockquote>
+<p>源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">//new Thread().start(); </span><br><span class="line"></span><br><span class="line">//start()方法的源代码</span><br><span class="line">public synchronized void start() &#123;</span><br><span class="line">        /**</span><br><span class="line">         * This method is not invoked for the main method thread or &quot;system&quot;</span><br><span class="line">         * group threads created/set up by the VM. Any new functionality added</span><br><span class="line">         * to this method in the future may have to also be added to the VM.</span><br><span class="line">         *</span><br><span class="line">         * A zero status value corresponds to state &quot;NEW&quot;.</span><br><span class="line">         */</span><br><span class="line">        if (threadStatus != 0)</span><br><span class="line">            throw new IllegalThreadStateException();</span><br><span class="line"></span><br><span class="line">        /* Notify the group that this thread is about to be started</span><br><span class="line">         * so that it can be added to the group&#x27;s list of threads</span><br><span class="line">         * and the group&#x27;s unstarted count can be decremented. */</span><br><span class="line">        </span><br><span class="line">        group.add(this);	//添加一个组</span><br><span class="line"></span><br><span class="line">        boolean started = false;</span><br><span class="line">        try &#123;</span><br><span class="line">            start0();		//调用的是本地方法</span><br><span class="line">            started = true;</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                if (!started) &#123;</span><br><span class="line">                    group.threadStartFailed(this);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; catch (Throwable ignore) &#123;</span><br><span class="line">                /* do nothing. If start0 threw a Throwable then</span><br><span class="line">                  it will be passed up the call stack */</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">    private native void start0();  //本地方法：调用底层的C++，Java是无法直接操作硬件它是运行在JVM虚拟机上的</span><br></pre></td></tr></table></figure>
+
+<p><strong>Runtime获取cpu的核数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//获取cpu的核数</span><br><span class="line">//CPU密集型，IO密集型</span><br><span class="line">System.out.println(Runtime.getRuntime().availableProcessors());</span><br></pre></td></tr></table></figure>
+
+<p><strong>并发编程：并发、并行</strong></p>
+<blockquote>
+<p><strong>并发（多条线程操作同一个资源）</strong></p>
+<p>CPU一核，模拟出来多条线程，进行快速交替</p>
+<p><strong>并行（多条线程同时执行：多个人一起走）</strong></p>
+<p>CPU多核，多个线程可以同时执行。线程池</p>
+</blockquote>
+<p>并发编程的本质：<strong>充分利用CPU资源</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/03/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" data-id="cl1j97n7l00001ov7817w43px" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2022/04/01/%E7%AC%AC%E5%8D%81%E5%A4%A9%EF%BC%88%E6%B3%A8%E8%A7%A3%E4%B8%8ECLass%E5%8F%8D%E7%BC%96%E8%AF%91%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第十天（注解与反编译）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
