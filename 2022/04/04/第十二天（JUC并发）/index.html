@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第十二天（JUC并发） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第十二天（JUC并发）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第十二天（JUC并发）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/04/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-04T09:46:34.000Z" itemprop="datePublished">2022-04-04</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><strong>个自己的一句话：“做人不要怕这里是中国”</strong></p>
+<p><em><strong>JUC == java.util.concurrent</strong></em></p>
+<p><strong>线程有几个状态</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">NEW //新生</span><br><span class="line"></span><br><span class="line">RUNNABLE //运行</span><br><span class="line"></span><br><span class="line">BLOCKED	 //阻塞</span><br><span class="line"></span><br><span class="line">WAITING	//等待，死死的等待</span><br><span class="line"></span><br><span class="line">TIMED_WAITING	//超时等待</span><br><span class="line"></span><br><span class="line">TERMINATED	//结束</span><br></pre></td></tr></table></figure>
+
+<p><strong>wait和sleep的区别</strong></p>
+<blockquote>
+<p><strong>来自不同的类</strong></p>
+<p>wait =&gt; Object  sleep=&gt;Thread</p>
+<p><strong>关于锁的不同</strong></p>
+<p>sleep抱着锁睡觉</p>
+<p>wait会释放锁</p>
+<p><strong>使用范围不同</strong></p>
+<p>sleep所有地方都可以睡</p>
+<p>wait只有同步代码块中可以睡</p>
+<p><strong>是否需要捕获异常</strong></p>
+<p>wait不需要</p>
+<p>sleep需要捕获异常</p>
+</blockquote>
+<p><strong>synchornized锁(买票的例子)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Put put = new Put();</span><br><span class="line"></span><br><span class="line">        //并发：只有一个重写方法的话可以使用lambda表达式</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            for (int i = 1; i &lt; 50; i++) &#123;</span><br><span class="line">                put.jianhao();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,&quot;A&quot;).start();</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            for (int i = 1; i &lt; 50; i++) &#123;</span><br><span class="line">                put.jianhao();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,&quot;B&quot;).start();</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            for (int i = 1; i &lt; 50; i++) &#123;</span><br><span class="line">                put.jianhao();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,&quot;C&quot;).start();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//真真开发是需要使用OOP思想  能不适用接口就不使用</span><br><span class="line">//类里面就是属性和方法</span><br><span class="line">class Put&#123;</span><br><span class="line">    int num = 50;</span><br><span class="line"></span><br><span class="line">    //买票的方法</span><br><span class="line">    public synchronized void  jianhao()&#123;</span><br><span class="line">        if (num!=0)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+&quot;购买了第&quot;+num--+&quot;张票&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Lock锁(买票的例子)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">public class Test02 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Put1 put = new Put1();</span><br><span class="line"></span><br><span class="line">        //并发：只有一个重写方法的话可以使用lambda表达式</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            for (int i = 1; i &lt; 50; i++) &#123;</span><br><span class="line">                put.jianhao();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,&quot;A&quot;).start();</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            for (int i = 1; i &lt; 50; i++) &#123;</span><br><span class="line">                put.jianhao();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,&quot;B&quot;).start();</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            for (int i = 1; i &lt; 50; i++) &#123;</span><br><span class="line">                put.jianhao();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,&quot;C&quot;).start();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//真真开发是需要使用OOP思想  能不适用接口就不使用</span><br><span class="line">//类里面就是属性和方法</span><br><span class="line">class Put1&#123;</span><br><span class="line">    private int num = 50;</span><br><span class="line">    private Lock lock = new ReentrantLock(); //创建一个lock</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //买票的方法</span><br><span class="line">    public  void  jianhao()&#123;</span><br><span class="line"></span><br><span class="line">        lock.lock(); //锁</span><br><span class="line"></span><br><span class="line">        //需要执行的代码</span><br><span class="line">        try &#123;</span><br><span class="line">            if (num!=0)</span><br><span class="line">            &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+&quot;购买了第&quot;+num--+&quot;张票&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            lock.unlock(); //解锁</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Lock中公平锁和非公平锁</strong></p>
+<blockquote>
+<p>FairSync     //公平锁:必须排队<br>NonfairSync    //非公平锁:可以插队(Lock默认)</p>
+</blockquote>
+<p><strong>synchornized和Lock的区别</strong></p>
+<blockquote>
+<p>1、synchronized是关键字、Lock是一个类</p>
+<p>2、synchronized锁（线程一不结束，线程二就会一直处于等待状态）、Lock锁就不一定了（lock.tryLock 尝试获取锁）</p>
+<p>3、synchronized会自动释放锁、Lock需要手动释放锁</p>
+<p>4、synchronized不可以获取锁的状态、Lock可以获取锁的状态</p>
+<p>5、synchronized是可重入，不可中断的，非公平锁、Lock是可重入，可以判断锁，非公平锁(可自行设置)</p>
+<p>6、synchronized适合少量同步代码问题、Lock适合大量的同步代码</p>
+</blockquote>
+<p><strong>生产者和消费者问题</strong></p>
+<p>面试的：单例模式、排序算法、生产者和消费者、死锁</p>
+<blockquote>
+<p><strong>synchronized例子</strong></p>
+<p><em><strong>使用if存在虚假唤醒问题JDK文档解决方案使用while</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;public class Test03 &#123;</span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">       A a =new A();</span><br><span class="line"></span><br><span class="line">       new Thread(()-&gt;&#123;</span><br><span class="line">           for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">               try &#123;</span><br><span class="line">                   a.put();</span><br><span class="line">               &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                   e.printStackTrace();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,&quot;A&quot;).start();</span><br><span class="line"></span><br><span class="line">       new Thread(()-&gt;&#123;</span><br><span class="line">           for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">               try &#123;</span><br><span class="line">                   a.out();</span><br><span class="line">               &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                   e.printStackTrace();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,&quot;B&quot;).start();</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;//消费者和生产者  （判断是否需要等待、业务、通知）</span><br><span class="line">&gt;class A&#123;</span><br><span class="line">   private int number=0;</span><br><span class="line"></span><br><span class="line">   public synchronized void  put() throws InterruptedException &#123;</span><br><span class="line">       if (number&gt;0)</span><br><span class="line">       &#123;</span><br><span class="line">           wait();  //等待</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       System.out.println(Thread.currentThread().getName()+&quot;加一&quot;);</span><br><span class="line">       number++;</span><br><span class="line"></span><br><span class="line">       notify();   //通知</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public synchronized void out() throws InterruptedException &#123;</span><br><span class="line">       if (number==0)</span><br><span class="line">       &#123;</span><br><span class="line">           wait(); //等待</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       System.out.println(Thread.currentThread().getName()+&quot;减一&quot;);</span><br><span class="line">       number--;</span><br><span class="line">       notify();   //通知</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Lock锁（JUC版生产者和消费者例子：lock中condition可以精准唤醒）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">&gt;public class Test04 &#123;</span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">       A04 a =new A04();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       new Thread(()-&gt;&#123;</span><br><span class="line">           for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">                   a.put();</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,&quot;A&quot;).start();</span><br><span class="line"></span><br><span class="line">       new Thread(()-&gt;&#123;</span><br><span class="line">           for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">                   a.out();</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,&quot;B&quot;).start();</span><br><span class="line"></span><br><span class="line">       new Thread(()-&gt;&#123;</span><br><span class="line">           for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">               a.put();</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,&quot;C&quot;).start();</span><br><span class="line"></span><br><span class="line">       new Thread(()-&gt;&#123;</span><br><span class="line">           for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">               a.out();</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,&quot;D&quot;).start();</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;//消费者和生产者  （判断是否需要等待、业务、通知）</span><br><span class="line">&gt;class A04&#123;</span><br><span class="line">   private int number=0;</span><br><span class="line"></span><br><span class="line">   private Lock lock =new ReentrantLock();</span><br><span class="line">   private Condition condition1 = lock.newCondition();</span><br><span class="line">   private Condition condition2 = lock.newCondition();</span><br><span class="line">   public  void  put()  &#123;</span><br><span class="line"></span><br><span class="line">       lock.lock();</span><br><span class="line">       try &#123;</span><br><span class="line"></span><br><span class="line">           while (number&gt;0)</span><br><span class="line">           &#123;</span><br><span class="line">               condition1.await();//1等待</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           System.out.println(Thread.currentThread().getName()+&quot;加一&quot;);</span><br><span class="line">           number++;</span><br><span class="line">           condition2.signal(); //指定唤醒2</span><br><span class="line">           //condition1.signalAll(); //唤醒所有</span><br><span class="line"></span><br><span class="line">       &#125;catch (Exception e)&#123;</span><br><span class="line"></span><br><span class="line">       &#125;finally &#123;</span><br><span class="line">           lock.unlock();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public  void out() &#123;</span><br><span class="line">       lock.lock();</span><br><span class="line">       try &#123;</span><br><span class="line"></span><br><span class="line">           while (number==0)</span><br><span class="line">           &#123;</span><br><span class="line">               condition2.await();//2等待</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           System.out.println(Thread.currentThread().getName()+&quot;减一&quot;);</span><br><span class="line">           number--;</span><br><span class="line">           condition1.signal(); //指定唤醒1</span><br><span class="line">           //condition2.signalAll(); //唤醒所有</span><br><span class="line"></span><br><span class="line">       &#125;catch (Exception e)&#123;</span><br><span class="line"></span><br><span class="line">       &#125;finally &#123;</span><br><span class="line">           lock.unlock();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>锁的是什么（没有时间差是没办法玩的一般使用 TimeUnit()方法来设置延时 ）</strong></p>
+<blockquote>
+<p>1、锁类中的方法</p>
+<p>2、锁类的Class（如果方法使用static修饰符，那么锁的就是Class）</p>
+</blockquote>
+<p><strong>并发下集合类不安全（set和list是一样的：set使用的是CopyOnWriteArraySet）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">java.util.ConcurrentModificationException  //并发修改异常</span><br><span class="line"></span><br><span class="line">        //List&lt;String&gt; list = new ArrayList&lt;&gt;();</span><br><span class="line">        //解决方案</span><br><span class="line">        //1、List&lt;String&gt; list = new Vector&lt;&gt;();</span><br><span class="line">        //2、List&lt;String&gt; list = Collections.synchronizedList(new ArrayList&lt;&gt;());  //使用Collections工具类中synchronizedList将list变的安全</span><br><span class="line">        //使用CopyOnWrite写入是复制</span><br><span class="line">        //多个线程调用时候，list，读取的时候固定的写入（覆盖）</span><br><span class="line">        //在写入的时候避免覆盖</span><br><span class="line">        List&lt;String&gt; list = new CopyOnWriteArrayList&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">        //Map的使用方法</span><br><span class="line">        //Map&lt;String,String&gt; map = new ConcurrentHashMap&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">        for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">            new Thread(()-&gt;&#123;</span><br><span class="line">                list.add(UUID.randomUUID().toString().substring(0,5));</span><br><span class="line">                System.out.println(list);</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>CopyOnWriteArrayList比Vector好在哪里</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;CopyOnWriteArrayList中方法使用的是lock锁</span><br><span class="line">&gt;Vector中方法使用的是synchronized</span><br><span class="line">&gt;使用synchronized锁的话运行速度会低</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>hashSet底层是什么？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public HashSet() &#123;</span><br><span class="line">    map = new HashMap&lt;&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// add set 本质就是map key是无法重复的</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    return map.put(e, PRESENT)==null;</span><br><span class="line">&#125;</span><br><span class="line">private static final Object PRESENT = new Object(); //不变的值</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/04/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" data-id="cl1m6cn6z0001nkv7h9d86bjr" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2022/04/05/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      第十三天（JUC并发）
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2022/04/03/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第十一天（JUC并发）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

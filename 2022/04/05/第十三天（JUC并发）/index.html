@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第十三天（JUC并发） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第十三天（JUC并发）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第十三天（JUC并发）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/05/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-05T09:59:13.000Z" itemprop="datePublished">2022-04-05</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><em><strong>加点自己的鸡汤：“今天不学哪还有明天”</strong></em></p>
+<p>String.valueOf()：将基本数据类型转换为字符串</p>
+<p><strong>Callable</strong></p>
+<blockquote>
+<p>Callable和Runnable的区别</p>
+<p>1、可以有返回值</p>
+<p>2、可以抛出异常</p>
+<p>3、方法不同，Runnable是run() Callable是call()</p>
+<p><em><strong>Callable可以被Thread调用原因（FutureTask&lt;&gt;，可以被Runnable调用，Runnable可以被Thread调用，FutureTask&lt;&gt;可以调用Callable）</strong></em></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class Test06 &#123;</span><br><span class="line">    public static void main(String[] args) throws ExecutionException, InterruptedException &#123;</span><br><span class="line"></span><br><span class="line">        //推荐使用：原因结果可以被缓存效率高</span><br><span class="line">        FutureTask task = new FutureTask(new myThread());</span><br><span class="line">        new Thread(task).start();</span><br><span class="line">        System.out.println(task.get());//获取返回值可能会阻塞（如果是个耗时操作的话）</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class myThread implements Callable&lt;String&gt;&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public String call() throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;zhangshan&quot;);</span><br><span class="line">        return &quot;zhangshan&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>三大辅助工具类</strong></p>
+<blockquote>
+<p><strong>1、CountDownLatch（减法，是阻塞方法如果规定的线程数没够会一直等待）</strong></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class Test07 &#123;</span><br><span class="line">    public static void main(String[] args) throws InterruptedException &#123;</span><br><span class="line"></span><br><span class="line">        //参数表示必须要执行几条线程</span><br><span class="line">        CountDownLatch countDownLatch = new CountDownLatch(9);</span><br><span class="line"></span><br><span class="line">        final int j = 1;</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">            new Thread(()-&gt;&#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+&quot;第&quot;+j+&quot;同学走了&quot;);</span><br><span class="line">                countDownLatch.countDown();  //减一  必须放到线程里面</span><br><span class="line">            &#125;,String.valueOf(i)).start();</span><br><span class="line">        &#125;</span><br><span class="line">        //设置的线程数走完之后才会往下执行</span><br><span class="line">        countDownLatch.await();</span><br><span class="line">        System.out.println(&quot;关门&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>2、CyclicBarrier（执行线程到达指定数量后触发执行指定线程后仍然后往后执行线程但不会结束程序）</strong></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Test08 &#123;</span><br><span class="line">    public static void main(String[] args) throws BrokenBarrierException, InterruptedException &#123;</span><br><span class="line"></span><br><span class="line">        //CyclicBarrier的构造方法有两个 一个是线程数一个是到达指定线程数后执行一条线程</span><br><span class="line">        CyclicBarrier cyclicBarrier = new CyclicBarrier(7,()-&gt;&#123;System.out.println(&quot;神龙来了快许愿！&quot;);&#125;);</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt;= 11; i++) &#123;</span><br><span class="line">            final int l = i;</span><br><span class="line">            new Thread(()-&gt;&#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+&quot;第&quot;+l+&quot;龙珠&quot;);</span><br><span class="line">                try &#123;</span><br><span class="line">                    cyclicBarrier.await();  //等待到达指定线程然后唤醒需要执行的线程</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125; catch (BrokenBarrierException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,String.valueOf(l)).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>3、Semaphore（设置同时执行的最大线程数量，会阻塞）</strong></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class Test09 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        //设置最大同时执行线程数</span><br><span class="line">        Semaphore semaphore = new Semaphore(2);</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; 10; i++) &#123;</span><br><span class="line"></span><br><span class="line">            final int l = i;</span><br><span class="line"></span><br><span class="line">            new Thread(()-&gt;&#123;</span><br><span class="line"></span><br><span class="line">                try &#123;</span><br><span class="line">                    semaphore.acquire();    //获得：假设执行线程如果满了，等待，等待到执行的线程被释放为止</span><br><span class="line">                    System.out.println(Thread.currentThread().getName()+&quot;号车获取车位&quot;);</span><br><span class="line">                    TimeUnit.SECONDS.sleep(2); //延时模拟线程执行时间</span><br><span class="line">                    System.out.println(Thread.currentThread().getName()+&quot;号车离开车位&quot;);</span><br><span class="line">                    semaphore.release();    //释放：将当前信号量+1，然后唤醒等待线程</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,String.valueOf(l)).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>ReadWriteLock（读写锁：写的时候只执行该写的线程执行完之后再执行其他线程，读的时候没有关系：怕并发修改异常。也叫独占锁和共享锁：独占锁（写锁）、共享锁（读锁））</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">public class Test10 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        MyByte myByte = new MyByte();</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt;= 10; i++) &#123;</span><br><span class="line">            final int l=i;</span><br><span class="line">            new Thread(()-&gt;&#123;</span><br><span class="line">                myByte.put(&quot;1&quot;,&quot;1&quot;);</span><br><span class="line">            &#125;,String.valueOf(l)).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt;= 10; i++) &#123;</span><br><span class="line">            final int l=i;</span><br><span class="line">            new Thread(()-&gt;&#123;</span><br><span class="line">                myByte.get(&quot;1&quot;);</span><br><span class="line">            &#125;,String.valueOf(l)).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//模拟缓存操作</span><br><span class="line">class MyByte&#123;</span><br><span class="line"></span><br><span class="line">    //创建读写锁</span><br><span class="line">    private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();</span><br><span class="line"></span><br><span class="line">    Map&lt;String,String&gt; map = new ConcurrentHashMap&lt;String,String&gt;();</span><br><span class="line">    //模拟写入</span><br><span class="line">    public void put(String key,String name)&#123;</span><br><span class="line"></span><br><span class="line">        readWriteLock.writeLock().lock();  //锁</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+&quot;开始写入&quot;);</span><br><span class="line">            map.put(key,name);</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+&quot;写入成功&quot;);</span><br><span class="line">        &#125;catch (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            readWriteLock.writeLock().unlock(); //解锁</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //模拟读取</span><br><span class="line">    public void get(String key)&#123;</span><br><span class="line"></span><br><span class="line">        readWriteLock.writeLock().lock();</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+&quot;开始读取&quot;);</span><br><span class="line">            String o = map.get(key);</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+&quot;读取成功&quot;);</span><br><span class="line">        &#125;catch (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            readWriteLock.writeLock().unlock();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>BlockingQueue（阻塞队列）</strong></p>
+<p>四组APL</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>抛出异常</th>
+<th>不抛出异常</th>
+<th>阻塞等待</th>
+<th>超时等待</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>添加</td>
+<td>add():如果超出最大值报异常</td>
+<td>offer():成功返回true失败返回false</td>
+<td>put():如果队满了就会一直等待</td>
+<td>put(元素,数值,TimeUnit.SECONDS):超过这个时间不行就不等了</td>
+</tr>
+<tr>
+<td>移除</td>
+<td>remove():如果超出最大值报异常</td>
+<td>poll():移除成功返回元素失败返回null</td>
+<td>take():如果没有需要移除的就会一直等待需</td>
+<td>poll(数值,TimeUnit.SECONDS):如果超过这个时间没有需要被移除的就不等了</td>
+</tr>
+<tr>
+<td>检查队首元素</td>
+<td>element()</td>
+<td>peek()</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>SynchronousQueue</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class Test11 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        //SynchronousQueue是实现了BlockingQueue接口所以可以</span><br><span class="line">        //同步队列：没有容量只能执行一个</span><br><span class="line">        SynchronousQueue&lt;String&gt; blockingQueue = new SynchronousQueue();</span><br><span class="line"></span><br><span class="line">            new Thread(()-&gt;&#123;</span><br><span class="line"></span><br><span class="line">                try &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName()+&quot;输入1&quot;);</span><br><span class="line">                    blockingQueue.offer(&quot;a&quot;,3,TimeUnit.SECONDS);</span><br><span class="line">                    System.out.println(Thread.currentThread().getName()+&quot;输入2&quot;);</span><br><span class="line">                    blockingQueue.offer(&quot;a&quot;,3,TimeUnit.SECONDS);</span><br><span class="line">                    System.out.println(Thread.currentThread().getName()+&quot;输入3&quot;);</span><br><span class="line">                    blockingQueue.offer(&quot;a&quot;,3,TimeUnit.SECONDS);</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;,&quot;1&quot;).start();</span><br><span class="line"></span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                TimeUnit.SECONDS.sleep(2);  //延时模拟</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+&quot;取出&quot;+blockingQueue.take());</span><br><span class="line">                TimeUnit.SECONDS.sleep(2);</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+&quot;取出&quot;+blockingQueue.take());</span><br><span class="line">                TimeUnit.SECONDS.sleep(2);</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+&quot;取出&quot;+blockingQueue.take());</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,&quot;1&quot;).start();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/05/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" data-id="cl1m6cn6n0000nkv77xizd20m" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2022/04/04/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第十二天（JUC并发）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
