@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第十四天（JUC并发） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第十四天（JUC并发）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第十四天（JUC并发）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/06/%E7%AC%AC%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-06T10:31:10.000Z" itemprop="datePublished">2022-04-06</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><em><strong>借用“杰斯”的一句话：“为了更美好的明天”而战“”</strong></em></p>
+<p><strong>线程池（三大方法、七大参数、四种拒绝策略）</strong></p>
+<p>程序运行，本质：占用系统资源！优化资源的使用=&gt;池化技术</p>
+<p>例如：线程池、连接池、内存池、对象池…（创建和销毁都十分消耗资源）</p>
+<p>池化技术：事先准备好一些资源，有人要用，就来池内拿，用完后放回池内</p>
+<span id="more"></span>
+
+
+
+<p><strong>线程池的好处</strong></p>
+<blockquote>
+<p>1、降低资源消耗</p>
+<p>2、提高响应速度</p>
+<p>3、方便管理</p>
+<p><strong>4、线程复用、可以控制最大并发数、管理线程</strong></p>
+</blockquote>
+<p><strong>Executors工具类三大方法是都使用了ThreadPoolExecutor创建的（创建线程池不推荐使用）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Test12 &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //创建线程池</span><br><span class="line">        ExecutorService service1 = Executors.newSingleThreadExecutor();//单个线程</span><br><span class="line">       // ExecutorService service2 = Executors.newFixedThreadPool(5);//固定线程</span><br><span class="line">       // ExecutorService service3 = Executors.newCachedThreadPool();//遇强则强</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">            //execute使用线程池创建线程</span><br><span class="line">            service1.execute(()-&gt;&#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName());</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用ThreadPoolExecutor创建线程池</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">   //ThreadPoolExecutor源码</span><br><span class="line">        public ThreadPoolExecutor(int corePoolSize,	//开启线程数</span><br><span class="line">                              int maximumPoolSize,	//最大开启线程数</span><br><span class="line">                              long keepAliveTime,	//超时等待时间</span><br><span class="line">                              TimeUnit unit,		//超时等待单位</span><br><span class="line">                              BlockingQueue&lt;Runnable&gt; workQueue,//阻塞队列排队</span><br><span class="line">                              ThreadFactory threadFactory,	//创建线程工厂使用默认的</span><br><span class="line">                              RejectedExecutionHandler handler//四种拒接策略) &#123;</span><br><span class="line">        this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,</span><br><span class="line">             threadFactory, defaultHandler);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ------------------------------------------------------</span><br><span class="line">    public class Test13 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">		//最大线程数这么定义？</span><br><span class="line">		//1、CPU密集型，几核就定义几</span><br><span class="line">		//2、IO密集型，判断程序十分耗资源的IO线程有几个定义其两倍</span><br><span class="line">        BlockingQueue blockingQueue = new LinkedBlockingQueue(3);</span><br><span class="line">        int l = Runtime.getRuntime().availableProcessors();  //获取线程的核数</span><br><span class="line"></span><br><span class="line">        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(</span><br><span class="line">                2,        //初始执行线程数量</span><br><span class="line">                l,      //最多同时执行线程数量（使用电脑的核数来做最大执行线程数）</span><br><span class="line">                2,      //超时等待时长</span><br><span class="line">                TimeUnit.SECONDS,   //超时等待时间单位</span><br><span class="line">                blockingQueue,  //阻塞队列</span><br><span class="line">                Executors.defaultThreadFactory(),   //创造线程工厂，使用默认的无需更改</span><br><span class="line">                new ThreadPoolExecutor.AbortPolicy()    //最大线程加队列满了，还有需要执行的线程，不进行这条线程并抛出异常</span><br><span class="line">                //new ThreadPoolExecutor.CallerRunsPolicy() //把线程抛回main线程</span><br><span class="line">                //new ThreadPoolExecutor.DiscardOldestPolicy()  //最大线程加队列满了。尝试和最早执行的线程进行竞争，不会抛出异常</span><br><span class="line">                //new ThreadPoolExecutor.DiscardPolicy()    //最大线程加队列满了，不再执行线程，不会抛出异常</span><br><span class="line">                );</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; 9; i++) &#123;</span><br><span class="line">            threadPoolExecutor.execute(()-&gt;&#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName());</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>四大函数接口</strong></p>
+<blockquote>
+<p><strong>Function（函数式接口）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//Function源码</span><br><span class="line">@FunctionalInterface //函数式接口</span><br><span class="line">public interface Function&lt;T, R&gt; &#123; //两个参数：一个是返回值类型一个是参数类型</span><br><span class="line"></span><br><span class="line">R apply(T t);</span><br><span class="line">-------------------------------------------</span><br><span class="line">  //Function使用lambda表达式  函数式接口 有返回值有参数</span><br><span class="line">  Function function = (String)-&gt;&#123;return &quot;zhangshan&quot;;&#125;;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>Predicate（判断型接口）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;//Predicate源码</span><br><span class="line">&gt;@FunctionalInterface</span><br><span class="line">&gt;public interface Predicate&lt;T&gt; &#123;</span><br><span class="line">&gt;boolean test(T t);</span><br><span class="line">&gt;-------------------------------------</span><br><span class="line">&gt;//Predicate使用lambda表达式 判断型接口 返回值只能是 布尔值</span><br><span class="line">&gt;Predicate predicate = (String)-&gt;&#123;if (String!=null)&#123;return true;&#125;else &#123;return false;&#125;&#125;;</span><br><span class="line">&gt;System.out.println(predicate.test(&quot;:hhh&quot;));</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<blockquote>
+<p><strong>Consumer（消费型接口）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;//Consumer源码</span><br><span class="line">&gt;@FunctionalInterface</span><br><span class="line">&gt;public interface Consumer&lt;T&gt; &#123;</span><br><span class="line">&gt;void accept(T t);</span><br><span class="line">&gt;------------------------------------------</span><br><span class="line">&gt;//Consumer使用lambda表达式  消费型接口 只有参数没有返回值</span><br><span class="line">&gt;Consumer consumer = (String)-&gt;&#123;System.out.println(String);&#125;;</span><br><span class="line">&gt;consumer.accept(&quot;lisi&quot;);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>Supplier（供给型接口）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;//Supplier源码</span><br><span class="line">&gt;@FunctionalInterface</span><br><span class="line">&gt;public interface Supplier&lt;T&gt; &#123;</span><br><span class="line">   T get();</span><br><span class="line">&gt;&#125;</span><br><span class="line">&gt;--------------------------------</span><br><span class="line">&gt;//Supplier使用lambda表达式 供给型接口  没有参数只有返回值</span><br><span class="line">&gt;Supplier supplier = ()-&gt;&#123;return 1024;&#125;;</span><br><span class="line">&gt;System.out.println(supplier.get());</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>Stream流式计算</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class Test15 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">    </span><br><span class="line">    //id必须是偶数</span><br><span class="line">    //年龄大于23</span><br><span class="line">    //用户名变成大写</span><br><span class="line">    //用户名字母倒序</span><br><span class="line">    //只输出一个用</span><br><span class="line">        Users u1 = new Users(1,&quot;a&quot;,21);</span><br><span class="line">        Users u2 = new Users(2,&quot;b&quot;,25);</span><br><span class="line">        Users u3 = new Users(3,&quot;c&quot;,23);</span><br><span class="line">        Users u4 = new Users(4,&quot;d&quot;,24);</span><br><span class="line"></span><br><span class="line">        //集合就是用来储存</span><br><span class="line">        List&lt;Users&gt; users = Arrays.asList(u1, u2, u3, u4);</span><br><span class="line"></span><br><span class="line">        //计算交给Stream流</span><br><span class="line">        //链式编程</span><br><span class="line">        users.stream().filter((u)-&gt;&#123;return u.getId()%2==0;&#125;).</span><br><span class="line">                filter((u)-&gt;&#123;return u.getAge()&gt;23;&#125;).</span><br><span class="line">                map((u)-&gt;&#123;return u.getName().toUpperCase();&#125;).</span><br><span class="line">                sorted((u,uu)-&gt;&#123;return uu.compareTo(u);&#125;).</span><br><span class="line">                limit(1)</span><br><span class="line">                .forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>ForkJoin（详解）</strong></p>
+<blockquote>
+<p>工作原理：将大任务拆分成小人物再进行总结</p>
+</blockquote>
+<p><img src="/2022/04/06/%E7%AC%AC%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220406212452.png"></p>
+<blockquote>
+<p>ForkJoin特点：工作窃取（可以进行工作窃取的原因是使用的是双端队列）</p>
+</blockquote>
+<p><img src="/2022/04/06/%E7%AC%AC%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220406213218.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/06/%E7%AC%AC%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" data-id="cl1nm9fhi0000bkv7f5yk42qg" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2022/04/05/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第十三天（JUC并发）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
