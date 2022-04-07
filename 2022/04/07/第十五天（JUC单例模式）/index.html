@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第十五天（单例模式） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第十五天（JUC单例模式）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第十五天（单例模式）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-07T12:24:11.000Z" itemprop="datePublished">2022-04-07</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><strong>单例模式</strong></p>
+<blockquote>
+<p><code>饿汉式</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;//饿汉式单例（一开始就会加载所有资源）</span><br><span class="line">&gt;public class Hungry &#123;</span><br><span class="line"></span><br><span class="line">   //会造成资源浪费</span><br><span class="line">   byte[] bytes1 = new byte[1024];</span><br><span class="line">   byte[] bytes2 = new byte[1024];</span><br><span class="line">   byte[] bytes3 = new byte[1024];</span><br><span class="line">   byte[] bytes4 = new byte[1024];</span><br><span class="line"></span><br><span class="line">   //无参构造</span><br><span class="line">   public Hungry()&#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   //静态常量：实例化对象</span><br><span class="line">   private final static Hungry HUNGRY = new Hungry();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   public static Hungry getInstance()&#123;</span><br><span class="line">       return HUNGRY;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>懒汉式单例</code>（单线程模式下没问题多线程并发下有问题）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;//懒汉式单例</span><br><span class="line">&gt;public class LazyMan &#123;</span><br><span class="line"></span><br><span class="line">   //无参构造</span><br><span class="line">   public LazyMan()&#123;&#125;;</span><br><span class="line"></span><br><span class="line">   //设置私有</span><br><span class="line">   private static LazyMan lazyMan;</span><br><span class="line"></span><br><span class="line">   //获取实例方法</span><br><span class="line">   public static LazyMan getInstance()&#123;</span><br><span class="line">       //lazyMan为空的时候才会实例化</span><br><span class="line">       if(lazyMan==null)</span><br><span class="line">       &#123;</span><br><span class="line">           lazyMan = new LazyMan();</span><br><span class="line">       &#125;</span><br><span class="line">       //返回实例化对象</span><br><span class="line">       return lazyMan;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>使用synchronized进行双重检查锁模式解决多线程并发问题（检查：DCL懒汉式）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&gt;//双重检查锁模式的懒汉式单例 简称：DCL懒汉式</span><br><span class="line">&gt;public class LazyMan &#123;</span><br><span class="line"></span><br><span class="line">   //无参构造</span><br><span class="line">   public LazyMan()&#123;</span><br><span class="line">       System.out.println(Thread.currentThread().getName()+&quot;ok&quot;);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   //设置私有</span><br><span class="line">   private volatile static LazyMan lazyMan;</span><br><span class="line"></span><br><span class="line">   //双重检查锁模式的 懒汉式单例 简称：DCL懒汉式</span><br><span class="line">   public static LazyMan getInstance()&#123;</span><br><span class="line">       if (lazyMan==null)</span><br><span class="line">       &#123;</span><br><span class="line">           synchronized (LazyMan.class) //锁的是Class（Class是唯一的）</span><br><span class="line">           &#123;</span><br><span class="line">               //lazyMan为空的时候才会实例化</span><br><span class="line">               if(lazyMan==null)</span><br><span class="line">               &#123;</span><br><span class="line">                   lazyMan = new LazyMan(); //new 不是一个原子性操作</span><br><span class="line">                   /**</span><br><span class="line">                   *1、分配内存空间</span><br><span class="line">                   *2、执行构造方法，初始化对象</span><br><span class="line">                   *3、把这个对象指向分配的内存空间</span><br><span class="line">                   *	有可能出现指令重排</span><br><span class="line">                   *	正常：123 重排结果：132</span><br><span class="line">                   *	如果线程执行的是指令重排后的顺序的话会出现lazyMan没有完成构造的问题</span><br><span class="line">                   *	所以需要加上volatile保证在多线程线下不会出现</span><br><span class="line">                   */</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       //返回实例化对象</span><br><span class="line">       return lazyMan;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">       for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">           new Thread(()-&gt;&#123;</span><br><span class="line">               LazyMan.getInstance();</span><br><span class="line">           &#125;).start();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%89/" data-id="cl1p17tdv0000ssv7bmsl3r18" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第十五天（JUC）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
