@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第十六天（JUC） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第十六天（JUC）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第十六天（JUC）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-08T09:41:37.000Z" itemprop="datePublished">2022-04-08</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><em><strong>给自的一句话：“适当的给自己一点压力还是有必要的。”</strong></em></p>
+<p><strong>cmdjava反编译命令java-p</strong></p>
+<p><strong>使用Enum枚举（Enum自带单例无法被反射进行破坏）</strong></p>
+<blockquote>
+<p>enum本身就是一个Class类</p>
+<p>通过反编译知道枚举的构造方法是又参数的</p>
+<p><img src="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220408183818.png"></p>
+<span id="more"></span>
+</blockquote>
+<blockquote>
+<p>尝试使用反射破坏枚举（失败）**</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;public enum EnumSingle &#123;</span><br><span class="line">   ENUM_SINGLE;</span><br><span class="line"></span><br><span class="line">   public EnumSingle getInstance()&#123;</span><br><span class="line">       return ENUM_SINGLE;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) throws Exception &#123;</span><br><span class="line">       Constructor&lt;EnumSingle&gt; constructor = EnumSingle.class.getDeclaredConstructor(String.class,int.class);</span><br><span class="line">       constructor.setAccessible(true);</span><br><span class="line">       EnumSingle enumSingle = constructor.newInstance();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>CAS（比较并交换）</strong></p>
+<p>听的迷迷糊糊以后再来深入</p>
+<blockquote>
+<p><code>unsafe类</code></p>
+<p><img src="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220408185713.png"></p>
+</blockquote>
+<p><strong>CAS：ABA问题（<code>狸猫换太子</code>）</strong></p>
+<p>视图：</p>
+<p><img src="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220408190700.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(integer.compareAndSet(20, 50));</span><br><span class="line">System.out.println(integer.get());</span><br><span class="line"></span><br><span class="line">//捣乱的线程</span><br><span class="line">System.out.println(integer.compareAndSet(50, 20));</span><br><span class="line">System.out.println(integer.get());</span><br><span class="line"></span><br><span class="line">System.out.println(integer.compareAndSet(20, 50));</span><br><span class="line">System.out.println(integer.get());</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用AtomicStamperdReference解决ABA问题（原子引用）</strong></p>
+<p>带版本号的原子操作（对应思想：乐观锁）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">//AtomicStampedReference 注意.如果泛型是一个包装类，注意对象的引用问题</span><br><span class="line">private static AtomicStampedReference&lt;Integer&gt; compareAndSet = new AtomicStampedReference&lt;Integer&gt;(20,1);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    new Thread(()-&gt;&#123;</span><br><span class="line">        int stamp = compareAndSet.getStamp(); //获取版本号</span><br><span class="line">        try &#123;</span><br><span class="line">            //加上延时保证这条线程回跑起来</span><br><span class="line">            TimeUnit.SECONDS.sleep(3);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //输出初始版本号</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+compareAndSet.getStamp()+&quot;开始修改&quot;);</span><br><span class="line">        //如果是期望的值就跟新并且获取当前版本号和跟新</span><br><span class="line">        System.out.println(compareAndSet.compareAndSet(20, 50,</span><br><span class="line">                compareAndSet.getStamp(), compareAndSet.getStamp() + 1)+&quot;修改成功&quot;);</span><br><span class="line"></span><br><span class="line">        //getStamp()输出当前的版本号</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+compareAndSet.getStamp()+&quot;开始捣乱成功&quot;);</span><br><span class="line">        //如果是期望的值就跟新并且获取当前版本号和跟新</span><br><span class="line">        System.out.println(compareAndSet.compareAndSet(50, 20,</span><br><span class="line">                compareAndSet.getStamp(), compareAndSet.getStamp() + 1)+&quot;捣乱成功&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;,&quot;a&quot;).start();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    new Thread(()-&gt;&#123;</span><br><span class="line"></span><br><span class="line">        int stamp = compareAndSet.getStamp(); //获取版本号</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            //加上延时保证这条线程回跑起来</span><br><span class="line">            TimeUnit.SECONDS.sleep(3);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(Thread.currentThread().getName()+compareAndSet.getStamp()+&quot;开始老实人&quot;);</span><br><span class="line">        System.out.println(compareAndSet.compareAndSet(20, 50, stamp, stamp+ 1)+&quot;老实人&quot;);</span><br><span class="line">    &#125;,&quot;b&quot;).start();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>锁的理解</strong></p>
+<blockquote>
+<p><strong>1、公平锁、非公平锁</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>2、可重入锁（递归锁）</strong></p>
+<p><img src="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220408200317.png"></p>
+</blockquote>
+<p><strong>synchronized可重入锁（自动获取）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//synchronized</span><br><span class="line">public class Test01 &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        A a = new A();</span><br><span class="line"></span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            a.Call();</span><br><span class="line">        &#125;,&quot;a&quot;).start();</span><br><span class="line"></span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            a.Udp();</span><br><span class="line">        &#125;,&quot;b&quot;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line">    public synchronized void Call()&#123;</span><br><span class="line">        System.out.println(&quot;call&quot;);</span><br><span class="line">        Udp();  //这里有一把锁</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public synchronized void Udp()&#123;</span><br><span class="line">        System.out.println(&quot;cdp&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>lock可重入锁（自动获取）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">//lock</span><br><span class="line">public class Test01 &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        A a = new A();</span><br><span class="line"></span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            a.Call();</span><br><span class="line">        &#125;,&quot;a&quot;).start();</span><br><span class="line"></span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            a.Udp();</span><br><span class="line">        &#125;,&quot;b&quot;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line"></span><br><span class="line">    Lock lock = new ReentrantLock();</span><br><span class="line"></span><br><span class="line">    public  void Call()&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        try &#123;</span><br><span class="line">            System.out.println(&quot;call&quot;);</span><br><span class="line">            Udp();  //这里有一把锁</span><br><span class="line"></span><br><span class="line">        &#125;catch (Exception e)</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public synchronized void Udp()&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        try &#123;</span><br><span class="line">            System.out.println(&quot;cdp&quot;);</span><br><span class="line"></span><br><span class="line">        &#125;catch (Exception e)</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>lock重入锁视图</code></p>
+<p><img src="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220408201948.png"></p>
+<p><strong>自旋锁</strong></p>
+<p><code>自定义自旋锁</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//自定义一把锁</span><br><span class="line">public class Test01 &#123;</span><br><span class="line">    //Thread 默认值为null</span><br><span class="line">    AtomicReference&lt;Thread&gt; atomicReference = new AtomicReference&lt;Thread&gt;(null);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //加锁</span><br><span class="line">    public  void MyLock()&#123;</span><br><span class="line">        Thread thread = Thread.currentThread(); //获取当前的线程</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+&quot;==&gt;MyLock&quot;);</span><br><span class="line"></span><br><span class="line">        //自旋锁</span><br><span class="line">        while (!atomicReference.compareAndSet(null,thread)) //如果atomicReference的期望值是null这个线程就一直循环</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //解锁</span><br><span class="line">    public void MyUnLock()&#123;</span><br><span class="line">        Thread thread =Thread.currentThread();</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+&quot;==&gt;MyUnLock&quot;);</span><br><span class="line">        atomicReference.compareAndSet(thread,null);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>使用自定义的锁</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class Test02 &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            new A().put();</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class A&#123;</span><br><span class="line"></span><br><span class="line">    Test01 test01 = new Test01();</span><br><span class="line"></span><br><span class="line">    public void put()&#123;</span><br><span class="line">        test01.MyLock();</span><br><span class="line">        try &#123;</span><br><span class="line">            System.out.println(&quot;aaa&quot;);</span><br><span class="line"></span><br><span class="line">        &#125;catch (Exception e)</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            test01.MyUnLock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>死锁</strong></p>
+<p>视图</p>
+<p><img src="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220408204716.png"></p>
+<blockquote>
+<p>死锁例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&gt;public class Test01 &#123;</span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">       new Thread(()-&gt;&#123;</span><br><span class="line">           try &#123;</span><br><span class="line">               new A().u();</span><br><span class="line">           &#125; catch (Exception e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,&quot;a&quot;).start();</span><br><span class="line"></span><br><span class="line">       new Thread(()-&gt;&#123;</span><br><span class="line">           try &#123;</span><br><span class="line">               new B().p();</span><br><span class="line">           &#125; catch (Exception e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,&quot;b&quot;).start();</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;class A&#123;</span><br><span class="line"></span><br><span class="line">   public void u() throws Exception &#123;</span><br><span class="line">       synchronized (A.class)&#123;</span><br><span class="line">           System.out.println(Thread.currentThread().getName()+&quot;suoA&quot;);</span><br><span class="line"></span><br><span class="line">           TimeUnit.SECONDS.sleep(2);</span><br><span class="line"></span><br><span class="line">           synchronized (B.class)&#123;</span><br><span class="line">               System.out.println(Thread.currentThread().getName()+&quot;suoB&quot;);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;class B&#123;</span><br><span class="line"></span><br><span class="line">   public void p() throws Exception &#123;</span><br><span class="line">       synchronized (B.class)&#123;</span><br><span class="line">           System.out.println(Thread.currentThread().getName()+&quot;suoB&quot;);</span><br><span class="line"></span><br><span class="line">           TimeUnit.SECONDS.sleep(2);</span><br><span class="line"></span><br><span class="line">           synchronized (A.class)&#123;</span><br><span class="line">               System.out.println(Thread.currentThread().getName()+&quot;suoA&quot;);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><code>排查死锁方式</code></p>
+<p>1、<img src="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220408211706.png"></p>
+<p>2、<img src="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220408212128.png"></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/" data-id="cl1qgnsau0000wsv7gtar8xio" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第十五天（单例模式）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
