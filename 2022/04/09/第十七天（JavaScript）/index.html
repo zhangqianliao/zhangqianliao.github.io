@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第十七天（JavaScript） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第十七天（JavaScript）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第十七天（JavaScript）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/09/%E7%AC%AC%E5%8D%81%E4%B8%83%E5%A4%A9%EF%BC%88JavaScript%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-09T04:45:20.000Z" itemprop="datePublished">2022-04-09</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><em><strong>给自己的一句话：“学习要趁早虽然我已经不早了但是也不算太晚。”</strong></em></p>
+<p><strong>javaScript基础语法</strong></p>
+<blockquote>
+<p>length:获取数组的长度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;arr.length</span><br><span class="line">&gt;3</span><br><span class="line">&gt;-----------------------</span><br><span class="line">&gt;arr.length = 10; //会增加数组的长度</span><br><span class="line">&gt;arr.length =1;//数组回变成一个，会造成数据丢失</span><br><span class="line"></span><br><span class="line">&gt;-------------------</span><br><span class="line">&gt;arr.slice(y);//会截取数组的长度进行输出，数组不会变</span><br></pre></td></tr></table></figure>
+</blockquote>
+<span id="more"></span>
+
+<p><strong>javaScript对象</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var p =&#123;name : &#x27;dd&#x27;,age:&#x27;13&#x27;&#125;  //对象名+&#123;属性名：值,&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>javaScript动态删除对象属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;delete p.name;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>javaScript动态添加对象属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;person.hhh=&#x27;hh&#x27;;p</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>javaScript中判断一个对象中是否存在一个属性（返回Boolean值）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;p.hasOwnProperty(&#x27;age&#x27;)  //</span><br><span class="line">&gt;还有一个 xxx in xxx 这个方法可以找到父类的属性进行比较</span><br><span class="line">&gt;false</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>Map、Set</strong></p>
+<p><code>Map</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="string">&#x27;a&#x27;</span>,<span class="number">1</span>],[<span class="string">&#x27;b&#x27;</span>,<span class="number">2</span>]])	<span class="comment">//创建map数组</span></span><br><span class="line"><span class="literal">undefined</span>						<span class="comment">//javaScript是不会报错的</span></span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">a.get(<span class="string">&#x27;a&#x27;</span>)						<span class="comment">//通过key获取map中的值</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"></span><br><span class="line">a.set(<span class="string">&#x27;c&#x27;</span>,<span class="number">3</span>)					<span class="comment">//向map数组中添加值</span></span><br><span class="line"><span class="function"><span class="title">Map</span>(<span class="params"><span class="number">3</span></span>)</span> &#123;<span class="string">&#x27;a&#x27;</span> =&gt; <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">2</span>, <span class="string">&#x27;c&#x27;</span> =&gt; <span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line">a.delete(<span class="string">&#x27;a&#x27;</span>)					<span class="comment">//通过key删除数组中指定的值（返回boolean值）</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Set</code>（无需不重复的集合）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])  <span class="comment">//创建set数组</span></span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">s.add(<span class="number">1</span>) <span class="comment">//添加只当元素</span></span><br><span class="line">s.delete(<span class="number">2</span>)	<span class="comment">//删除指定元素</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用for of遍历Set（for in不建议使用）</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> x <span class="keyword">of</span> s)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(x)</span><br><span class="line">&#125;</span><br><span class="line"><span class="attr">VM1945</span>:<span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="attr">VM1945</span>:<span class="number">1</span> <span class="number">3</span></span><br><span class="line"><span class="attr">VM1945</span>:<span class="number">1</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>JavaScript函数的定义方式</strong></p>
+<p><code>方式一</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">aa</span>(<span class="params">x</span>)</span>&#123;<span class="keyword">if</span>(x &gt;<span class="number">0</span>)&#123;<span class="keyword">return</span> x;&#125;&#125;</span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">aa(<span class="number">2</span>)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p><code>方式二</code>（匿名内部函数）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aa = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;<span class="keyword">if</span>(x &gt;<span class="number">0</span>)&#123;<span class="keyword">return</span> x;&#125;&#125;</span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">aa(<span class="number">2</span>)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>如果你的函数只定义的一个参数，别人在使用函数是传入了多个参数可以使用 …rest</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">x,...rest</span>)</span>&#123;<span class="built_in">console</span>.log(x);<span class="built_in">console</span>.log(rest)&#125;  <span class="comment">//定义的函数</span></span><br><span class="line"></span><br><span class="line">b(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>)				<span class="comment">//使用是传入的参数</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span> 								<span class="comment">//定义的参数可以直接使用</span></span><br><span class="line">(<span class="number">6</span>) [<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>]			<span class="comment">//其余未定义的参数会放入数组中</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Javascript中全局变量都自动绑定在window中</strong>（会产生变量冲突）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.alert(<span class="number">2</span>)</span><br><span class="line"><span class="literal">undefined</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方式自定义一个全局变量</strong>（降低全局命名冲突问题）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;&#125;;		</span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">a.name = <span class="string">&#x27;zhnag&#x27;</span>;</span><br><span class="line"><span class="string">&#x27;zhnag&#x27;</span></span><br><span class="line">a.name</span><br><span class="line"><span class="string">&#x27;zhnag&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>let和const（建议使用let）</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> bb = <span class="number">1</span>;  <span class="comment">//使用let可以保证变量的局部性 </span></span><br><span class="line"><span class="keyword">const</span> Po = <span class="number">1</span>;		<span class="comment">//使用const可以保证常量不可被修改 常量以大写开头</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>方法（方法就是把把函数放在对象里面，apply可以指定this指向的位子）</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> zhangshang = &#123;<span class="attr">d</span>:<span class="number">2000</span>,</span><br><span class="line">                  <span class="attr">age</span>:	<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">                    </span>&#123;<span class="keyword">let</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>().getFullYear;</span><br><span class="line">                     <span class="keyword">return</span> now-<span class="built_in">this</span>.b</span><br><span class="line">                    &#125;</span><br><span class="line">                 &#125;</span><br><span class="line"><span class="comment">//属性</span></span><br><span class="line"><span class="comment">//zhangshang.d</span></span><br><span class="line"><span class="comment">//方法</span></span><br><span class="line"><span class="comment">//zhangshang.age()</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>typeof获取对象的类型</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typeof z</span><br><span class="line">&#x27;string&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><strong>JSON对象（js支持的类型都可以用JSON来表示）</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]  <span class="comment">//定义一个数组</span></span><br><span class="line"></span><br><span class="line">arr					<span class="comment">//输出数组</span></span><br><span class="line">(<span class="number">4</span>) [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> s = <span class="built_in">JSON</span>.stringify(arr)	<span class="comment">//通过JSON转换为String格式</span></span><br><span class="line"></span><br><span class="line">s						<span class="comment">//输出转换后的结果</span></span><br><span class="line"><span class="string">&#x27;[1,2,3,4]&#x27;</span></span><br><span class="line">	</span><br><span class="line"><span class="keyword">let</span> arrs = <span class="built_in">JSON</span>.parse(<span class="string">&#x27;[1,2,3,4]&#x27;</span>)  <span class="comment">//通过JSON将字符串转换成数组</span></span><br><span class="line"></span><br><span class="line">arrs							<span class="comment">//输出数组</span></span><br><span class="line">(<span class="number">4</span>) [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+
+<p><code>json</code></p>
+<p>转换格式：</p>
+<p>​        对象都用：{}</p>
+<p>​        数组都用：[]</p>
+<p>​        所有的键值都用：key:value</p>
+<p><strong>面向对象Class继承（Class==原型   本质还是对象指向原型   <code>_proto_</code>原型链）</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sstudent</span></span>&#123;   <span class="comment">//定义一个类Sstudent</span></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">name</span>)</span>&#123;		<span class="comment">//使用constructor创建构造方法</span></span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="function"><span class="title">hello</span>(<span class="params"></span>)</span>&#123;			<span class="comment">//定义一个hello方法</span></span><br><span class="line">    alert(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> xiaoming = <span class="keyword">new</span> Sstudent(<span class="string">&#x27;xiaoming&#x27;</span>)  <span class="comment">//定义一个叫xiaoming的对象继承Sstudent类</span></span><br><span class="line"></span><br><span class="line">xiaoming.hello()		<span class="comment">//使用类中的方法</span></span><br><span class="line"></span><br><span class="line">xiaoming.name			<span class="comment">//使用类中的属性</span></span><br><span class="line"><span class="string">&#x27;xiaoming&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>window</p>
+</blockquote>
+<p>window代表 浏览器窗口</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.innerHeight  <span class="comment">//历览器的高</span></span><br><span class="line"><span class="number">714</span></span><br><span class="line"><span class="built_in">window</span>.innerWidth	<span class="comment">//浏览器的宽</span></span><br><span class="line"><span class="number">979</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Navigator（不建议使用因为会被别人修改）</p>
+</blockquote>
+<p>navigator封装浏览器的信息</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">navigator.appVersion</span><br><span class="line"><span class="string">&#x27;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36&#x27;</span></span><br><span class="line">navigator.userAgent</span><br><span class="line"><span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>screen</p>
+</blockquote>
+<p>代表屏幕的尺寸</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> screen.width</span><br><span class="line"><span class="number">1536</span></span><br><span class="line">screen.height</span><br><span class="line"><span class="number">864</span> </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>location</p>
+</blockquote>
+<p>location代表当前页面的URL信息</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">host: <span class="string">&quot;www.baidu.com&quot;</span></span><br><span class="line"><span class="attr">hostname</span>: <span class="string">&quot;www.baidu.com&quot;</span></span><br><span class="line"><span class="attr">href</span>: <span class="string">&quot;https://www.baidu.com/&quot;</span></span><br><span class="line"><span class="attr">origin</span>: <span class="string">&quot;https://www.baidu.com&quot;</span></span><br><span class="line"></span><br><span class="line">locatiom.reload() <span class="comment">//刷新当前页面</span></span><br><span class="line"></span><br><span class="line">locatiom.assign(<span class="string">&#x27;https://zhangqianliao.github.io/&#x27;</span>)  <span class="comment">//设置新的值</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>document（内容：DOM）</p>
+</blockquote>
+<p>document代表当前页面，HTML DOM文档树</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">document</span>.title</span><br><span class="line"><span class="string">&#x27;一些记忆&#x27;</span></span><br><span class="line"><span class="built_in">document</span>.title = <span class="string">&quot;hhhhh&quot;</span></span><br><span class="line"><span class="string">&#x27;hhhhh&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>document获取cookie</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie</span><br><span class="line"><span class="string">&#x27;trc_cookie_storage=taboola%2520global%253Auser-id%3D4b2f6c9f-3648-4743-b04c-cb08363d0981-tuct8991e48&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>劫持cookie原理</p>
+<p>点击进入<a target="_blank" rel="noopener" href="http://www.taobao.com/">www.taobao.com</a></p>
+<p>里面有js代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script scr=<span class="string">&quot;aa.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;!--恶意人员：获取你的cookie上传到他的服务器--&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>history（不建议使用）</p>
+</blockquote>
+<p>history代表浏览器的历史记录</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">history.forward() <span class="comment">//前进</span></span><br><span class="line">history.back() <span class="comment">//后退</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>DOM（重点）</strong></p>
+<p>浏览器网页就是一个Dom 树形结构</p>
+<p><img src="/2022/04/09/%E7%AC%AC%E5%8D%81%E4%B8%83%E5%A4%A9%EF%BC%88JavaScript%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220409192500.png"></p>
+<p>更新：更新Dom节点</p>
+<p>遍历Dom节点：得到Dom节点</p>
+<p>删除：删除一个Dom节点</p>
+<p>添加：添加一个Dom节点</p>
+<blockquote>
+<p>要操作一个Dom节点，就需要先获得这个Dom节点</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获得节点方法之一</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&quot;xx&quot;</span>); </span><br></pre></td></tr></table></figure>
+
+<p>这是原生代码不建议使用（建议使用jQuery）</p>
+<blockquote>
+<p>删除一个Dom节点（一定要使用父节点才能删除子节点，自己是无法删除自己的）</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">document</span>.getElementById(<span class="string">&quot;xx&quot;</span>);  <span class="comment">//获取节点</span></span><br><span class="line"><span class="keyword">let</span> b - a.parentElement;				<span class="comment">//获取子节点的父节点</span></span><br><span class="line">a.removeChild(a);						<span class="comment">//通过父节点删除子节点</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>追加一个Dom节点</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;a&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;b&quot;</span>&gt;</span>aaaaa<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;c&quot;</span>&gt;</span>cccccccc<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">let</span> a = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;a&#x27;</span>); <span class="comment">//已存在的节点</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">let</span> b = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;c&#x27;</span>);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">	a.appendChild(b)		<span class="comment">//将节点c添加到节点a里面</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建一个新的节点</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.createElement(<span class="string">&#x27;p&#x27;</span>);  <span class="comment">//创建一个标签</span></span><br><span class="line">a.id = <span class="string">&#x27;d&#x27;</span>;							<span class="comment">//给标签的id起名字</span></span><br><span class="line">a.innerText = <span class="string">&quot;hhhhhhhhhhh&quot;</span>;		<span class="comment">//给标签加内容</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/09/%E7%AC%AC%E5%8D%81%E4%B8%83%E5%A4%A9%EF%BC%88JavaScript%EF%BC%89/" data-id="cl1ru73a20000hwv7501m0ofn" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第十六天（JUC）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
