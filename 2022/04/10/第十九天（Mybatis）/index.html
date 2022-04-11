@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第十九天（Mybatis） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第十九天（Mybatis）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第十九天（Mybatis）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/10/%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-10T14:15:10.000Z" itemprop="datePublished">2022-04-10</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><em><strong>给自己的一句话：“什么事情都要一步一步来，学习更是。”</strong></em></p>
+<blockquote>
+<p><code>Mybatis官方中文在线文档地址：</code><strong><a target="_blank" rel="noopener" href="https://mybatis.net.cn/getting-started.html">Mybatis</a></strong></p>
+</blockquote>
+<p>Mybatis搭建环境何时使用</p>
+<p>1、创建一个基础的Maven项目</p>
+<p>2、在pom.xml文件中添加依赖</p>
+<span id="more"></span>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--Mybatis依赖--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;mybatis&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;x.x.x&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--mysql驱动依赖--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;x.x.x&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--junit测试依赖--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;x.x.x&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>3、编写获取SqlSessionFactory的工具类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MybatisUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SqlSessionFactory sqlSessionFactory;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//使用Mybatis第一步：获取sqlSessionFactory对象</span></span><br><span class="line">            String resource = <span class="string">&quot;mybatis-config.xml&quot;</span>;</span><br><span class="line">            InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">            sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//有了sqlSessionFactory之后就可以获取SqlSession</span></span><br><span class="line">    <span class="comment">//SqlSession包含了SQL需要执行的所有命令</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SqlSession <span class="title">getSqlSession</span><span class="params">()</span></span>&#123;</span><br><span class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sqlSession;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4、配置configuration文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration</span><br><span class="line">        PUBLIC <span class="string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span><br><span class="line">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span><br><span class="line">&lt;!--configuration核心配置文件--&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;environments <span class="keyword">default</span>=<span class="string">&quot;development&quot;</span>&gt;</span><br><span class="line">        &lt;environment id=<span class="string">&quot;development&quot;</span>&gt;</span><br><span class="line">            &lt;transactionManager type=<span class="string">&quot;JDBC&quot;</span>/&gt;</span><br><span class="line">            &lt;dataSource type=<span class="string">&quot;POOLED&quot;</span>&gt;</span><br><span class="line">                &lt;property name=<span class="string">&quot;driver&quot;</span> value=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>/&gt;</span><br><span class="line">                &lt;property name=<span class="string">&quot;url&quot;</span> value=<span class="string">&quot;jdbc:mysql://localhost:3306/tb_users?useSSL=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;serverTimezone=GMT&quot;</span>/&gt; &lt;!--使用mysql8<span class="number">.0</span>还需要设置时间差--&gt;</span><br><span class="line">                &lt;property name=<span class="string">&quot;username&quot;</span> value=<span class="string">&quot;root&quot;</span>/&gt;</span><br><span class="line">                &lt;property name=<span class="string">&quot;password&quot;</span> value=<span class="string">&quot;123456&quot;</span>/&gt;</span><br><span class="line">            &lt;/dataSource&gt;</span><br><span class="line">        &lt;/environment&gt;</span><br><span class="line">    &lt;/environments&gt;</span><br><span class="line">    &lt;!--每一个Mapper.XML都需要在Mybatis核心配置文件中注册--&gt;</span><br><span class="line">    &lt;mappers&gt;</span><br><span class="line">        &lt;mapper resource=<span class="string">&quot;com/dao/hhhhMapper.xml&quot;</span>/&gt;</span><br><span class="line">    &lt;/mappers&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<p>4、创建实体类和Dao接口</p>
+<p>5、编写Mapper映射文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">        PUBLIC <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span><br><span class="line">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span><br><span class="line">&lt;mapper namespace=<span class="string">&quot;com.dao.hhhhDao&quot;</span>&gt;		<span class="comment">//命名空间</span></span><br><span class="line">    &lt;select id=<span class="string">&quot;getHhhh&quot;</span> resultType=<span class="string">&quot;com.pojo.hhhh&quot;</span>&gt;	<span class="comment">//id为方法名 resultType返回会的参数类型</span></span><br><span class="line">        select * from hhhh</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以使用了</p>
+<p><strong>我出现的错误</strong></p>
+<p>1、找不到Mapper映射文件：<img src="/2022/04/10/%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220411102642.png"></p>
+<p>问题原因：Maven约定大于配置(IDEA)</p>
+<p>解决方式在pom.xml文件中进行配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--在build中配置resources，来防止我们资源导出失败问题--&gt;</span><br><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;resources&gt;</span><br><span class="line">        &lt;resource&gt;</span><br><span class="line">            &lt;directory&gt;src/main/resources&lt;/directory&gt;</span><br><span class="line">            &lt;includes&gt;</span><br><span class="line">                &lt;include&gt;**<span class="comment">/*/.properties&lt;/include&gt;</span></span><br><span class="line"><span class="comment">                &lt;include&gt;**/</span>*.xml&lt;/include&gt;</span><br><span class="line">            &lt;/includes&gt;</span><br><span class="line">            &lt;filtering&gt;<span class="keyword">true</span>&lt;/filtering&gt;</span><br><span class="line">        &lt;/resource&gt;</span><br><span class="line">        &lt;resource&gt;</span><br><span class="line">            &lt;directory&gt;src/main/java&lt;/directory&gt;</span><br><span class="line">            &lt;includes&gt;</span><br><span class="line">                &lt;include&gt;**<span class="comment">/*/.properties&lt;/include&gt;</span></span><br><span class="line"><span class="comment">                &lt;include&gt;**/</span>*.xml&lt;/include&gt;</span><br><span class="line">            &lt;/includes&gt;</span><br><span class="line">            &lt;filtering&gt;<span class="keyword">true</span>&lt;/filtering&gt;</span><br><span class="line">        &lt;/resource&gt;</span><br><span class="line">    &lt;/resources&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2、编码格式问题：<img src="/2022/04/10/%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220411103453.png"></p>
+<p>解决方式</p>
+<p><code>settings &gt; Editor &gt; File Encodings</code> 找到 <code>Project Encoding:</code></p>
+<p><img src="/2022/04/10/%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220411103628.png"></p>
+<p><strong>增删改查（在执行增删改的时候一定要提交事物，要不然数据库中的数据是不会变的）</strong></p>
+<p>Mybatis提交事物</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SqlSession session = getSqlSession(); </span><br><span class="line"></span><br><span class="line">hhhhDao  dao = session.getMapper(hhhhDao.class);</span><br><span class="line"><span class="keyword">int</span> xiaoli = dao.addHhhh(<span class="keyword">new</span> hhhh(<span class="number">6</span>, <span class="string">&quot;xiaoli&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (xiaoli &gt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">  System.out.println(<span class="string">&quot;修改成功&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">session.commit();  <span class="comment">//提交事物</span></span><br><span class="line">session.close();	<span class="comment">//必须要关闭资源</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>万能Map</strong></p>
+<p>如果一个实体类中属性过多可以使用map进行进行传值</p>
+<p>Dao：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">addHhhhMap</span><span class="params">(Map&lt;String,Object&gt; map)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>Mapper：（在实体类属性较多的时候使用map可以更好的进行SQL语句的编写，如果使用实体类就很麻烦）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=<span class="string">&quot;addHhhhMap&quot;</span> parameterType=<span class="string">&quot;map&quot;</span>&gt;  <span class="comment">//传入map</span></span><br><span class="line">        <span class="function">insert into <span class="title">hhhh</span> <span class="params">(name)</span> <span class="title">value</span> <span class="params">(#&#123;userName&#125;)</span> <span class="comment">//像插入那个就写那个 </span></span></span><br><span class="line"><span class="function">&lt;/insert&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用时：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  SqlSession session = getSqlSession();</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    hhhhDao  dao = session.getMapper(hhhhDao.class);</span><br><span class="line">    <span class="comment">//创建一个map</span></span><br><span class="line">    Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="comment">//key一定要和sql语句中的名字一致</span></span><br><span class="line">    map.put(<span class="string">&quot;userName&quot;</span>,<span class="string">&quot;kankan&quot;</span>);</span><br><span class="line">    <span class="keyword">int</span> i = dao.addHhhhMap(map);</span><br><span class="line">    <span class="keyword">if</span> (i &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;修改成功&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">    session.commit();<span class="comment">//提交事物</span></span><br><span class="line">    session.close();    <span class="comment">//关闭资源</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用properties进行db配置文件进行编写时注意事项</strong></p>
+<p><code>mysql8.0的URL连接方式问题</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--在映射文件中直接使用可以使用--&gt;</span><br><span class="line">jdbc:mysql:<span class="comment">//localhost:3306/tb_users?useSSL=true&amp;&amp;amp;useUnicode=true&amp;&amp;amp;characterEncoding=UTF-8&amp;&amp;amp;serverTimezone=GMT</span></span><br></pre></td></tr></table></figure>
+
+<p>爆红提示<img src="/2022/04/10/%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220411203921.png"></p>
+<p>解决方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--在db.properties中url连接使用这个方式--&gt;</span><br><span class="line">jdbc:mysql:<span class="comment">//localhost:3306/tb_users?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone = GMT</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/10/%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/" data-id="cl1upjbdw0000fgv7gq7ccxnc" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2022/04/10/%E7%AC%AC%E5%8D%81%E5%85%AB%E5%A4%A9%EF%BC%88javaScript%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第十八天（javaScript、Jquery）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
