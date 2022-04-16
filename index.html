@@ -65,6 +65,270 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-第二十四天（javaWeb）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/16/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/">第二十四天（javaWeb）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/16/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-16T08:59:34.000Z" itemprop="datePublished">2022-04-16</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+        <p><strong>给自的一句话：“一定要往好的方向想。”</strong></p>
+<p><code>每日英语：load：加载、properties：属性、context：上下文、resource：资源、extends：给予：more：更多</code></p>
+<p><strong>使用ServletContext获取properties中的数据</strong></p>
+<p>1、创建一个.properties文件存入数据    <img src="/2022/04/16/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220416190424.png"></p>
+<p>2、创建一个继承HttpServlet的类并重写get、post方法，然后使用ServletContext方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dome01</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        InputStream is = <span class="keyword">this</span>.getServletContext().getResourceAsStream(<span class="string">&quot;/WEB-INF/classes/a.properties&quot;</span>);  <span class="comment">//使用ServletContext方法创建一个ResourceAs流</span></span><br><span class="line">        Properties properties = <span class="keyword">new</span> Properties(); <span class="comment">//实例化一个Properties对象</span></span><br><span class="line">        properties.load(is);	<span class="comment">//使用properties中的load方法加载前面创建好的流</span></span><br><span class="line">        String u = properties.getProperty(<span class="string">&quot;user&quot;</span>); <span class="comment">//使用getProperty方法通过key获取对应的值</span></span><br><span class="line">        String p = properties.getProperty(<span class="string">&quot;pwd&quot;</span>);</span><br><span class="line"></span><br><span class="line">        resp.getWriter().println(u+<span class="string">&quot;:&quot;</span>+p);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        doGet(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <p>
+            <a class="article-more-link" href="/2022/04/16/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/">
+              Read More...
+            </a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/16/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" data-id="cl21w3ymv00023ov7epvx9hei" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
+    <article id="post-第二十三天（javaWeb）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/">第二十三天（javaWeb）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-15T08:00:07.000Z" itemprop="datePublished">2022-04-15</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <p><strong>给自己的一句话：“黎明就在眼前。”</strong></p>
+<p><code>每日英语：</code></p>
+<p><strong>使用IDEL创建maven项目配置Tomcat</strong></p>
+<p>1、<img src="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220415172051.png"></p>
+<p>idel自带maven仓库，也可以自己设置</p>
+<p>2、<img src="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220415172246.png"></p>
+<p><img src="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220415172523.png"></p>
+<p><img src="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220415172750.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" data-id="cl21w3ymq00013ov7fz0fhf2k" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
+    <article id="post-第二十二天（javaWeb）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/">第二十二天（javaWeb）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-14T03:21:54.000Z" itemprop="datePublished">2022-04-14</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <p><code>每日英语：remote：远程、cache：缓存、control：控制、download：下载</code></p>
+<p><strong>Tomcat</strong></p>
+<p>解压后的目录：<img src="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220414112546.png"></p>
+<blockquote>
+<p>tomcat启动和关闭</p>
+</blockquote>
+<p><img src="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220414113554.png"></p>
+<p><strong>面试题：请问网站是如何访问的</strong></p>
+<p>1、打开浏览器输入域名后回车</p>
+<p>2、检查本机 window（C:\Windows\System32\drivers\etc\hosts）配置文件下有没有这个域名映射。</p>
+<p>​    1、有：直接返回对应的ip地址，这个地址中，有我们需要访问的web程序，可以直接访问</p>
+<p>​    2、没有：去DNS服务器找，找到的话就返回，找不到的话就返回找不到</p>
+<p> <img src="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220414120200.png"></p>
+<p><strong>使用tomcat简单部署静态网页</strong></p>
+<p>1、依葫芦画瓢（拷贝一份tomcat自带的ROOT），然后将里面的页面相关的都删除</p>
+<p>2、开启tomcat服务就可以访问了</p>
+<p>结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">--webapps:Tomcat服务器的web目录</span><br><span class="line">	-ROOT</span><br><span class="line">	-zhang</span><br><span class="line">		-WEB-INF</span><br><span class="line">			-classes：java程序</span><br><span class="line">			-lib：web应用所依赖的jar包</span><br><span class="line">			-web.xml：网站配置文件</span><br><span class="line">		-index.html 默认的首页</span><br><span class="line">		-static</span><br><span class="line">			-css</span><br><span class="line">				-style.css</span><br><span class="line">			-js</span><br><span class="line">			-img</span><br><span class="line">		-...</span><br></pre></td></tr></table></figure>
+
+<p><strong>http、https（默认端口号：http：80、https：443）</strong></p>
+<p>http：超文本传输协议，是一个简单的请求-响应协议，它通常运行在TCP之上</p>
+<p>​    文本：html，字符串…</p>
+<p>​    超文本：图片、音乐、视频、定位、地图…</p>
+<p>https：安全的</p>
+<p><strong>响应状态码</strong></p>
+<p>200：请求响应成功</p>
+<p>3xx：请求重定向</p>
+<p>4xx：找不到资源 404</p>
+<p>5xx：服务器代码错误 500、502：网关错误</p>
+<p><strong>Maven</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" data-id="cl21w3yn200033ov7cigvfo7j" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
+    <article id="post-第二十一天（Mybatis）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/13/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/">第二十一天（Mybatis）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/13/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-13T11:42:56.000Z" itemprop="datePublished">2022-04-13</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <p><strong>给自己的一句话：“稳住稳住稳住。”</strong></p>
+<p><code>每日英语：request：请求、response：响应、network：网络、</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/13/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/" data-id="cl21w3ymg00003ov7akihgg2z" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
     <article id="post-第二十天（Mybatis）" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -441,260 +705,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://zhangqianliao.github.io/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%89/" data-id="cl1p17tdv0000ssv7bmsl3r18" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第十五天（JUC）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%EF%BC%89/">第十五天（JUC）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-07T10:11:59.000Z" itemprop="datePublished">2022-04-07</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <p><strong>给自己的一句话：“苦逼的日子总会过去。”</strong></p>
-<p><strong>Volatile</strong></p>
-<blockquote>
-<p>1、保证可见性</p>
-<p>2、<code>不保证原子性</code></p>
-<p>3、禁止指令重排</p>
-</blockquote>
-        
-          <p>
-            <a class="article-more-link" href="/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%EF%BC%89/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%EF%BC%89/" data-id="cl1p17tec0001ssv78kpae400" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第十四天（JUC并发）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/06/%E7%AC%AC%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/">第十四天（JUC并发）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/06/%E7%AC%AC%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-06T10:31:10.000Z" itemprop="datePublished">2022-04-06</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <p><em><strong>借用“杰斯”的一句话：“为了更美好的明天”而战“”</strong></em></p>
-<p><strong>线程池（三大方法、七大参数、四种拒绝策略）</strong></p>
-<p>程序运行，本质：占用系统资源！优化资源的使用=&gt;池化技术</p>
-<p>例如：线程池、连接池、内存池、对象池…（创建和销毁都十分消耗资源）</p>
-<p>池化技术：事先准备好一些资源，有人要用，就来池内拿，用完后放回池内</p>
-        
-          <p>
-            <a class="article-more-link" href="/2022/04/06/%E7%AC%AC%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/06/%E7%AC%AC%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" data-id="cl1nm9fhi0000bkv7f5yk42qg" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第十三天（JUC并发）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/05/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/">第十三天（JUC并发）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/05/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-05T09:59:13.000Z" itemprop="datePublished">2022-04-05</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <p><em><strong>加点自己的鸡汤：“今天不学哪还有明天”</strong></em></p>
-<p>String.valueOf()：将基本数据类型转换为字符串</p>
-        
-          <p>
-            <a class="article-more-link" href="/2022/04/05/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/05/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" data-id="cl1m6cn6n0000nkv77xizd20m" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第十二天（JUC并发）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/04/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/">第十二天（JUC并发）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/04/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-04T09:46:34.000Z" itemprop="datePublished">2022-04-04</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <p><strong>个自己的一句话：“做人不要怕这里是中国”</strong></p>
-<p><em><strong>JUC == java.util.concurrent</strong></em></p>
-<p><strong>线程有几个状态</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">NEW //新生</span><br><span class="line"></span><br><span class="line">RUNNABLE //运行</span><br><span class="line"></span><br><span class="line">BLOCKED	 //阻塞</span><br><span class="line"></span><br><span class="line">WAITING	//等待，死死的等待</span><br><span class="line"></span><br><span class="line">TIMED_WAITING	//超时等待</span><br><span class="line"></span><br><span class="line">TERMINATED	//结束</span><br></pre></td></tr></table></figure>
-        
-          <p>
-            <a class="article-more-link" href="/2022/04/04/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/04/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" data-id="cl1m6cn6z0001nkv7h9d86bjr" class="article-share-link">
         分享
       </a>
       

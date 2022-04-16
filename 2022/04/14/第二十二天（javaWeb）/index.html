@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第二十二天（javaWeb） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第二十二天（javaWeb）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第二十二天（javaWeb）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-14T03:21:54.000Z" itemprop="datePublished">2022-04-14</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><code>每日英语：remote：远程、cache：缓存、control：控制、download：下载</code></p>
+<p><strong>Tomcat</strong></p>
+<p>解压后的目录：<img src="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220414112546.png"></p>
+<blockquote>
+<p>tomcat启动和关闭</p>
+</blockquote>
+<p><img src="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220414113554.png"></p>
+<p><strong>面试题：请问网站是如何访问的</strong></p>
+<p>1、打开浏览器输入域名后回车</p>
+<p>2、检查本机 window（C:\Windows\System32\drivers\etc\hosts）配置文件下有没有这个域名映射。</p>
+<p>​    1、有：直接返回对应的ip地址，这个地址中，有我们需要访问的web程序，可以直接访问</p>
+<p>​    2、没有：去DNS服务器找，找到的话就返回，找不到的话就返回找不到</p>
+<p> <img src="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220414120200.png"></p>
+<p><strong>使用tomcat简单部署静态网页</strong></p>
+<p>1、依葫芦画瓢（拷贝一份tomcat自带的ROOT），然后将里面的页面相关的都删除</p>
+<p>2、开启tomcat服务就可以访问了</p>
+<p>结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">--webapps:Tomcat服务器的web目录</span><br><span class="line">	-ROOT</span><br><span class="line">	-zhang</span><br><span class="line">		-WEB-INF</span><br><span class="line">			-classes：java程序</span><br><span class="line">			-lib：web应用所依赖的jar包</span><br><span class="line">			-web.xml：网站配置文件</span><br><span class="line">		-index.html 默认的首页</span><br><span class="line">		-static</span><br><span class="line">			-css</span><br><span class="line">				-style.css</span><br><span class="line">			-js</span><br><span class="line">			-img</span><br><span class="line">		-...</span><br></pre></td></tr></table></figure>
+
+<p><strong>http、https（默认端口号：http：80、https：443）</strong></p>
+<p>http：超文本传输协议，是一个简单的请求-响应协议，它通常运行在TCP之上</p>
+<p>​    文本：html，字符串…</p>
+<p>​    超文本：图片、音乐、视频、定位、地图…</p>
+<p>https：安全的</p>
+<p><strong>响应状态码</strong></p>
+<p>200：请求响应成功</p>
+<p>3xx：请求重定向</p>
+<p>4xx：找不到资源 404</p>
+<p>5xx：服务器代码错误 500、502：网关错误</p>
+<p><strong>Maven</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" data-id="cl21w3yn200033ov7cigvfo7j" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      第二十三天（javaWeb）
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2022/04/13/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第二十一天（Mybatis）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
