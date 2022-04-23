@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    （停更了一天原因：新游戏）第三十天（网页上传文件） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-（停更了一天原因：新游戏）第三十天（网页上传文件）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  （停更了一天原因：新游戏）第三十天（网页上传文件）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/23/%EF%BC%88%E5%81%9C%E6%9B%B4%E4%BA%86%E4%B8%80%E5%A4%A9%E5%8E%9F%E5%9B%A0%EF%BC%9A%E6%96%B0%E6%B8%B8%E6%88%8F%EF%BC%89%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9%EF%BC%88%E7%BD%91%E9%A1%B5%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-23T09:33:44.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><strong>给自己的一句话：”不要害怕被拒绝总有一天那会被接受的。“</strong></p>
+<p><code>每日英语：commons：平民、bute：但是</code></p>
+<p><strong>上传文件</strong></p>
+<p>1、网络准备（可以直接使用别人写好的jar包）</p>
+<p>commons-io和commons-fileupload</p>
+<p>不使用maven时</p>
+<p>1、web中jar包都放在lib目录下，新建lib目录将下好的jar包复制进去</p>
+<p>2、右键点击lib将jar包添加到项目类库中<img src="/2022/04/23/%EF%BC%88%E5%81%9C%E6%9B%B4%E4%BA%86%E4%B8%80%E5%A4%A9%E5%8E%9F%E5%9B%A0%EF%BC%9A%E6%96%B0%E6%B8%B8%E6%88%8F%EF%BC%89%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9%EF%BC%88%E7%BD%91%E9%A1%B5%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220423180020.png"></p>
+<p>也可以<img src="/2022/04/23/%EF%BC%88%E5%81%9C%E6%9B%B4%E4%BA%86%E4%B8%80%E5%A4%A9%E5%8E%9F%E5%9B%A0%EF%BC%9A%E6%96%B0%E6%B8%B8%E6%88%8F%EF%BC%89%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9%EF%BC%88%E7%BD%91%E9%A1%B5%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220423180706.png"></p>
+<p><img src="/2022/04/23/%EF%BC%88%E5%81%9C%E6%9B%B4%E4%BA%86%E4%B8%80%E5%A4%A9%E5%8E%9F%E5%9B%A0%EF%BC%9A%E6%96%B0%E6%B8%B8%E6%88%8F%EF%BC%89%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9%EF%BC%88%E7%BD%91%E9%A1%B5%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220423180833.png"></p>
+<span id="more"></span>
+
+<blockquote>
+<p>文件上传注意的事项</p>
+<p>.为保证服务器的安全，上传文件应该放在外界无法访问的目录下，比如WEB-INF目录下。</p>
+<p>.为防止文件覆盖的现象发生，要为文件产生一个唯一的 文件名，比如：时间戳、uuid、md5、位运算算法。</p>
+<p>.要限制上传文件的最大值。</p>
+<p>.可以限制上传文件的类型，在收到上传文件名时，判断其后缀是否合法。</p>
+</blockquote>
+<p><strong>上传代码可直接拷贝就行</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.fileupload.FileItem;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.fileupload.FileUploadException;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.fileupload.ProgressListener;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.fileupload.disk.DiskFileItemFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.fileupload.servlet.ServletFileUpload;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFile</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断上传的表单是 普通表单（比如字符串） 还是 带文件的表单 ，是返回true,否返回false；</span></span><br><span class="line">    <span class="keyword">if</span> (!ServletFileUpload.isMultipartContent(request))&#123;</span><br><span class="line">      <span class="keyword">return</span>;<span class="comment">//如果这是一个普通文件我们直接返回.否则，说明我们的表单是带文件上传的.</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建上传文件的保存目录，为了安全建议在WEB-INF目录下，用户无法访问。安全。</span></span><br><span class="line">    String uploadpath = <span class="keyword">this</span>.getServletContext().getRealPath(<span class="string">&quot;/WEB-INF/Upload&quot;</span>);<span class="comment">//获取上传文件的保存路径。</span></span><br><span class="line">    System.out.println(uploadpath);</span><br><span class="line">    File uploadfile = <span class="keyword">new</span> File(uploadpath);</span><br><span class="line">    <span class="keyword">if</span> (!uploadfile.exists())&#123;</span><br><span class="line">      uploadfile.mkdir();<span class="comment">//如果目录不存在就创建这样一个目录。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//临时文件</span></span><br><span class="line">    <span class="comment">//临时路径，如果上传的文件超过预期的大小，我们将它存放到一个临时目录中，过几天自动删除，或者提醒用户转存为永久。</span></span><br><span class="line">    String tmppath = <span class="keyword">this</span>.getServletContext().getRealPath(<span class="string">&quot;/WEB-INF/tmp&quot;</span>);</span><br><span class="line">    System.out.println(tmppath);</span><br><span class="line">    File file = <span class="keyword">new</span> File(tmppath);</span><br><span class="line">    <span class="keyword">if</span> (!file.exists())&#123;</span><br><span class="line">      file.mkdir();<span class="comment">//如果目录不存在就创建这样临时目录。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//处理上传的文件一般需要通过流来获取，我们可以通过request.getInputstream(),原生态文件上传流获取，十分麻烦。</span></span><br><span class="line">    <span class="comment">//但是我们都建议使用Apache的文件上传组件来实现，common-fileupload,它需要依赖于common-io组件；</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">//1、创建DiskFileItemFactory对象，处理文件上传路径或限制文件大小。</span></span><br><span class="line">      DiskFileItemFactory factory = getDiskFileItemFactory(file);</span><br><span class="line">      <span class="comment">//2、获取ServletFileUpload.</span></span><br><span class="line">      ServletFileUpload upload = getServletFileUpload(factory);</span><br><span class="line">      <span class="comment">//3、处理上传文件</span></span><br><span class="line">      String msg = uploadParseRequest(upload,request,uploadpath);</span><br><span class="line">      <span class="comment">//Servlet请求转发消息</span></span><br><span class="line">      request.setAttribute(<span class="string">&quot;msg&quot;</span>,msg);</span><br><span class="line">      request.getRequestDispatcher(<span class="string">&quot;/success.jsp&quot;</span>).forward(request,response);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (FileUploadException e)&#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DiskFileItemFactory <span class="title">getDiskFileItemFactory</span><span class="params">(File file)</span></span>&#123;</span><br><span class="line">    <span class="comment">//1、创建DiskFileItemFactory对象，处理文件上传路径或限制文件大小.</span></span><br><span class="line">    DiskFileItemFactory factory = <span class="keyword">new</span> DiskFileItemFactory();</span><br><span class="line">    <span class="comment">//通过这个工厂设置一个缓冲区，当上传的文件大小大于缓冲区的时候，将它放到临时文件中；</span></span><br><span class="line">    <span class="comment">//这里不设置的话也有默认的。</span></span><br><span class="line">    factory.setSizeThreshold(<span class="number">1024</span> * <span class="number">1024</span>);<span class="comment">//缓冲区大小为1M.</span></span><br><span class="line">    factory.setRepository(file);</span><br><span class="line">    <span class="keyword">return</span> factory;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ServletFileUpload <span class="title">getServletFileUpload</span><span class="params">(DiskFileItemFactory factory)</span></span>&#123;</span><br><span class="line">    <span class="comment">//2、获取ServletFileUpload。</span></span><br><span class="line">    ServletFileUpload upload = <span class="keyword">new</span> ServletFileUpload(factory);</span><br><span class="line">    <span class="comment">//监听文件上传进度。</span></span><br><span class="line">    upload.setProgressListener(<span class="keyword">new</span> ProgressListener() &#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">long</span> pBytesRead, <span class="keyword">long</span> lpContentLenght, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//pBytesRead:已读取到的文件大小。</span></span><br><span class="line">        <span class="comment">//pContentLenght：文件大小。</span></span><br><span class="line">        System.out.println(<span class="string">&quot;总大小：&quot;</span>+lpContentLenght+<span class="string">&quot;已上传：&quot;</span>+pBytesRead);<span class="comment">//在这里还可以加进度。</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//处理乱码问题.</span></span><br><span class="line">    upload.setHeaderEncoding(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">    <span class="comment">//设置单个文件的最大值.</span></span><br><span class="line">    upload.setFileSizeMax(<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">10</span>);</span><br><span class="line">    <span class="comment">//设置总共能够上传文件的大小.</span></span><br><span class="line">    <span class="comment">//1024 = 1kb * 1024 = 1M * 10 = 10M</span></span><br><span class="line">    upload.setSizeMax(<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> upload;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">uploadParseRequest</span><span class="params">(ServletFileUpload upload,HttpServletRequest request,String uploadpath)</span> <span class="keyword">throws</span> IOException, FileUploadException </span>&#123;</span><br><span class="line">    String msg = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="comment">//3、处理上传文件。</span></span><br><span class="line">    <span class="comment">//把前端的请求解析，封装成一个FileItem对象。</span></span><br><span class="line">    List&lt;FileItem&gt; fileItems = upload.parseRequest(request);</span><br><span class="line">    <span class="keyword">for</span> (FileItem fileItem : fileItems) &#123;</span><br><span class="line">      <span class="keyword">if</span> (fileItem.isFormField())&#123; <span class="comment">//判断是普通表单还是带文件的表单。</span></span><br><span class="line">        <span class="comment">//getFieldName指的是前端表单控件的name。</span></span><br><span class="line">        String name = fileItem.getFieldName();</span><br><span class="line">        String value = fileItem.getString(<span class="string">&quot;UTF-8&quot;</span>);<span class="comment">//处理乱码。</span></span><br><span class="line">        System.out.println(name+<span class="string">&quot;:&quot;</span>+value);</span><br><span class="line">      &#125;<span class="keyword">else</span> &#123;<span class="comment">//判断它是带文件的表单。</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//======================处理文件=======================//</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//拿到文件的名字</span></span><br><span class="line">        String uploadFileName = fileItem.getName();</span><br><span class="line">        System.out.println(<span class="string">&quot;上传的文件名：&quot;</span>+uploadFileName);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (uploadFileName.trim().equals(<span class="string">&quot;&quot;</span>) || uploadFileName == <span class="keyword">null</span>)&#123;</span><br><span class="line">          <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获得上传的文件名，例如/img/girl/ooa.jpg,只需要ooa，其前面的后面的都不需要。</span></span><br><span class="line">        String fileName = uploadFileName.substring(uploadFileName.lastIndexOf(<span class="string">&quot;/&quot;</span>) + <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//获得文件的后缀名。</span></span><br><span class="line">        String fileExtName = uploadFileName.substring(uploadFileName.lastIndexOf(<span class="string">&quot;.&quot;</span>) + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">                如果文件后缀名fileExtName不是我们所需要的。</span></span><br><span class="line"><span class="comment">                就直接return，不处理，告诉用户文件类型不对。</span></span><br><span class="line"><span class="comment">                */</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//可以使用UUID(唯一识别的通用码),保证文件名唯一。</span></span><br><span class="line">        <span class="comment">//UUID.randomUUID，随机生一个唯一识别的通用码。</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//网络传输中的东西，都需要序列化。</span></span><br><span class="line">        <span class="comment">//pojo，实体类，如果想要在多个电脑运行，传输---&gt;需要吧对象都序列化了。</span></span><br><span class="line">        <span class="comment">//JNI=java Native Interface</span></span><br><span class="line">        <span class="comment">//implements Serializable ：标记接口，JVM---&gt;java栈 本地方法栈 native--&gt;c++</span></span><br><span class="line"></span><br><span class="line">        String uuidPath= UUID.randomUUID().toString();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;文件信息【文件名：&quot;</span>+fileName+<span class="string">&quot;文件类型：&quot;</span>+fileExtName+<span class="string">&quot;】&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//可以使用UUID(唯一通用识别码)来保证文件名的统一。</span></span><br><span class="line">        String uuidFileName = UUID.randomUUID().toString();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//=======================传输文件=========================//</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//获得文件上传的流</span></span><br><span class="line">        InputStream inputStream = fileItem.getInputStream();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建一个文件输出流</span></span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(uploadpath + <span class="string">&quot;/&quot;</span> + uuidFileName +<span class="string">&quot;.&quot;</span>+ fileExtName);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建一个缓冲区</span></span><br><span class="line">        <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//判断是否读取完毕</span></span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果大于0，说明还存在数据</span></span><br><span class="line">        <span class="keyword">while</span> ((len=inputStream.read(buffer))&gt;<span class="number">0</span>)&#123;</span><br><span class="line">          fos.write(buffer,<span class="number">0</span>,len);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//关闭流</span></span><br><span class="line">        fos.close();</span><br><span class="line">        inputStream.close();</span><br><span class="line"></span><br><span class="line">        msg = <span class="string">&quot;文件上传成功！&quot;</span>;</span><br><span class="line">        fileItem.delete();<span class="comment">//上传成功，清除临时文件</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> msg;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>出现问题：1、使用maven项目创建的需要导入依赖，使用lib目录不可以</p>
+<p>​        2、文件创建路径</p>
+<p>解决问题思路如果报错了就看log，如果时路径找不到就仔细点。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/23/%EF%BC%88%E5%81%9C%E6%9B%B4%E4%BA%86%E4%B8%80%E5%A4%A9%E5%8E%9F%E5%9B%A0%EF%BC%9A%E6%96%B0%E6%B8%B8%E6%88%8F%EF%BC%89%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9%EF%BC%88%E7%BD%91%E9%A1%B5%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%EF%BC%89/" data-id="cl2bvap7300007gv7h3avh2a6" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2022/04/21/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B9%9D%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">第二十九天（javaWeb）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
