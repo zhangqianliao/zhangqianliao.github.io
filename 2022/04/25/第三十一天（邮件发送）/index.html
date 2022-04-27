@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="解答">
+  
+  <title>
+    第三十一天（邮件发送） |
+    
+    一些记忆
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+<article id="post-第三十一天（邮件发送）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  第三十一天（邮件发送）
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/25/%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-25T03:17:36.000Z" itemprop="datePublished">2022-04-25</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p><strong>给自己的一句话：“自己对自己的约束。”</strong></p>
+<p><code>每日英语：network：网络、system：系统、activation：激活、mail：邮件、handlers：操纵者、protocol：协议、quit：退出、factory：工厂</code></p>
+<p><strong>邮件发送</strong></p>
+<p>发送邮件：SMTP协议</p>
+<p>接受右键：POP3协议</p>
+<p><img src="/2022/04/25/%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220425113416.png"></p>
+<span id="more"></span>
+
+<p>java实现邮件发送需要使用两个jar包</p>
+<p>mail.jar     activation.jar</p>
+<blockquote>
+<p>MIME协议（可以发送一些图片或文件等）</p>
+</blockquote>
+<p>我自己的QQ授权码：oyzgrgovalofcjbd</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.sun.mail.util.MailSSLSocketFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.mail.*;</span><br><span class="line"><span class="keyword">import</span> javax.mail.internet.InternetAddress;</span><br><span class="line"><span class="keyword">import</span> javax.mail.internet.MimeMessage;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//简单邮件</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo01</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Properties中 设置属性</span></span><br><span class="line">    Properties prop=<span class="keyword">new</span> Properties();</span><br><span class="line">    prop.setProperty(<span class="string">&quot;mail.host&quot;</span>,<span class="string">&quot;smtp.qq.com&quot;</span>);<span class="comment">///设置QQ邮件服务器</span></span><br><span class="line">    prop.setProperty(<span class="string">&quot;mail.transport.protocol&quot;</span>,<span class="string">&quot;smtp&quot;</span>);<span class="comment">///邮件发送协议</span></span><br><span class="line">    prop.setProperty(<span class="string">&quot;mail.smtp.auth&quot;</span>,<span class="string">&quot;true&quot;</span>);<span class="comment">//需要验证用户密码</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//QQ邮箱需要设置SSL加密，原因：大厂。其他邮箱不需要</span></span><br><span class="line">    MailSSLSocketFactory sf = <span class="keyword">new</span> MailSSLSocketFactory();</span><br><span class="line">    sf.setTrustAllHosts(<span class="keyword">true</span>);</span><br><span class="line">    prop.put(<span class="string">&quot;mail.smtp.ssl.enable&quot;</span>,<span class="string">&quot;true&quot;</span>);<span class="comment">//使用安全的连接为true</span></span><br><span class="line">    prop.put(<span class="string">&quot;mail.smtp.ssl.socketFactory&quot;</span>,sf);<span class="comment">//socket工厂，使用自己的socket工厂</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//使用javaMail发送邮件的5个步骤</span></span><br><span class="line">    <span class="comment">//1.创建定义整个应用程序所需要的环境信息的session对象</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//QQ才有!其他邮箱就不用</span></span><br><span class="line">    Session session= Session.getDefaultInstance(prop, <span class="keyword">new</span> Authenticator() &#123;<span class="comment">//获取默认的实例</span></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">protected</span> PasswordAuthentication <span class="title">getPasswordAuthentication</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//发件人邮箱、授权码</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> PasswordAuthentication(<span class="string">&quot;1713856741@qq.com&quot;</span>,<span class="string">&quot;oyzgrgovalofcjbd&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//开启session的debug模式，这样可以查看到程序发送Email的运行状态</span></span><br><span class="line">    session.setDebug(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.通过session得到transport对象</span></span><br><span class="line">    Transport ts = session.getTransport();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.使用邮箱的用户名和授权码连上邮件服务器</span></span><br><span class="line">    ts.connect(<span class="string">&quot;smtp.qq.com&quot;</span>,<span class="string">&quot;1713856741@qq.com&quot;</span>,<span class="string">&quot;oyzgrgovalofcjbd&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//4.创建邮件：写邮件</span></span><br><span class="line">    <span class="comment">//需要传递session</span></span><br><span class="line">    MimeMessage message = <span class="keyword">new</span> MimeMessage(session);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//指明邮件的发件人</span></span><br><span class="line">    message.setFrom(<span class="keyword">new</span> InternetAddress(<span class="string">&quot;1713856741@qq.com&quot;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//指明邮件的收件人，现在发件人和收件人是一样的，那就是自己给自己发</span></span><br><span class="line">    message.setRecipient(Message.RecipientType.TO, <span class="keyword">new</span> InternetAddress(<span class="string">&quot;1713856741@qq.com&quot;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//邮件的标题   只包含文本的简单邮件</span></span><br><span class="line">    message.setSubject(<span class="string">&quot;发送的标题&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//邮件的文本内容</span></span><br><span class="line">    message.setContent(<span class="string">&quot;你好&quot;</span>,<span class="string">&quot;text/html;charset=UTF-8&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//5.发送邮件</span></span><br><span class="line">    ts.sendMessage(message,message.getAllRecipients());</span><br><span class="line"></span><br><span class="line">    <span class="comment">//6.关闭连接，一切网络都需要关闭</span></span><br><span class="line">    ts.close();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/25/%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%EF%BC%89/" data-id="cl2hmtihu00002ov74m3e2p7y" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2022/04/25/%E7%AC%AC%E4%B8%89%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88Spring%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      第三十二天（Spring）
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2022/04/23/%EF%BC%88%E5%81%9C%E6%9B%B4%E4%BA%86%E4%B8%80%E5%A4%A9%E5%8E%9F%E5%9B%A0%EF%BC%9A%E6%96%B0%E6%B8%B8%E6%88%8F%EF%BC%89%E7%AC%AC%E4%B8%89%E5%8D%81%E5%A4%A9%EF%BC%88%E7%BD%91%E9%A1%B5%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%EF%BC%89/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">（停更了一天原因：新游戏）第三十天（网页上传文件）</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+
+</article>
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NDM1OS8zMDgzMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>一些记忆 &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="一些记忆"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

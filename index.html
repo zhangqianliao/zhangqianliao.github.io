@@ -65,6 +65,287 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-三十四天（Spring）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/27/%E4%B8%89%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88Spring%EF%BC%89/">三十四天（Spring）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/27/%E4%B8%89%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88Spring%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-27T11:48:11.000Z" itemprop="datePublished">2022-04-27</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+        <p><strong>给自己的一句话：”不要让自己麻木。“</strong></p>
+<p><code>每日英语：scopes：范围、singleton：单身汉、一个、prototype：原型、property：所有物、constructor：构造器autowire：自动装配、import：进口、导入</code></p>
+<p><strong>IOC创建对象的方式</strong></p>
+<blockquote>
+<p>无参构造和有参构造</p>
+</blockquote>
+<p>无参</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userSservice&quot;</span> <span class="attr">class</span>=<span class="string">&quot;service.userServiceImpl&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;user&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;userTest&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>有参方式一（推荐使用）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--用参数名字赋值--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;u&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao.Users&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;张三&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>有参方式二（不推荐使用）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--用参数下标赋值--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;u&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao.Users&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">&quot;0&quot;</span> <span class="attr">value</span>=<span class="string">&quot;hhh&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>有参方式三（不推荐使用）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--用参数类型赋值--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;u&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao.Users&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">type</span>=<span class="string">&quot;java.lang.String&quot;</span> <span class="attr">value</span>=<span class="string">&quot;hhhh&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        
+          <p>
+            <a class="article-more-link" href="/2022/04/27/%E4%B8%89%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88Spring%EF%BC%89/">
+              Read More...
+            </a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/27/%E4%B8%89%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88Spring%EF%BC%89/" data-id="cl2hmtii200012ov73yuyg7xm" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
+    <article id="post-三十三天（Spring）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/26/%E4%B8%89%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88Spring%EF%BC%89/">三十三天（Spring）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/26/%E4%B8%89%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88Spring%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-26T12:52:14.000Z" itemprop="datePublished">2022-04-26</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <p><strong>给自己的一句话：“加油吧！”</strong></p>
+<p><code>每日英语：application：应用</code></p>
+<p><strong>IOC</strong></p>
+<blockquote>
+<p>没有使用IOC思想的web</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> dao.UserTestDaoImpl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">userServiceImpl</span> <span class="keyword">implements</span> <span class="title">userService</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> userDao useraao = <span class="keyword">new</span> UserTestDaoImpl();<span class="comment">//直接写死，如果用户需要跟换方法需要修改内部代码</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Select</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        user.Select();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/26/%E4%B8%89%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88Spring%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220426213158.png"></p>
+<blockquote>
+<p>使用IOC思想后的web</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> dao.userDao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">userServiceImpl</span> <span class="keyword">implements</span> <span class="title">userService</span></span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">private</span> userDao user;  </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUseraao</span><span class="params">(userDao useraao)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.user =  useraao;	<span class="comment">//这样就没有将这个方法写死，用户想要用那个方法就可以调用那个方法</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Select</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        user.Select();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/26/%E4%B8%89%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88Spring%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220426213422.png"></p>
+<p><strong>上面的代码使用Spring配置文件之后</strong></p>
+<p><code>xml头部配置文件直接去Spring官网去找</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">        https://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  	<span class="comment">&lt;!--每一个bean都相当于java中的一个new--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;user&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao.userDaoImpl&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userTest&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dao.UserTestDaoImpl&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  	<span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    ref：xml内部内容</span></span><br><span class="line"><span class="comment">	value：一个具体的内容</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userSservice&quot;</span> <span class="attr">class</span>=<span class="string">&quot;service.userServiceImpl&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;user&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;userTest&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">tset</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">//获取ApplicationContext</span></span><br><span class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">&quot;beans.xml&quot;</span>);</span><br><span class="line">		<span class="comment">//从容器中获取想要的对象</span></span><br><span class="line">        userService user = (userService) context.getBean(<span class="string">&quot;userSservice&quot;</span>);</span><br><span class="line">        user.Select();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>IOC可以简单的理解为：对象由Spring来创建、管理、装配（IOC的核心是set方法，如果没有set方法就不行）</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/26/%E4%B8%89%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88Spring%EF%BC%89/" data-id="cl2hmtii700022ov73dj30iu1" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
+    <article id="post-第三十二天（Spring）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/25/%E7%AC%AC%E4%B8%89%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88Spring%EF%BC%89/">第三十二天（Spring）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/25/%E7%AC%AC%E4%B8%89%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88Spring%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-25T14:18:18.000Z" itemprop="datePublished">2022-04-25</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <p><strong>给自己的一句话：“路要一步一步走饭要一口一口吃。”</strong></p>
+<p><code>每日英语：Spring：春天、project：项目、overview：概述、framework：框架、support：支持、core：中心</code></p>
+<blockquote>
+<p>Spring框架的前身是interface21框架</p>
+</blockquote>
+<p><strong>Spring的优点</strong></p>
+<p>1、Spring是一个开源的免费框架（容器）</p>
+<p>2、Spring是一个轻量级的，非入侵式的框架</p>
+<p>3、控制反转（IOC），面向切面编程（AOP）</p>
+<p>4、支持事务的处理，对框架整合的支持</p>
+<p>总结成一句话：Spring是一个轻量级的控制反转（IOC）和面向切面编程（AOP）的框架。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/25/%E7%AC%AC%E4%B8%89%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88Spring%EF%BC%89/" data-id="cl2hmtii900032ov73k1cgh8x" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
+    <article id="post-第三十一天（邮件发送）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/25/%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%EF%BC%89/">第三十一天（邮件发送）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/25/%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-25T03:17:36.000Z" itemprop="datePublished">2022-04-25</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+        <p><strong>给自己的一句话：“自己对自己的约束。”</strong></p>
+<p><code>每日英语：network：网络、system：系统、activation：激活、mail：邮件、handlers：操纵者、protocol：协议、quit：退出、factory：工厂</code></p>
+<p><strong>邮件发送</strong></p>
+<p>发送邮件：SMTP协议</p>
+<p>接受右键：POP3协议</p>
+<p><img src="/2022/04/25/%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220425113416.png"></p>
+        
+          <p>
+            <a class="article-more-link" href="/2022/04/25/%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%EF%BC%89/">
+              Read More...
+            </a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/25/%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%EF%BC%89/" data-id="cl2hmtihu00002ov74m3e2p7y" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
     <article id="post-（停更了一天原因：新游戏）第三十天（网页上传文件）" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -456,270 +737,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://zhangqianliao.github.io/2022/04/17/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" data-id="cl24rwmvk0000nwv77tdab33l" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第二十四天（javaWeb）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/16/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/">第二十四天（javaWeb）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/16/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-16T08:59:34.000Z" itemprop="datePublished">2022-04-16</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <p><strong>给自的一句话：“一定要往好的方向想。”</strong></p>
-<p><code>每日英语：load：加载、properties：属性、context：上下文、resource：资源、extends：给予：more：更多</code></p>
-<p><strong>使用ServletContext获取properties中的数据</strong></p>
-<p>1、创建一个.properties文件存入数据    <img src="/2022/04/16/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220416190424.png"></p>
-<p>2、创建一个继承HttpServlet的类并重写get、post方法，然后使用ServletContext方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dome01</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        InputStream is = <span class="keyword">this</span>.getServletContext().getResourceAsStream(<span class="string">&quot;/WEB-INF/classes/a.properties&quot;</span>);  <span class="comment">//使用ServletContext方法创建一个ResourceAs流</span></span><br><span class="line">        Properties properties = <span class="keyword">new</span> Properties(); <span class="comment">//实例化一个Properties对象</span></span><br><span class="line">        properties.load(is);	<span class="comment">//使用properties中的load方法加载前面创建好的流</span></span><br><span class="line">        String u = properties.getProperty(<span class="string">&quot;user&quot;</span>); <span class="comment">//使用getProperty方法通过key获取对应的值</span></span><br><span class="line">        String p = properties.getProperty(<span class="string">&quot;pwd&quot;</span>);</span><br><span class="line"></span><br><span class="line">        resp.getWriter().println(u+<span class="string">&quot;:&quot;</span>+p);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        doGet(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <p>
-            <a class="article-more-link" href="/2022/04/16/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/16/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" data-id="cl21w3ymv00023ov7epvx9hei" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第二十三天（javaWeb）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/">第二十三天（javaWeb）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-15T08:00:07.000Z" itemprop="datePublished">2022-04-15</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <p><strong>给自己的一句话：“黎明就在眼前。”</strong></p>
-<p><code>每日英语：</code></p>
-<p><strong>使用IDEL创建maven项目配置Tomcat</strong></p>
-<p>1、<img src="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220415172051.png"></p>
-<p>idel自带maven仓库，也可以自己设置</p>
-<p>2、<img src="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220415172246.png"></p>
-<p><img src="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220415172523.png"></p>
-<p><img src="/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220415172750.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/15/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" data-id="cl21w3ymq00013ov7fz0fhf2k" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第二十二天（javaWeb）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/">第二十二天（javaWeb）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-14T03:21:54.000Z" itemprop="datePublished">2022-04-14</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <p><code>每日英语：remote：远程、cache：缓存、control：控制、download：下载</code></p>
-<p><strong>Tomcat</strong></p>
-<p>解压后的目录：<img src="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220414112546.png"></p>
-<blockquote>
-<p>tomcat启动和关闭</p>
-</blockquote>
-<p><img src="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220414113554.png"></p>
-<p><strong>面试题：请问网站是如何访问的</strong></p>
-<p>1、打开浏览器输入域名后回车</p>
-<p>2、检查本机 window（C:\Windows\System32\drivers\etc\hosts）配置文件下有没有这个域名映射。</p>
-<p>​    1、有：直接返回对应的ip地址，这个地址中，有我们需要访问的web程序，可以直接访问</p>
-<p>​    2、没有：去DNS服务器找，找到的话就返回，找不到的话就返回找不到</p>
-<p> <img src="/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220414120200.png"></p>
-<p><strong>使用tomcat简单部署静态网页</strong></p>
-<p>1、依葫芦画瓢（拷贝一份tomcat自带的ROOT），然后将里面的页面相关的都删除</p>
-<p>2、开启tomcat服务就可以访问了</p>
-<p>结构</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">--webapps:Tomcat服务器的web目录</span><br><span class="line">	-ROOT</span><br><span class="line">	-zhang</span><br><span class="line">		-WEB-INF</span><br><span class="line">			-classes：java程序</span><br><span class="line">			-lib：web应用所依赖的jar包</span><br><span class="line">			-web.xml：网站配置文件</span><br><span class="line">		-index.html 默认的首页</span><br><span class="line">		-static</span><br><span class="line">			-css</span><br><span class="line">				-style.css</span><br><span class="line">			-js</span><br><span class="line">			-img</span><br><span class="line">		-...</span><br></pre></td></tr></table></figure>
-
-<p><strong>http、https（默认端口号：http：80、https：443）</strong></p>
-<p>http：超文本传输协议，是一个简单的请求-响应协议，它通常运行在TCP之上</p>
-<p>​    文本：html，字符串…</p>
-<p>​    超文本：图片、音乐、视频、定位、地图…</p>
-<p>https：安全的</p>
-<p><strong>响应状态码</strong></p>
-<p>200：请求响应成功</p>
-<p>3xx：请求重定向</p>
-<p>4xx：找不到资源 404</p>
-<p>5xx：服务器代码错误 500、502：网关错误</p>
-<p><strong>Maven</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/14/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" data-id="cl21w3yn200033ov7cigvfo7j" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第二十一天（Mybatis）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/13/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/">第二十一天（Mybatis）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/13/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-13T11:42:56.000Z" itemprop="datePublished">2022-04-13</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <p><strong>给自己的一句话：“稳住稳住稳住。”</strong></p>
-<p><code>每日英语：request：请求、response：响应、network：网络、</code></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/13/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/" data-id="cl21w3ymg00003ov7akihgg2z" class="article-share-link">
         分享
       </a>
       
