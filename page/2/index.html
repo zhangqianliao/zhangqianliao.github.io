@@ -65,6 +65,138 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-第二十六天（javaWeb）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/18/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/">第二十六天（javaWeb）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/18/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-18T11:06:02.000Z" itemprop="datePublished">2022-04-18</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+        <p><strong>给自己的一句话：“都会慢慢好起来的。”</strong></p>
+<p><code>每日英语：parse：解析、cookie：曲奇、current：现在、equals：等于、encoder：编码器、decoder：解码器、destory：销毁、service：服务器</code></p>
+<p>一个url请求对应一个servlet</p>
+        
+          <p>
+            <a class="article-more-link" href="/2022/04/18/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/">
+              Read More...
+            </a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/18/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" data-id="cl24rwmw90001nwv7a2b49gzp" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
+    <article id="post-第二十五天（javaWeb）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/17/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/">第二十五天（javaWeb）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/17/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-17T11:50:46.000Z" itemprop="datePublished">2022-04-17</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <p><strong>给自己的一句话：“一切都会好起来的。”</strong></p>
+<p><code>每日英语：characterEncoding：字符编码、page：页、网页、历史、dispatcher：调度、hobby：爱好</code></p>
+<p>jsp页面表单提交获取根目录的方法</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">&quot;$&#123;pageContext.request.contextPath&#125;/dm3&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;checkbox&quot;</span> name=<span class="string">&quot;hobbys&quot;</span> value=<span class="string">&quot;唱歌&quot;</span>&gt;唱歌</span><br><span class="line">    &lt;input type=<span class="string">&quot;checkbox&quot;</span> name=<span class="string">&quot;hobbys&quot;</span> value=<span class="string">&quot;跳舞&quot;</span>&gt;跳舞</span><br><span class="line">    &lt;input type=<span class="string">&quot;checkbox&quot;</span> name=<span class="string">&quot;hobbys&quot;</span> value=<span class="string">&quot;耍酷&quot;</span>&gt;耍酷</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>重定向</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sendRedirect</span><span class="params">(String var1)</span> <span class="keyword">throws</span> IOException</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resp.sendRedirect(<span class="string">&quot;/zhang/dm1&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>面试题：重定向和转发的区别</strong></p>
+<p>相同点：都会进行页面跳转</p>
+<p>不同点：重定向url会发生改变，转发url不会发生改变。</p>
+<p><strong>request获取from数据</strong></p>
+<p><img src="/2022/04/17/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220417214447.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/17/%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88javaWeb%EF%BC%89/" data-id="cl24rwmvk0000nwv77tdab33l" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
     <article id="post-第二十四天（javaWeb）" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -576,135 +708,6 @@
     </div>
     <footer class="article-footer">
       <a data-url="http://zhangqianliao.github.io/2022/04/09/%E7%AC%AC%E5%8D%81%E4%B8%83%E5%A4%A9%EF%BC%88JavaScript%EF%BC%89/" data-id="cl1ru73a20000hwv7501m0ofn" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第十六天（JUC）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/">第十六天（JUC）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-08T09:41:37.000Z" itemprop="datePublished">2022-04-08</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <p><em><strong>给自的一句话：“适当的给自己一点压力还是有必要的。”</strong></em></p>
-<p><strong>cmdjava反编译命令java-p</strong></p>
-<p><strong>使用Enum枚举（Enum自带单例无法被反射进行破坏）</strong></p>
-<blockquote>
-<p>enum本身就是一个Class类</p>
-<p>通过反编译知道枚举的构造方法是又参数的</p>
-<p><img src="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220408183818.png"></p></blockquote>
-        
-          <p>
-            <a class="article-more-link" href="/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/08/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9%EF%BC%88JUC%EF%BC%89/" data-id="cl1qgnsau0000wsv7gtar8xio" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第十五天（JUC单例模式）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%89/">第十五天（单例模式）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-07T12:24:11.000Z" itemprop="datePublished">2022-04-07</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <p><strong>单例模式</strong></p>
-<blockquote>
-<p><code>饿汉式</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;//饿汉式单例（一开始就会加载所有资源）</span><br><span class="line">&gt;public class Hungry &#123;</span><br><span class="line"></span><br><span class="line">   //会造成资源浪费</span><br><span class="line">   byte[] bytes1 = new byte[1024];</span><br><span class="line">   byte[] bytes2 = new byte[1024];</span><br><span class="line">   byte[] bytes3 = new byte[1024];</span><br><span class="line">   byte[] bytes4 = new byte[1024];</span><br><span class="line"></span><br><span class="line">   //无参构造</span><br><span class="line">   public Hungry()&#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   //静态常量：实例化对象</span><br><span class="line">   private final static Hungry HUNGRY = new Hungry();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   public static Hungry getInstance()&#123;</span><br><span class="line">       return HUNGRY;</span><br><span class="line">   &#125;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure></blockquote>
-        
-          <p>
-            <a class="article-more-link" href="/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%89/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9%EF%BC%88JUC%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%EF%BC%89/" data-id="cl1p17tdv0000ssv7bmsl3r18" class="article-share-link">
         分享
       </a>
       
