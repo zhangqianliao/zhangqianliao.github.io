@@ -65,6 +65,267 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-第二十天（Mybatis）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/12/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/">第二十天（Mybatis）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/12/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-12T10:56:14.000Z" itemprop="datePublished">2022-04-12</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+        <p><em><strong>给自的一句话：“尽人事，顺天命。”</strong></em></p>
+<p><code>每日英语单词：break：中断、body：身体、color：颜色、class：类、count：计数、client：客户、code：代码</code></p>
+<h3 id="类型别名（typeAliases）"><a href="#类型别名（typeAliases）" class="headerlink" title="类型别名（typeAliases）"></a>类型别名（typeAliases）</h3><p>方式一：应用在实体类比较少的时候</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;typeAliases&gt;</span><br><span class="line">  &lt;typeAlias alias=<span class="string">&quot;Author&quot;</span> type=<span class="string">&quot;domain.blog.Author&quot;</span>/&gt;</span><br><span class="line">  &lt;typeAlias alias=<span class="string">&quot;Blog&quot;</span> type=<span class="string">&quot;domain.blog.Blog&quot;</span>/&gt;</span><br><span class="line">  &lt;typeAlias alias=<span class="string">&quot;Comment&quot;</span> type=<span class="string">&quot;domain.blog.Comment&quot;</span>/&gt;</span><br><span class="line">  &lt;typeAlias alias=<span class="string">&quot;Post&quot;</span> type=<span class="string">&quot;domain.blog.Post&quot;</span>/&gt;</span><br><span class="line">  &lt;typeAlias alias=<span class="string">&quot;Section&quot;</span> type=<span class="string">&quot;domain.blog.Section&quot;</span>/&gt;</span><br><span class="line">  &lt;typeAlias alias=<span class="string">&quot;Tag&quot;</span> type=<span class="string">&quot;domain.blog.Tag&quot;</span>/&gt;</span><br><span class="line">&lt;/typeAliases&gt;</span><br></pre></td></tr></table></figure>
+        
+          <p>
+            <a class="article-more-link" href="/2022/04/12/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/">
+              Read More...
+            </a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/12/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/" data-id="cl1w4zbsp0000y4v74rq8cisq" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
+    <article id="post-第十九天（Mybatis）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/10/%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/">第十九天（Mybatis）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/10/%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-10T14:15:10.000Z" itemprop="datePublished">2022-04-10</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+        <p><em><strong>给自己的一句话：“什么事情都要一步一步来，学习更是。”</strong></em></p>
+<p><code>每日英语单词</code></p>
+<p><code>argument：参量、ascent：提升、already：已经、byte：字节、boolean：布尔值、buffer：缓冲器、button：按钮</code></p>
+<blockquote>
+<p><code>Mybatis官方中文在线文档地址：</code><strong><a target="_blank" rel="noopener" href="https://mybatis.net.cn/getting-started.html">Mybatis</a></strong></p>
+</blockquote>
+<p>Mybatis搭建环境何时使用</p>
+<p>1、创建一个基础的Maven项目</p>
+<p>2、在pom.xml文件中添加依赖</p>
+        
+          <p>
+            <a class="article-more-link" href="/2022/04/10/%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/">
+              Read More...
+            </a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/10/%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%A4%A9%EF%BC%88Mybatis%EF%BC%89/" data-id="cl1upjbdw0000fgv7gq7ccxnc" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
+    <article id="post-第十八天（javaScript）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/10/%E7%AC%AC%E5%8D%81%E5%85%AB%E5%A4%A9%EF%BC%88javaScript%EF%BC%89/">第十八天（javaScript、Jquery）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/10/%E7%AC%AC%E5%8D%81%E5%85%AB%E5%A4%A9%EF%BC%88javaScript%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-10T03:06:45.000Z" itemprop="datePublished">2022-04-10</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+        <p><strong>给自己的一句话：”不要被眼前的安逸蒙蔽了双眼。“</strong></p>
+<blockquote>
+<p>每日英语单词</p>
+</blockquote>
+<p><code>Array（数组）、Accessible（可存取的）、Area（面积）、Audio（音频）、Addition（增加）Action（行动）</code></p>
+<p><code>arithmetic（算法）、Adjustment（调整）、Actual（真实）</code></p>
+        
+          <p>
+            <a class="article-more-link" href="/2022/04/10/%E7%AC%AC%E5%8D%81%E5%85%AB%E5%A4%A9%EF%BC%88javaScript%EF%BC%89/">
+              Read More...
+            </a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/10/%E7%AC%AC%E5%8D%81%E5%85%AB%E5%A4%A9%EF%BC%88javaScript%EF%BC%89/" data-id="cl1upjbe40001fgv7e3vkfaj6" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
+    <article id="post-第十七天（JavaScript）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/09/%E7%AC%AC%E5%8D%81%E4%B8%83%E5%A4%A9%EF%BC%88JavaScript%EF%BC%89/">第十七天（JavaScript）</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/09/%E7%AC%AC%E5%8D%81%E4%B8%83%E5%A4%A9%EF%BC%88JavaScript%EF%BC%89/" class="article-date">
+  <time datetime="2022-04-09T04:45:20.000Z" itemprop="datePublished">2022-04-09</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+        <p><em><strong>给自己的一句话：“学习要趁早虽然我已经不早了但是也不算太晚。”</strong></em></p>
+<p><strong>javaScript基础语法</strong></p>
+<blockquote>
+<p>length:获取数组的长度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;arr.length</span><br><span class="line">&gt;3</span><br><span class="line">&gt;-----------------------</span><br><span class="line">&gt;arr.length = 10; //会增加数组的长度</span><br><span class="line">&gt;arr.length =1;//数组回变成一个，会造成数据丢失</span><br><span class="line"></span><br><span class="line">&gt;-------------------</span><br><span class="line">&gt;arr.slice(y);//会截取数组的长度进行输出，数组不会变</span><br></pre></td></tr></table></figure>
+</blockquote>
+        
+          <p>
+            <a class="article-more-link" href="/2022/04/09/%E7%AC%AC%E5%8D%81%E4%B8%83%E5%A4%A9%EF%BC%88JavaScript%EF%BC%89/">
+              Read More...
+            </a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zhangqianliao.github.io/2022/04/09/%E7%AC%AC%E5%8D%81%E4%B8%83%E5%A4%A9%EF%BC%88JavaScript%EF%BC%89/" data-id="cl1ru73a20000hwv7501m0ofn" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+
+</article>
+    
     <article id="post-第十六天（JUC）" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -448,283 +709,12 @@
 
 </article>
     
-    <article id="post-第十一天（JUC并发）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/03/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/">第十一天（JUC并发）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/03/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-03T10:06:24.000Z" itemprop="datePublished">2022-04-03</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <p><em><strong>给自的一句话：“自己给自己一个坚定的信念不会是一件坏事”</strong></em></p>
-<p><strong>线程和进程</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//进程：一个程序：qq.exe、lol.exe 程序的集合，一个进程包含多个线程，至少有一个线程。</span><br></pre></td></tr></table></figure>
-        
-          <p>
-            <a class="article-more-link" href="/2022/04/03/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/03/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%A4%A9%EF%BC%88JUC%E5%B9%B6%E5%8F%91%EF%BC%89/" data-id="cl1j97n7l00001ov7817w43px" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第十天（注解与CLass反编译）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/01/%E7%AC%AC%E5%8D%81%E5%A4%A9%EF%BC%88%E6%B3%A8%E8%A7%A3%E4%B8%8ECLass%E5%8F%8D%E7%BC%96%E8%AF%91%EF%BC%89/">第十天（注解与反编译）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/01/%E7%AC%AC%E5%8D%81%E5%A4%A9%EF%BC%88%E6%B3%A8%E8%A7%A3%E4%B8%8ECLass%E5%8F%8D%E7%BC%96%E8%AF%91%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-01T13:10:14.000Z" itemprop="datePublished">2022-04-01</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <p><em><strong>给自的一句话：“永远不要安于现状不然很容易让人迷失”</strong></em></p>
-<p><strong>内置注解</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Override //该注解表示：重写注解</span><br><span class="line">@Depreacted //使用该注解表示：不推荐使用该方法，但是可以使用</span><br><span class="line">@SuppressWarnings(&quot;xx&quot;)//该注解表示：镇压错误提示</span><br></pre></td></tr></table></figure>
-
-<p><strong>元注解</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//Target 表示我们的注解可以用在那些地方</span><br><span class="line">@Target(value=&#123;ElementType.METHOD,ElementType.TYPE&#125;)</span><br><span class="line"></span><br><span class="line">//Retention 表示我们的注解在上面地方还有效</span><br><span class="line">//runtime&gt;class&gt;sources</span><br><span class="line">@Retention(value= RetentionPolicy.RUNTIME)</span><br><span class="line"></span><br><span class="line">//Documented 表示是否将我们的注解生成在JAVAdoc中</span><br><span class="line">@Documented</span><br><span class="line"></span><br><span class="line">//Inherited 子类可以继承父类的注解</span><br><span class="line">@Inherited</span><br><span class="line">@interface xxxx&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>自定义注解</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class 注解与反射 &#123;</span><br><span class="line">    @MyAnnotation(&quot;hhh&quot;) //单个参数可以不用写名称</span><br><span class="line">    public void test()&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Target(&#123;ElementType.TYPE,ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@interface MyAnnotation&#123;</span><br><span class="line">    //注解参数 参数类型+名称();</span><br><span class="line">    String value() default &quot;&quot;;//default设置默认初始值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>获取Class的方式</strong></p>
-<p>正常获取方式：引入包类名称=&gt;通过new实例化=&gt;取得实例化对象</p>
-<p>反射获取方式：实例化=&gt;getClass()方法=&gt;得到完整的包类名称</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c = Class.forName(&quot;java.lang.String&quot;)</span><br></pre></td></tr></table></figure>
-
-<p><img src="file:///C:\Users\zhangqianliao\AppData\Roaming\Tencent\Users\1713856741\QQ\WinTemp\RichOle\9L(2)WA%XS961U6JK@Q`ZTQ.png" alt="img"></p>
-<p><strong>不产生初始化的操作</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//调用final常量池中的数据</span><br><span class="line">//使用类创建数组  它只是创建了一个变量名称和空间大小不会初始化</span><br><span class="line">//子类调用父类的静态方法或者变量</span><br></pre></td></tr></table></figure>
-
-<p><strong>获取类运行是结构</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Class c = Class.forName(&quot;xxxx&quot;);</span><br><span class="line">//获取类名</span><br><span class="line">c.getName()//获得所有包名+类名</span><br><span class="line">c.getSimpleName()//获取所有类名</span><br><span class="line"></span><br><span class="line">//获取类的属性</span><br><span class="line">c.getFields()//只能获取public属性</span><br><span class="line">c.getDeclaredFields()//获取所有属性</span><br><span class="line"></span><br><span class="line">//获取指定属性的值</span><br><span class="line">c.getDeclaredField(&quot;name&quot;);</span><br><span class="line"></span><br><span class="line">//获取类的方法</span><br><span class="line">c.getMethods()//获取public修饰的方法</span><br><span class="line">c.getDeclaredMethods()//获取所有方法包括private修饰的方法</span><br><span class="line"></span><br><span class="line">//获取指定方法</span><br><span class="line">c.getMethod(&quot;getname&quot;,参数类型) //怕重载所有要指定参数</span><br><span class="line"></span><br><span class="line">//获取构造器</span><br><span class="line">c.getConstructors()//只能获取public修饰的构造器</span><br><span class="line">c.getDeclaredConstructors()//获取所有构造器</span><br><span class="line"></span><br><span class="line">//获取指定构造器</span><br><span class="line">c.getDeclaredConstructor(参数类型)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>简单的Class反射使用</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class 注解与反射 &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        Class c = Class.forName(&quot;pojo.Users&quot;);</span><br><span class="line"></span><br><span class="line">        //通过反射创造对象</span><br><span class="line">        //获取包名和所有属性名称并输出</span><br><span class="line">        for (Field declaredField : c.getDeclaredFields()) &#123;</span><br><span class="line">            System.out.println(declaredField);</span><br><span class="line">        &#125;</span><br><span class="line">        //通过构造器创建对象</span><br><span class="line">        Constructor declaredConstructor = c.getDeclaredConstructor(String.class,int.class);</span><br><span class="line">        Users test = (Users) declaredConstructor.newInstance(&quot;张三&quot;, 30);</span><br><span class="line">        //输出</span><br><span class="line">        System.out.println(test.getName());</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;----------------------&quot;);</span><br><span class="line"></span><br><span class="line">        //通过反射使用方法修改值</span><br><span class="line">        //获取所有方法并输出</span><br><span class="line">        for (Method declaredMethod : c.getDeclaredMethods()) &#123;</span><br><span class="line">            System.out.println(declaredMethod);</span><br><span class="line">        &#125;</span><br><span class="line">        Method method =  c.getDeclaredMethod(&quot;setName&quot;, String.class);  //获取指定方法</span><br><span class="line">        method.invoke(test,&quot;李四&quot;);  //invoke激活的意思</span><br><span class="line">        System.out.println(test.getName()); //输出</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;----------------------&quot;);</span><br><span class="line"></span><br><span class="line">        //通过反射修改属性值</span><br><span class="line">        Field name = c.getDeclaredField(&quot;name&quot;); //获取指定属性</span><br><span class="line">        name.setAccessible(true);  //关闭程序安全检查</span><br><span class="line">        name.set(test,&quot;王五&quot;);</span><br><span class="line">        System.out.println(test.getName());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>比较反编译和普通方法的执行速度</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">class TestPerformance1 &#123;</span><br><span class="line">    Users users = null;</span><br><span class="line"></span><br><span class="line">    public TestPerformance1()&#123;</span><br><span class="line">        users = new Users();</span><br><span class="line"></span><br><span class="line">        long startTime1 = System.currentTimeMillis(); //获取开始时间</span><br><span class="line">        for (int i = 0; i &lt;1000000; i--) &#123;</span><br><span class="line">            users.getName();</span><br><span class="line">        &#125;</span><br><span class="line">        long startTime2 =System.currentTimeMillis(); //获取结束时间</span><br><span class="line">        System.out.println(&quot;普通方法：&quot;+(startTime2-startTime1));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">class TestPerformance2 &#123;</span><br><span class="line">    Users users =null;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public TestPerformance2() throws NoSuchFieldException &#123;</span><br><span class="line"></span><br><span class="line">        users = new Users();</span><br><span class="line">        Class c = users.getClass();</span><br><span class="line"></span><br><span class="line">        Field name = c.getDeclaredField(&quot;name&quot;);</span><br><span class="line"></span><br><span class="line">        long startTime1 = System.currentTimeMillis(); //获取开始时间</span><br><span class="line">        for (int i = 0; i &lt;1000000; i--) &#123;</span><br><span class="line">           name.getName();</span><br><span class="line">        &#125;</span><br><span class="line">        long startTime2 =System.currentTimeMillis(); //获取结束时间</span><br><span class="line">        System.out.println(&quot;没有关闭检查反编译方法：&quot;+(startTime2-startTime1));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class TestPerformance3 &#123;</span><br><span class="line">    Users users = null;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public TestPerformance3() throws Exception &#123;</span><br><span class="line">        users = new Users();</span><br><span class="line">        Class c = users.getClass();</span><br><span class="line">        Field name = c.getDeclaredField(&quot;name&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        long startTime1 = System.currentTimeMillis(); //获取开始时间</span><br><span class="line">        for (int i = 0; i &lt;1000000; i--) &#123;</span><br><span class="line">            name.setAccessible(true);</span><br><span class="line">            name.getName();</span><br><span class="line">        &#125;</span><br><span class="line">        long startTime2 =System.currentTimeMillis(); //获取结束时间</span><br><span class="line">        System.out.println(&quot;关闭反编译方法：&quot;+(startTime2-startTime1));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>反射获取范型信息</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//反射获取泛型信息</span><br><span class="line">Method test01 = 注解与反射.class.getMethod(&quot;test01&quot;, Map.class); //通过类名获取指定方法</span><br><span class="line">for (Type genericParameterType : test01.getGenericParameterTypes()) &#123; //获取方法返回值类型</span><br><span class="line">    System.out.println(genericParameterType); //输出</span><br><span class="line">    if (genericParameterType instanceof ParameterizedType) //判读获取到的返回值类型是否为范型</span><br><span class="line">    &#123;</span><br><span class="line">        //强转和输出范型的类型</span><br><span class="line">        for (Type actualTypeArgument : ((ParameterizedType) genericParameterType).getActualTypeArguments()) &#123;</span><br><span class="line">            System.out.println(actualTypeArgument);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>反编译通过getAnnotations()获取注解信息</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Class c2 = Class.forName(&quot;pojo.Users&quot;);  //获取类的Class</span><br><span class="line">for (Annotation annotation : c2.getAnnotations()) &#123;  //通过getAnnotations()获取注解信息</span><br><span class="line">    System.out.println(annotation);</span><br><span class="line">&#125;</span><br><span class="line">for (Field declaredField : c2.getDeclaredFields()) &#123;</span><br><span class="line">    System.out.println(declaredField);</span><br><span class="line">&#125;</span><br><span class="line">Field name = c2.getDeclaredField(&quot;name&quot;);</span><br><span class="line">for (Annotation annotation : name.getAnnotations()) &#123;</span><br><span class="line">    System.out.println(annotation);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/01/%E7%AC%AC%E5%8D%81%E5%A4%A9%EF%BC%88%E6%B3%A8%E8%A7%A3%E4%B8%8ECLass%E5%8F%8D%E7%BC%96%E8%AF%91%EF%BC%89/" data-id="cl1j97n7q00011ov71b9r6my2" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第九天（GUI编程）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/04/01/%E7%AC%AC%E4%B9%9D%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/">第九天（GUI编程）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/04/01/%E7%AC%AC%E4%B9%9D%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/" class="article-date">
-  <time datetime="2022-04-01T10:11:21.000Z" itemprop="datePublished">2022-04-01</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <p><em><strong>给自己一句话：”今天不学哪来明天“</strong></em></p>
-<p><strong>Swing弹窗JDialog</strong></p>
-        
-          <p>
-            <a class="article-more-link" href="/2022/04/01/%E7%AC%AC%E4%B9%9D%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/04/01/%E7%AC%AC%E4%B9%9D%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/" data-id="cl1ggd5qx0000n8v7b2yd05ob" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
-    <article id="post-第八天（GUI编程）" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/03/31/%E7%AC%AC%E5%85%AB%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/">第八天（GUI编程）</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/03/31/%E7%AC%AC%E5%85%AB%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/" class="article-date">
-  <time datetime="2022-03-31T09:58:24.000Z" itemprop="datePublished">2022-03-31</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <p><em><strong>给自己的一句话：“今天都不学难道还有时间？”</strong></em></p>
-<p><strong>事件监听（按钮事件test）</strong></p>
-        
-          <p>
-            <a class="article-more-link" href="/2022/03/31/%E7%AC%AC%E5%85%AB%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/">
-              Read More...
-            </a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zhangqianliao.github.io/2022/03/31/%E7%AC%AC%E5%85%AB%E5%A4%A9%EF%BC%88GUI%E7%BC%96%E7%A8%8B%EF%BC%89/" data-id="cl1f1jqcz0000ukv70eqgh88j" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-
-</article>
-    
   </article>
   
 
   
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
   </nav>
   
 </section>
