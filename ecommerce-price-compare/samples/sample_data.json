@@ -1,0 +1,233 @@
+{
+  "keyword": "无线蓝牙耳机",
+  "search_time": "2026-07-14 10:30:00",
+  "products": [
+    {
+      "name": "新款无线蓝牙耳机降噪长续航",
+      "price": 89.90,
+      "original_price": 199.00,
+      "platform": "拼多多",
+      "url": "https://mobile.yangkeduo.com/goods.html?goods_id=1008654321",
+      "sales": 156800,
+      "shop_rating": 4.5,
+      "shop_name": "拼多多百亿补贴数码店",
+      "image_url": "https://img.example.com/1001.jpg",
+      "product_id": "PD10086543",
+      "collected_at": "2026-07-14 10:30:00"
+    },
+    {
+      "name": "热销无线蓝牙耳机入耳式运动",
+      "price": 129.00,
+      "original_price": 259.00,
+      "platform": "淘宝",
+      "url": "https://item.taobao.com/item.htm?id=2008654321",
+      "sales": 89200,
+      "shop_rating": 4.7,
+      "shop_name": "天猫数码官方旗舰店",
+      "image_url": "https://img.example.com/2001.jpg",
+      "product_id": "TB20086543",
+      "collected_at": "2026-07-14 10:30:01"
+    },
+    {
+      "name": "旗舰无线蓝牙耳机主动降噪",
+      "price": 299.00,
+      "original_price": 499.00,
+      "platform": "京东",
+      "url": "https://item.jd.com/3008654321.html",
+      "sales": 45600,
+      "shop_rating": 4.9,
+      "shop_name": "京东自营数码旗舰店",
+      "image_url": "https://img.example.com/3001.jpg",
+      "product_id": "JD30086543",
+      "collected_at": "2026-07-14 10:30:02"
+    },
+    {
+      "name": "特价无线蓝牙耳机迷你隐形",
+      "price": 59.90,
+      "original_price": 129.00,
+      "platform": "拼多多",
+      "url": "https://mobile.yangkeduo.com/goods.html?goods_id=1008654322",
+      "sales": 234500,
+      "shop_rating": 4.2,
+      "shop_name": "拼多多工厂直供店",
+      "image_url": "https://img.example.com/1002.jpg",
+      "product_id": "PD10086544",
+      "collected_at": "2026-07-14 10:30:03"
+    },
+    {
+      "name": "正品无线蓝牙耳机高音质",
+      "price": 199.00,
+      "original_price": 399.00,
+      "platform": "淘宝",
+      "url": "https://item.taobao.com/item.htm?id=2008654322",
+      "sales": 67800,
+      "shop_rating": 4.8,
+      "shop_name": "品牌耳机官方店",
+      "image_url": "https://img.example.com/2002.jpg",
+      "product_id": "TB20086544",
+      "collected_at": "2026-07-14 10:30:04"
+    },
+    {
+      "name": "精选无线蓝牙耳机运动防水",
+      "price": 168.00,
+      "original_price": 298.00,
+      "platform": "京东",
+      "url": "https://item.jd.com/3008654322.html",
+      "sales": 32100,
+      "shop_rating": 4.8,
+      "shop_name": "京东品质数码店",
+      "image_url": "https://img.example.com/3002.jpg",
+      "product_id": "JD30086544",
+      "collected_at": "2026-07-14 10:30:05"
+    },
+    {
+      "name": "爆款无线蓝牙耳机Pro版",
+      "price": 399.00,
+      "original_price": 699.00,
+      "platform": "京东",
+      "url": "https://item.jd.com/3008654323.html",
+      "sales": 28900,
+      "shop_rating": 4.9,
+      "shop_name": "京东旗舰自营店",
+      "image_url": "https://img.example.com/3003.jpg",
+      "product_id": "JD30086545",
+      "collected_at": "2026-07-14 10:30:06"
+    },
+    {
+      "name": "限量无线蓝牙耳机降噪版",
+      "price": 259.00,
+      "original_price": 459.00,
+      "platform": "淘宝",
+      "url": "https://item.taobao.com/item.htm?id=2008654323",
+      "sales": 41200,
+      "shop_rating": 4.6,
+      "shop_name": "优品数码专营店",
+      "image_url": "https://img.example.com/2003.jpg",
+      "product_id": "TB20086545",
+      "collected_at": "2026-07-14 10:30:07"
+    },
+    {
+      "name": "百亿补贴无线蓝牙耳机",
+      "price": 79.90,
+      "original_price": 159.00,
+      "platform": "拼多多",
+      "url": "https://mobile.yangkeduo.com/goods.html?goods_id=1008654323",
+      "sales": 189000,
+      "shop_rating": 4.4,
+      "shop_name": "百亿补贴官方店",
+      "image_url": "https://img.example.com/1003.jpg",
+      "product_id": "PD10086545",
+      "collected_at": "2026-07-14 10:30:08"
+    },
+    {
+      "name": "官方无线蓝牙耳机Max版",
+      "price": 599.00,
+      "original_price": 899.00,
+      "platform": "京东",
+      "url": "https://item.jd.com/3008654324.html",
+      "sales": 15600,
+      "shop_rating": 5.0,
+      "shop_name": "京东官方旗舰店",
+      "image_url": "https://img.example.com/3004.jpg",
+      "product_id": "JD30086546",
+      "collected_at": "2026-07-14 10:30:09"
+    }
+  ],
+  "price_stats": {
+    "count": 10,
+    "min": 59.9,
+    "max": 599.0,
+    "avg": 228.27,
+    "median": 183.5,
+    "range": 539.1
+  },
+  "platform_stats": {
+    "京东": {
+      "count": 4,
+      "min_price": 168.0,
+      "max_price": 599.0,
+      "avg_price": 366.25,
+      "total_sales": 122200,
+      "avg_rating": 4.9
+    },
+    "淘宝": {
+      "count": 3,
+      "min_price": 129.0,
+      "max_price": 259.0,
+      "avg_price": 195.67,
+      "total_sales": 198200,
+      "avg_rating": 4.7
+    },
+    "拼多多": {
+      "count": 3,
+      "min_price": 59.9,
+      "max_price": 89.9,
+      "avg_price": 76.57,
+      "total_sales": 580300,
+      "avg_rating": 4.37
+    }
+  },
+  "value_recommendations": [
+    {
+      "rank": 1,
+      "score": 92.5,
+      "product": {
+        "name": "特价无线蓝牙耳机迷你隐形",
+        "price": 59.90,
+        "platform": "拼多多",
+        "sales": 234500,
+        "shop_rating": 4.2
+      }
+    },
+    {
+      "rank": 2,
+      "score": 88.3,
+      "product": {
+        "name": "百亿补贴无线蓝牙耳机",
+        "price": 79.90,
+        "platform": "拼多多",
+        "sales": 189000,
+        "shop_rating": 4.4
+      }
+    },
+    {
+      "rank": 3,
+      "score": 75.6,
+      "product": {
+        "name": "新款无线蓝牙耳机降噪长续航",
+        "price": 89.90,
+        "platform": "拼多多",
+        "sales": 156800,
+        "shop_rating": 4.5
+      }
+    },
+    {
+      "rank": 4,
+      "score": 68.2,
+      "product": {
+        "name": "热销无线蓝牙耳机入耳式运动",
+        "price": 129.00,
+        "platform": "淘宝",
+        "sales": 89200,
+        "shop_rating": 4.7
+      }
+    },
+    {
+      "rank": 5,
+      "score": 62.8,
+      "product": {
+        "name": "正品无线蓝牙耳机高音质",
+        "price": 199.00,
+        "platform": "淘宝",
+        "sales": 67800,
+        "shop_rating": 4.8
+      }
+    }
+  ],
+  "comparison": {
+    "cheapest_platform": "拼多多",
+    "highest_rating_platform": "京东",
+    "most_products_platform": "京东",
+    "conclusion": "拼多多平均价格最低；京东店铺评分最高；京东商品数量最多；价格区间 59.90 - 599.00 元。"
+  }
+}

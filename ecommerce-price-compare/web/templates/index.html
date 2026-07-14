@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电商商品价格对比工具 - 实时采集与分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .search-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .platform-select {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .platform-tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .platform-tag:hover {
+            border-color: #667eea;
+        }
+
+        .platform-tag.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .search-btn {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .search-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results-section {
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .stat-card .label {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .stat-card .value.price {
+            color: #e74c3c;
+        }
+
+        .charts-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .chart-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .chart-container {
+            height: 300px;
+            position: relative;
+        }
+
+        .comparison-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .comparison-section h3 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 20px;
+        }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .platform-compare-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .platform-compare-table th,
+        .platform-compare-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .platform-compare-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .platform-compare-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .best-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #27ae60;
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .recommendations-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .recommendations-section h3 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 20px;
+        }
+
+        .recommendation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .recommendation-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            transition: all 0.3s;
+        }
+
+        .recommendation-item:hover {
+            background: #eef2ff;
+            transform: translateX(5px);
+        }
+
+        .rank-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .rank-1 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
+        .rank-2 { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+        .rank-3 { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
+        .rank-other { background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%); }
+
+        .rec-info {
+            flex: 1;
+        }
+
+        .rec-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .rec-meta {
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .rec-price {
+            color: #e74c3c;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .rec-score {
+            background: #27ae60;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .rec-platform {
+            padding: 2px 8px;
+            background: #667eea20;
+            color: #667eea;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .products-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .products-section h3 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 20px;
+        }
+
+        .products-toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .sort-btn {
+            padding: 6px 14px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .sort-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .sort-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .products-table-container {
+            overflow-x: auto;
+        }
+
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .products-table th,
+        .products-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .products-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+            white-space: nowrap;
+        }
+
+        .products-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .products-table .price-col {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .platform-label {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .platform-京东 { background: #e74c3c20; color: #e74c3c; }
+        .platform-淘宝 { background: #f39c1220; color: #f39c12; }
+        .platform-拼多多 { background: #e74c3c30; color: #c0392b; }
+
+        .product-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .product-link:hover {
+            text-decoration: underline;
+        }
+
+        .sample-banner {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sample-banner button {
+            background: white;
+            color: #f5576c;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c0392b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛒 电商商品价格对比工具</h1>
+            <p>实时采集 · 智能分析 · 性价比推荐</p>
+        </div>
+
+        <div class="search-section">
+            <div class="sample-banner" id="sampleBanner">
+                <span>📊 当前显示示例数据（无线蓝牙耳机），点击右侧按钮开始新搜索</span>
+                <button onclick="hideSampleBanner()">我知道了</button>
+            </div>
+
+            <div class="search-form">
+                <input type="text" class="search-input" id="keywordInput"
+                       placeholder="输入商品关键词，如：无线蓝牙耳机、手机、笔记本电脑..."
+                       value="无线蓝牙耳机">
+                <div class="platform-select" id="platformSelect">
+                    <span class="platform-tag active" data-platform="京东">京东</span>
+                    <span class="platform-tag active" data-platform="淘宝">淘宝</span>
+                    <span class="platform-tag active" data-platform="拼多多">拼多多</span>
+                </div>
+                <button class="search-btn" id="searchBtn" onclick="doSearch()">🔍 开始搜索</button>
+            </div>
+        </div>
+
+        <div class="error-message" id="errorMsg"></div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>正在采集商品数据，请稍候...</p>
+        </div>
+
+        <div class="results-section" id="results">
+            <div class="stats-grid" id="statsGrid"></div>
+
+            <div class="charts-row">
+                <div class="chart-card">
+                    <h3>📊 各平台价格对比</h3>
+                    <div class="chart-container">
+                        <canvas id="platformChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>📈 价格分布</h3>
+                    <div class="chart-container">
+                        <canvas id="distributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-section">
+                <h3>⚖️ 横向对比分析</h3>
+                <div class="conclusion-box" id="conclusionBox"></div>
+                <table class="platform-compare-table" id="platformCompareTable">
+                    <thead>
+                        <tr>
+                            <th>平台</th>
+                            <th>商品数量</th>
+                            <th>最低价</th>
+                            <th>最高价</th>
+                            <th>平均价</th>
+                            <th>总销量</th>
+                            <th>平均评分</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="recommendations-section">
+                <h3>🏆 性价比 TOP 5 推荐</h3>
+                <div class="recommendation-list" id="recommendationList"></div>
+            </div>
+
+            <div class="products-section">
+                <h3>📋 全部商品 <span id="productCount" style="font-size: 14px; color: #888; font-weight: normal;"></span></h3>
+                <div class="products-toolbar">
+                    <span style="color: #888; font-size: 14px; margin-right: 10px;">排序:</span>
+                    <button class="sort-btn active" data-sort="price" onclick="sortProducts('price')">价格从低到高</button>
+                    <button class="sort-btn" data-sort="sales" onclick="sortProducts('sales')">销量从高到低</button>
+                    <button class="sort-btn" data-sort="rating" onclick="sortProducts('rating')">评分从高到低</button>
+                    <button class="sort-btn" data-sort="value" onclick="sortProducts('value')">性价比</button>
+                </div>
+                <div class="products-table-container">
+                    <table class="products-table" id="productsTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>平台</th>
+                                <th>商品名称</th>
+                                <th>价格</th>
+                                <th>原价</th>
+                                <th>销量</th>
+                                <th>评分</th>
+                                <th>店铺</th>
+                                <th>链接</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+        let platformChart = null;
+        let distributionChart = null;
+        let currentSort = 'price';
+
+        const platformColors = {
+            '京东': '#e74c3c',
+            '淘宝': '#f39c12',
+            '拼多多': '#c0392b'
+        };
+
+        function hideSampleBanner() {
+            document.getElementById('sampleBanner').style.display = 'none';
+        }
+
+        document.querySelectorAll('.platform-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+
+        document.getElementById('keywordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                doSearch();
+            }
+        });
+
+        function getSelectedPlatforms() {
+            const selected = [];
+            document.querySelectorAll('.platform-tag.active').forEach(tag => {
+                selected.push(tag.dataset.platform);
+            });
+            return selected;
+        }
+
+        function showError(msg) {
+            const errEl = document.getElementById('errorMsg');
+            errEl.textContent = '❌ ' + msg;
+            errEl.classList.add('active');
+            setTimeout(() => errEl.classList.remove('active'), 5000);
+        }
+
+        function formatSales(sales) {
+            if (sales >= 10000) {
+                return (sales / 10000).toFixed(1) + '万';
+            }
+            return sales.toString();
+        }
+
+        function doSearch() {
+            const keyword = document.getElementById('keywordInput').value.trim();
+            if (!keyword) {
+                showError('请输入搜索关键词');
+                return;
+            }
+
+            const platforms = getSelectedPlatforms();
+            if (platforms.length === 0) {
+                showError('请至少选择一个平台');
+                return;
+            }
+
+            document.getElementById('errorMsg').classList.remove('active');
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('searchBtn').disabled = true;
+
+            fetch('/api/search', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    keyword: keyword,
+                    platforms: platforms.join(','),
+                    use_mock: true,
+                    page_size: 20
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('searchBtn').disabled = false;
+
+                if (data.success) {
+                    currentData = data.analysis;
+                    renderResults(data.analysis, keyword);
+                    document.getElementById('results').classList.add('active');
+                    hideSampleBanner();
+                } else {
+                    showError(data.error || '搜索失败');
+                }
+            })
+            .catch(err => {
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('searchBtn').disabled = false;
+                showError('网络错误，请重试');
+                console.error(err);
+            });
+        }
+
+        function renderResults(analysis, keyword) {
+            renderStats(analysis.price_stats);
+            renderPlatformChart(analysis.platform_stats);
+            renderDistributionChart(analysis.price_distribution);
+            renderComparison(analysis.comparison);
+            renderRecommendations(analysis.value_recommendations);
+            renderProductsTable(analysis.products);
+        }
+
+        function renderStats(priceStats) {
+            const grid = document.getElementById('statsGrid');
+            grid.innerHTML = `
+                <div class="stat-card">
+                    <div class="label">商品总数</div>
+                    <div class="value">${priceStats.count}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">最低价</div>
+                    <div class="value price">¥${priceStats.min.toFixed(2)}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">最高价</div>
+                    <div class="value price">¥${priceStats.max.toFixed(2)}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">平均价</div>
+                    <div class="value price">¥${priceStats.avg.toFixed(2)}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">价格中位数</div>
+                    <div class="value price">¥${priceStats.median.toFixed(2)}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">价格区间</div>
+                    <div class="value price">¥${priceStats.range.toFixed(2)}</div>
+                </div>
+            `;
+        }
+
+        function renderPlatformChart(platformStats) {
+            const ctx = document.getElementById('platformChart').getContext('2d');
+
+            if (platformChart) {
+                platformChart.destroy();
+            }
+
+            const labels = Object.keys(platformStats);
+            const avgPrices = labels.map(p => platformStats[p].avg_price);
+            const minPrices = labels.map(p => platformStats[p].min_price);
+            const maxPrices = labels.map(p => platformStats[p].max_price);
+            const colors = labels.map(p => platformColors[p] || '#667eea');
+
+            platformChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: '最低价',
+                            data: minPrices,
+                            backgroundColor: colors.map(c => c + '40'),
+                            borderColor: colors,
+                            borderWidth: 2,
+                            borderRadius: 6
+                        },
+                        {
+                            label: '平均价',
+                            data: avgPrices,
+                            backgroundColor: colors.map(c => c + '80'),
+                            borderColor: colors,
+                            borderWidth: 2,
+                            borderRadius: 6
+                        },
+                        {
+                            label: '最高价',
+                            data: maxPrices,
+                            backgroundColor: colors,
+                            borderColor: colors,
+                            borderWidth: 2,
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: value => '¥' + value
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderDistributionChart(distribution) {
+            const ctx = document.getElementById('distributionChart').getContext('2d');
+
+            if (distributionChart) {
+                distributionChart.destroy();
+            }
+
+            distributionChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: distribution.bins,
+                    datasets: [{
+                        label: '商品数量',
+                        data: distribution.counts,
+                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                        borderColor: '#667eea',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#667eea',
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { stepSize: 1 }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderComparison(comparison) {
+            document.getElementById('conclusionBox').innerHTML =
+                '📌 ' + comparison.conclusion;
+
+            const tbody = document.querySelector('#platformCompareTable tbody');
+            const stats = comparison.platform_stats;
+            const cheapest = comparison.cheapest_platform;
+            const highestRating = comparison.highest_rating_platform;
+            const mostProducts = comparison.most_products_platform;
+
+            let html = '';
+            for (const [platform, data] of Object.entries(stats)) {
+                html += `
+                    <tr>
+                        <td><span class="platform-label platform-${platform}">${platform}</span></td>
+                        <td>${data.count} ${platform === mostProducts ? '<span class="best-badge">最多</span>' : ''}</td>
+                        <td>¥${data.min_price.toFixed(2)} ${platform === cheapest ? '<span class="best-badge">最低</span>' : ''}</td>
+                        <td>¥${data.max_price.toFixed(2)}</td>
+                        <td>¥${data.avg_price.toFixed(2)}</td>
+                        <td>${formatSales(data.total_sales)}</td>
+                        <td>${data.avg_rating.toFixed(2)} ${platform === highestRating ? '<span class="best-badge">最高</span>' : ''}</td>
+                    </tr>
+                `;
+            }
+            tbody.innerHTML = html;
+        }
+
+        function renderRecommendations(recommendations) {
+            const list = document.getElementById('recommendationList');
+            const medals = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣'];
+
+            let html = '';
+            recommendations.forEach((item, index) => {
+                const p = item.product;
+                const rankClass = index < 3 ? `rank-${index + 1}` : 'rank-other';
+                html += `
+                    <div class="recommendation-item">
+                        <div class="rank-badge ${rankClass}">${medals[index] || (index + 1)}</div>
+                        <div class="rec-info">
+                            <div class="rec-name">${p.name}</div>
+                            <div class="rec-meta">
+                                <span class="rec-price">¥${p.price.toFixed(2)}</span>
+                                <span class="rec-score">性价比 ${item.score.toFixed(1)}分</span>
+                                <span class="rec-platform">${p.platform}</span>
+                                <span>销量: ${formatSales(p.sales)}</span>
+                                <span>评分: ${p.shop_rating.toFixed(1)}</span>
+                                <span>${p.shop_name}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            list.innerHTML = html;
+        }
+
+        function renderProductsTable(products) {
+            const tbody = document.querySelector('#productsTable tbody');
+            document.getElementById('productCount').textContent = `(共 ${products.length} 件)`;
+
+            let html = '';
+            products.forEach((p, index) => {
+                html += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td><span class="platform-label platform-${p.platform}">${p.platform}</span></td>
+                        <td>${p.name}</td>
+                        <td class="price-col">¥${p.price.toFixed(2)}</td>
+                        <td style="color: #999; text-decoration: line-through;">¥${(p.original_price || p.price).toFixed(2)}</td>
+                        <td>${formatSales(p.sales)}</td>
+                        <td>${p.shop_rating.toFixed(1)}</td>
+                        <td>${p.shop_name || '-'}</td>
+                        <td><a href="${p.url}" target="_blank" class="product-link">查看 →</a></td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function sortProducts(sortType) {
+            if (!currentData) return;
+
+            currentSort = sortType;
+            document.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.sort === sortType);
+            });
+
+            const products = [...currentData.products];
+
+            switch (sortType) {
+                case 'price':
+                    products.sort((a, b) => a.price - b.price);
+                    break;
+                case 'sales':
+                    products.sort((a, b) => b.sales - a.sales);
+                    break;
+                case 'rating':
+                    products.sort((a, b) => b.shop_rating - a.shop_rating);
+                    break;
+                case 'value':
+                    const scores = {};
+                    currentData.value_recommendations.forEach(item => {
+                        scores[item.product.product_id || item.product.name] = item.score;
+                    });
+                    products.sort((a, b) => {
+                        const sa = scores[a.product_id || a.name] || 0;
+                        const sb = scores[b.product_id || b.name] || 0;
+                        return sb - sa;
+                    });
+                    break;
+            }
+
+            renderProductsTable(products);
+        }
+
+        window.onload = function() {
+            const sampleData = JSON.parse(document.getElementById('sampleData').textContent);
+            currentData = sampleData;
+            renderResults(sampleData, sampleData.keyword);
+            document.getElementById('results').classList.add('active');
+        };
+    </script>
+
+    <script type="application/json" id="sampleData">
+        {
+            "keyword": "无线蓝牙耳机",
+            "products": [
+                {"name": "特价无线蓝牙耳机迷你隐形", "price": 59.90, "original_price": 129.00, "platform": "拼多多", "url": "#", "sales": 234500, "shop_rating": 4.2, "shop_name": "拼多多工厂直供店", "product_id": "PD001"},
+                {"name": "百亿补贴无线蓝牙耳机", "price": 79.90, "original_price": 159.00, "platform": "拼多多", "url": "#", "sales": 189000, "shop_rating": 4.4, "shop_name": "百亿补贴官方店", "product_id": "PD002"},
+                {"name": "新款无线蓝牙耳机降噪长续航", "price": 89.90, "original_price": 199.00, "platform": "拼多多", "url": "#", "sales": 156800, "shop_rating": 4.5, "shop_name": "拼多多百亿补贴数码店", "product_id": "PD003"},
+                {"name": "热销无线蓝牙耳机入耳式运动", "price": 129.00, "original_price": 259.00, "platform": "淘宝", "url": "#", "sales": 89200, "shop_rating": 4.7, "shop_name": "天猫数码官方旗舰店", "product_id": "TB001"},
+                {"name": "精选无线蓝牙耳机运动防水", "price": 168.00, "original_price": 298.00, "platform": "京东", "url": "#", "sales": 32100, "shop_rating": 4.8, "shop_name": "京东品质数码店", "product_id": "JD001"},
+                {"name": "正品无线蓝牙耳机高音质", "price": 199.00, "original_price": 399.00, "platform": "淘宝", "url": "#", "sales": 67800, "shop_rating": 4.8, "shop_name": "品牌耳机官方店", "product_id": "TB002"},
+                {"name": "限量无线蓝牙耳机降噪版", "price": 259.00, "original_price": 459.00, "platform": "淘宝", "url": "#", "sales": 41200, "shop_rating": 4.6, "shop_name": "优品数码专营店", "product_id": "TB003"},
+                {"name": "旗舰无线蓝牙耳机主动降噪", "price": 299.00, "original_price": 499.00, "platform": "京东", "url": "#", "sales": 45600, "shop_rating": 4.9, "shop_name": "京东自营数码旗舰店", "product_id": "JD002"},
+                {"name": "爆款无线蓝牙耳机Pro版", "price": 399.00, "original_price": 699.00, "platform": "京东", "url": "#", "sales": 28900, "shop_rating": 4.9, "shop_name": "京东旗舰自营店", "product_id": "JD003"},
+                {"name": "官方无线蓝牙耳机Max版", "price": 599.00, "original_price": 899.00, "platform": "京东", "url": "#", "sales": 15600, "shop_rating": 5.0, "shop_name": "京东官方旗舰店", "product_id": "JD004"}
+            ],
+            "price_stats": {
+                "count": 10,
+                "min": 59.9,
+                "max": 599.0,
+                "avg": 228.27,
+                "median": 183.5,
+                "range": 539.1
+            },
+            "platform_stats": {
+                "京东": {"count": 4, "min_price": 168.0, "max_price": 599.0, "avg_price": 366.25, "total_sales": 122200, "avg_rating": 4.9},
+                "淘宝": {"count": 3, "min_price": 129.0, "max_price": 259.0, "avg_price": 195.67, "total_sales": 198200, "avg_rating": 4.7},
+                "拼多多": {"count": 3, "min_price": 59.9, "max_price": 89.9, "avg_price": 76.57, "total_sales": 580300, "avg_rating": 4.37}
+            },
+            "price_distribution": {
+                "bins": ["60-114", "114-168", "168-222", "222-276", "276-330", "330-384", "384-438", "438-492", "492-546", "546-600"],
+                "counts": [3, 1, 2, 1, 1, 0, 1, 0, 0, 1]
+            },
+            "value_recommendations": [
+                {"rank": 1, "score": 92.5, "product": {"name": "特价无线蓝牙耳机迷你隐形", "price": 59.90, "platform": "拼多多", "sales": 234500, "shop_rating": 4.2, "shop_name": "拼多多工厂直供店", "product_id": "PD001"}},
+                {"rank": 2, "score": 88.3, "product": {"name": "百亿补贴无线蓝牙耳机", "price": 79.90, "platform": "拼多多", "sales": 189000, "shop_rating": 4.4, "shop_name": "百亿补贴官方店", "product_id": "PD002"}},
+                {"rank": 3, "score": 75.6, "product": {"name": "新款无线蓝牙耳机降噪长续航", "price": 89.90, "platform": "拼多多", "sales": 156800, "shop_rating": 4.5, "shop_name": "拼多多百亿补贴数码店", "product_id": "PD003"}},
+                {"rank": 4, "score": 68.2, "product": {"name": "热销无线蓝牙耳机入耳式运动", "price": 129.00, "platform": "淘宝", "sales": 89200, "shop_rating": 4.7, "shop_name": "天猫数码官方旗舰店", "product_id": "TB001"}},
+                {"rank": 5, "score": 62.8, "product": {"name": "正品无线蓝牙耳机高音质", "price": 199.00, "platform": "淘宝", "sales": 67800, "shop_rating": 4.8, "shop_name": "品牌耳机官方店", "product_id": "TB002"}}
+            ],
+            "comparison": {
+                "cheapest_platform": "拼多多",
+                "highest_rating_platform": "京东",
+                "most_products_platform": "京东",
+                "conclusion": "拼多多平均价格最低；京东店铺评分最高；京东商品数量最多；价格区间 59.90 - 599.00 元。"
+            }
+        }
+    </script>
+</body>
+</html>
